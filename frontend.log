@@ -1,0 +1,11 @@
+
+> pdf-template-engine-frontend@1.0.0 dev
+> vite
+
+
+  VITE v5.4.21  ready in 138 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: use --host to expose
+2:17:34 PM [vite] hmr update /src/components/TemplateEditor.jsx
+2:18:11 PM [vite] hmr update /src/components/TemplateEditor.jsx
