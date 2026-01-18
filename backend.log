@@ -2,35 +2,41 @@
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
 INFO:     Will watch for changes in these directories: ['/Users/doyoung_kim/Documents/Git/report/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [12292] using WatchFiles
+INFO:     Started reloader process [18743] using WatchFiles
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [12312]
+INFO:     Started server process [18770]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:56630 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56632 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56637 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56639 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56642 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56644 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56646 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60588 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60590 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60593 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60595 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69/preview?page=1 HTTP/1.1" 200 OK
 ✓ 페이지 1에 폰트 등록: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
 ✓ 페이지 1에 폰트 등록: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
-INFO:     127.0.0.1:56726 - "POST /api/render/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56728 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:59103 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:59105 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:59111 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:59114 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:59117 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60667 - "POST /api/render/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60676 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60678 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60681 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60684 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60687 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69/preview?page=1 HTTP/1.1" 200 OK
 ✓ 페이지 1에 폰트 등록: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
 ✓ 페이지 1에 폰트 등록: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
-INFO:     127.0.0.1:59125 - "POST /api/render/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:59174 - "POST /api/images HTTP/1.1" 200 OK
-INFO:     127.0.0.1:59177 - "GET /images/7ce0a4c5-d7ee-4ba7-908a-10f6a53e0a2b.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60690 - "POST /api/render/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61039 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61041 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61044 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61047 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61050 - "GET /api/templates/9a5e04a3-2570-470e-8688-34abc7e9cc69/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61055 - "POST /api/images HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61059 - "GET /images/87ec5e6b-9c89-4516-83b5-28668e28afdc.jpeg HTTP/1.1" 200 OK
+✓ 페이지 1에 폰트 등록: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ 페이지 1에 폰트 등록: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+✓ 이미지 삽입 완료: images/87ec5e6b-9c89-4516-83b5-28668e28afdc.jpeg at (82.78538333899526, 655.9239828456768) size (25.951530827271238, 17.319347903793304)
+INFO:     127.0.0.1:61062 - "POST /api/render/9a5e04a3-2570-470e-8688-34abc7e9cc69 HTTP/1.1" 200 OK
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [12312]
-INFO:     Stopping reloader process [12292]
+INFO:     Finished server process [18770]
+INFO:     Stopping reloader process [18743]

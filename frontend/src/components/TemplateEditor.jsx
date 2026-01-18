@@ -885,6 +885,19 @@ function TemplateEditor({ templateId, onBack }) {
     
     // 데이터 입력받기 (간단한 프롬프트로)
     elements.forEach(el => {
+      // 체크박스는 프롬프트 없이 자동으로 true 값 설정
+      if (el.type === 'checkbox' && el.data_path === 'checked') {
+        if (!testData['checked']) {
+          testData['checked'] = true
+        }
+        return
+      }
+      
+      // 이미지는 프롬프트 없이 건너뛰기
+      if (el.type === 'image') {
+        return
+      }
+      
       if (el.data_path && !testData[el.data_path]) {
         const value = prompt(t('templateEditor.alerts.testRenderPrompt', { path: el.data_path }))
         if (value !== null) {
