@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import uvicorn
@@ -29,61 +30,18 @@ app.add_middleware(
 BASE_DIR = Path(__file__).parent.parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 UPLOADS_DIR = BASE_DIR / "uploads"
+IMAGES_DIR = BASE_DIR / "uploads" / "images"
 TEMPLATES_DIR.mkdir(exist_ok=True)
 UPLOADS_DIR.mkdir(exist_ok=True)
+IMAGES_DIR.mkdir(exist_ok=True)
 
 # 서비스 초기화
 pdf_service = PDFService()
 template_service = TemplateService(TEMPLATES_DIR)
 render_service = RenderService(TEMPLATES_DIR, UPLOADS_DIR)
 
-
-# ===== 빈 A4 템플릿 생성 =====
-@app.post("/api/templates/blank")
-async def create_blank_template(page_count: int = 1):
-    """빈 A4 템플릿 생성"""
-    try:
-        from reportlab.pdfgen import canvas
-        from reportlab.lib.pagesizes import A4
-        
-        template_id = str(uuid.uuid4())
-        
-        # 빈 A4 PDF 생성
-        file_path = UPLOADS_DIR / f"{template_id}.pdf"
-        c = canvas.Canvas(str(file_path), pagesize=A4)
-        
-        # A4 크기: 595.28 x 841.89 pt
-        for i in range(page_count):
-            if i > 0:
-                c.showPage()
-        c.save()
-        
-        # 기본 템플릿 구조 생성
-        template = {
-            "template_id": template_id,
-            "filename": "blank_a4.pdf",
-            "page_size": {"w_pt": 595.28, "h_pt": 841.89},
-            "pages": [{
-                "page": i + 1,
-                "width": 595.28,
-                "height": 841.89,
-                "width_pt": 595.28,
-                "height_pt": 841.89,
-            } for i in range(page_count)],
-            "elements": [],
-            "created_at": datetime.now().isoformat(),
-        }
-        
-        template_service.save_template(template_id, template)
-        
-        return {
-            "template_id": template_id,
-            "filename": "blank_a4.pdf",
-            "page_count": page_count,
-            "page_size": {"w_pt": 595.28, "h_pt": 841.89},
-        }
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+# 정적 파일 서빙 (업로드된 이미지)
+app.mount("/api/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
 
 
 # ===== 템플릿 업로드 =====
@@ -260,6 +218,32 @@ async def delete_all_templates():
                 preview_file.unlink()
         
         return {"status": "success", "deleted_count": deleted_count}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+# ===== 이미지 업로드 =====
+@app.post("/api/images")
+async def upload_image(file: UploadFile = File(...)):
+    """도장/서명 이미지 업로드"""
+    try:
+        # 이미지 파일만 허용
+        if not file.content_type or not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="Image files only")
+        
+        image_id = str(uuid.uuid4())
+        # 원본 확장자 유지
+        ext = Path(file.filename).suffix if file.filename else '.png'
+        image_path = IMAGES_DIR / f"{image_id}{ext}"
+        
+        with open(image_path, "wb") as f:
+            content = await file.read()
+            f.write(content)
+        
+        # 상대 경로 반환 (uploads/images/image_id.ext)
+        relative_path = f"images/{image_id}{ext}"
+        
+        return {"image_path": relative_path, "image_id": image_id}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

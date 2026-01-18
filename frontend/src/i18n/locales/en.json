@@ -1,0 +1,100 @@
+{
+  "app": {
+    "title": "PDF Template Automation Engine",
+    "backToList": "← Back to List"
+  },
+  "templateList": {
+    "title": "Template List",
+    "upload": "Upload PDF Template",
+    "deleteAll": "Delete All",
+    "empty": {
+      "title": "No templates uploaded.",
+      "description": "Upload a PDF template file to get started."
+    },
+    "card": {
+      "fieldCount": "Fields",
+      "createdAt": "Created",
+      "noName": "No name",
+      "delete": "Delete"
+    },
+    "alerts": {
+      "pdfOnly": "Only PDF files can be uploaded.",
+      "uploadSuccess": "Template uploaded successfully!",
+      "uploadFailed": "Upload failed",
+      "deleteConfirm": "Are you sure you want to delete",
+      "deleteSuccess": "Template deleted successfully.",
+      "deleteFailed": "Delete failed",
+      "deleteAllConfirm": "Are you sure you want to delete all templates ({{count}})?\nThis action cannot be undone.",
+      "deleteAllSuccess": "All templates ({{count}}) have been deleted.",
+      "deleteAllFailed": "Delete failed",
+      "noTemplatesToDelete": "No templates to delete."
+    }
+  },
+  "templateEditor": {
+    "loading": "Loading template...",
+    "page": "Page",
+    "save": "Save",
+    "testRender": "Test Render",
+    "delete": "Delete",
+    "blankTemplate": {
+      "title": "A4 Blank Template",
+      "size": "595 × 842 pt"
+    },
+    "properties": {
+      "title": "Edit Properties",
+      "dataPath": "Data Path",
+      "dataPathPlaceholder": "e.g., customer.name",
+      "x": "X",
+      "y": "Y",
+      "width": "Width",
+      "height": "Height",
+      "fontSize": "Font Size",
+      "align": "Align",
+      "alignLeft": "Left",
+      "alignCenter": "Center",
+      "alignRight": "Right"
+    },
+    "elementsList": {
+      "title": "Field List (Page {{page}})",
+      "empty": "No fields on this page.",
+      "noPath": "(No path)"
+    },
+    "instructions": {
+      "title": "How to Use",
+      "step1": "Drag on the template to select a field area",
+      "step2": "Enter data path (e.g., customer.name)",
+      "step3": "Click a field to edit properties",
+      "step4": "Save and test render"
+    },
+    "modal": {
+      "dataPathTitle": "Enter Data Path",
+      "dataPathPlaceholder": "e.g., customer.name, items[0].price",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "imageUploadTitle": "Upload Image",
+      "imageUploadDescription": "Select a stamp or signature image (PNG, JPG, etc.)",
+      "selectImage": "Select Image"
+    },
+    "tools": {
+      "title": "Tools",
+      "select": "Select",
+      "text": "Text",
+      "checkbox": "Checkbox",
+      "image": "Image"
+    },
+    "alerts": {
+      "loadFailed": "Failed to load template",
+      "saveSuccess": "Template mapping saved!",
+      "saveFailed": "Save failed",
+      "renderFailed": "Render failed",
+      "testRenderPrompt": "Enter value for {{path}}:",
+      "imageUploadFailed": "Image upload failed"
+    }
+  },
+  "language": {
+    "select": "Select Language",
+    "korean": "한국어",
+    "english": "English",
+    "japanese": "日本語"
+  }
+}

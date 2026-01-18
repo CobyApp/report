@@ -1,0 +1,100 @@
+{
+  "app": {
+    "title": "PDFテンプレート自動化エンジン",
+    "backToList": "← リストに戻る"
+  },
+  "templateList": {
+    "title": "テンプレート一覧",
+    "upload": "PDFテンプレートをアップロード",
+    "deleteAll": "すべて削除",
+    "empty": {
+      "title": "アップロードされたテンプレートがありません。",
+      "description": "PDFテンプレートファイルをアップロードして開始してください。"
+    },
+    "card": {
+      "fieldCount": "フィールド数",
+      "createdAt": "作成日",
+      "noName": "名前なし",
+      "delete": "削除"
+    },
+    "alerts": {
+      "pdfOnly": "PDFファイルのみアップロードできます。",
+      "uploadSuccess": "テンプレートがアップロードされました！",
+      "uploadFailed": "アップロード失敗",
+      "deleteConfirm": "を削除しますか？",
+      "deleteSuccess": "テンプレートが削除されました。",
+      "deleteFailed": "削除失敗",
+      "deleteAllConfirm": "すべてのテンプレート（{{count}}件）を削除しますか？\nこの操作は元に戻せません。",
+      "deleteAllSuccess": "すべてのテンプレート（{{count}}件）が削除されました。",
+      "deleteAllFailed": "削除失敗",
+      "noTemplatesToDelete": "削除するテンプレートがありません。"
+    }
+  },
+  "templateEditor": {
+    "loading": "テンプレートを読み込み中...",
+    "page": "ページ",
+    "save": "保存",
+    "testRender": "テストレンダリング",
+    "delete": "削除",
+    "blankTemplate": {
+      "title": "A4空白テンプレート",
+      "size": "595 × 842 pt"
+    },
+    "properties": {
+      "title": "プロパティ編集",
+      "dataPath": "データパス",
+      "dataPathPlaceholder": "例: customer.name",
+      "x": "X",
+      "y": "Y",
+      "width": "幅",
+      "height": "高さ",
+      "fontSize": "フォントサイズ",
+      "align": "配置",
+      "alignLeft": "左",
+      "alignCenter": "中央",
+      "alignRight": "右"
+    },
+    "elementsList": {
+      "title": "フィールド一覧（ページ{{page}}）",
+      "empty": "このページにフィールドがありません。",
+      "noPath": "（パスなし）"
+    },
+    "instructions": {
+      "title": "使い方",
+      "step1": "テンプレート上でドラッグしてフィールド領域を選択",
+      "step2": "データパスを入力（例: customer.name）",
+      "step3": "フィールドをクリックしてプロパティを編集",
+      "step4": "保存してテストレンダリング"
+    },
+    "modal": {
+      "dataPathTitle": "データパス入力",
+      "dataPathPlaceholder": "例: customer.name, items[0].price",
+      "confirm": "確認",
+      "cancel": "キャンセル",
+      "imageUploadTitle": "画像アップロード",
+      "imageUploadDescription": "スタンプや署名画像を選択してください（PNG、JPGなど）",
+      "selectImage": "画像を選択"
+    },
+    "tools": {
+      "title": "ツール",
+      "select": "選択",
+      "text": "テキスト",
+      "checkbox": "チェックボックス",
+      "image": "画像"
+    },
+    "alerts": {
+      "loadFailed": "テンプレートの読み込みに失敗しました",
+      "saveSuccess": "テンプレートマッピングが保存されました！",
+      "saveFailed": "保存失敗",
+      "renderFailed": "レンダリング失敗",
+      "testRenderPrompt": "{{path}}に入力する値:",
+      "imageUploadFailed": "画像アップロード失敗"
+    }
+  },
+  "language": {
+    "select": "言語選択",
+    "korean": "한국어",
+    "english": "English",
+    "japanese": "日本語"
+  }
+}

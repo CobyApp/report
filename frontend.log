@@ -3,9 +3,153 @@
 > vite
 
 
-  VITE v5.4.21  ready in 138 ms
+  VITE v5.4.21  ready in 92 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: use --host to expose
-2:17:34 PM [vite] hmr update /src/components/TemplateEditor.jsx
-2:18:11 PM [vite] hmr update /src/components/TemplateEditor.jsx
+6:28:59 PM [vite] Internal server error: /Users/doyoung_kim/Documents/Git/report/frontend/src/components/TemplateEditor.jsx: Identifier 'currentSelectedElement' has already been declared. (425:12)
+
+  423 |       // 커서 모양 결정 및 리사이즈 핸들 그리기
+  424 |       // elements 배열에서 최신 요소를 찾아 사용 (selectedElement는 오래된 bbox를 가질 수 있음)
+> 425 |       const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
+      |             ^
+  426 |       if (!isDraggingElement && !isResizing) {
+  427 |         const handle = currentSelectedElement ? getResizeHandle(currentSelectedElement, currentX, currentY) : null
+  428 |         const hoveredElement = getElementAtPoint(currentX, currentY)
+  Plugin: vite:react-babel
+  File: /Users/doyoung_kim/Documents/Git/report/frontend/src/components/TemplateEditor.jsx:425:12
+  423|        // 커서 모양 결정 및 리사이즈 핸들 그리기
+  424|        // elements 배열에서 최신 요소를 찾아 사용 (selectedElement는 오래된 bbox를 가질 수 있음)
+  425|        const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
+     |              ^
+  426|        if (!isDraggingElement && !isResizing) {
+  427|          const handle = currentSelectedElement ? getResizeHandle(currentSelectedElement, currentX, currentY) : null
+      at constructor (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:365:19)
+      at JSXParserMixin.raise (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:6599:19)
+      at ScopeHandler.checkRedeclarationInScope (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:1619:19)
+      at ScopeHandler.declareName (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:1585:12)
+      at JSXParserMixin.declareNameFromIdentifier (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:7567:16)
+      at JSXParserMixin.checkIdentifier (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:7563:12)
+      at JSXParserMixin.checkLVal (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:7500:12)
+      at JSXParserMixin.parseVarId (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13402:10)
+      at JSXParserMixin.parseVar (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13373:12)
+      at JSXParserMixin.parseVarStatement (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13220:10)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12841:23)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementListItem (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12737:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13306:61)
+      at JSXParserMixin.parseBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13299:10)
+      at JSXParserMixin.parseBlock (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13287:10)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12848:21)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12747:17)
+      at JSXParserMixin.parseIfStatement (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13120:28)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12786:21)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementListItem (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12737:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13306:61)
+      at JSXParserMixin.parseBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13299:10)
+      at JSXParserMixin.parseBlock (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13287:10)
+      at JSXParserMixin.parseFunctionBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12090:24)
+      at JSXParserMixin.parseArrowExpression (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12065:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11677:12)
+      at JSXParserMixin.parseExprAtom (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11321:23)
+      at JSXParserMixin.parseExprAtom (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:4764:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11071:23)
+      at JSXParserMixin.parseUpdate (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11056:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11036:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10889:61)
+      at JSXParserMixin.parseExprOps (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10894:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10871:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10821:21)
+      at /Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10790:39
+      at JSXParserMixin.allowInAnd (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12411:16)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10790:17)
+      at JSXParserMixin.parseVar (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13374:91)
+      at JSXParserMixin.parseVarStatement (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13220:10)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12841:23)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementListItem (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12737:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13306:61)
+      at JSXParserMixin.parseBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13299:10)
+      at JSXParserMixin.parseBlock (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13287:10)
+      at JSXParserMixin.parseFunctionBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12090:24)
+6:28:59 PM [vite] Pre-transform error: /Users/doyoung_kim/Documents/Git/report/frontend/src/components/TemplateEditor.jsx: Identifier 'currentSelectedElement' has already been declared. (425:12)
+
+  423 |       // 커서 모양 결정 및 리사이즈 핸들 그리기
+  424 |       // elements 배열에서 최신 요소를 찾아 사용 (selectedElement는 오래된 bbox를 가질 수 있음)
+> 425 |       const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
+      |             ^
+  426 |       if (!isDraggingElement && !isResizing) {
+  427 |         const handle = currentSelectedElement ? getResizeHandle(currentSelectedElement, currentX, currentY) : null
+  428 |         const hoveredElement = getElementAtPoint(currentX, currentY)
+6:30:59 PM [vite] Internal server error: /Users/doyoung_kim/Documents/Git/report/frontend/src/components/TemplateEditor.jsx: Identifier 'currentSelectedElement' has already been declared. (425:12)
+
+  423 |       // 커서 모양 결정 및 리사이즈 핸들 그리기
+  424 |       // elements 배열에서 최신 요소를 찾아 사용 (selectedElement는 오래된 bbox를 가질 수 있음)
+> 425 |       const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
+      |             ^
+  426 |       if (!isDraggingElement && !isResizing) {
+  427 |         const handle = currentSelectedElement ? getResizeHandle(currentSelectedElement, currentX, currentY) : null
+  428 |         const hoveredElement = getElementAtPoint(currentX, currentY)
+  Plugin: vite:react-babel
+  File: /Users/doyoung_kim/Documents/Git/report/frontend/src/components/TemplateEditor.jsx:425:12
+  423|        // 커서 모양 결정 및 리사이즈 핸들 그리기
+  424|        // elements 배열에서 최신 요소를 찾아 사용 (selectedElement는 오래된 bbox를 가질 수 있음)
+  425|        const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
+     |              ^
+  426|        if (!isDraggingElement && !isResizing) {
+  427|          const handle = currentSelectedElement ? getResizeHandle(currentSelectedElement, currentX, currentY) : null
+      at constructor (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:365:19)
+      at JSXParserMixin.raise (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:6599:19)
+      at ScopeHandler.checkRedeclarationInScope (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:1619:19)
+      at ScopeHandler.declareName (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:1585:12)
+      at JSXParserMixin.declareNameFromIdentifier (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:7567:16)
+      at JSXParserMixin.checkIdentifier (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:7563:12)
+      at JSXParserMixin.checkLVal (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:7500:12)
+      at JSXParserMixin.parseVarId (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13402:10)
+      at JSXParserMixin.parseVar (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13373:12)
+      at JSXParserMixin.parseVarStatement (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13220:10)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12841:23)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementListItem (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12737:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13306:61)
+      at JSXParserMixin.parseBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13299:10)
+      at JSXParserMixin.parseBlock (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13287:10)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12848:21)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12747:17)
+      at JSXParserMixin.parseIfStatement (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13120:28)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12786:21)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementListItem (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12737:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13306:61)
+      at JSXParserMixin.parseBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13299:10)
+      at JSXParserMixin.parseBlock (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13287:10)
+      at JSXParserMixin.parseFunctionBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12090:24)
+      at JSXParserMixin.parseArrowExpression (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12065:10)
+      at JSXParserMixin.parseParenAndDistinguishExpression (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11677:12)
+      at JSXParserMixin.parseExprAtom (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11321:23)
+      at JSXParserMixin.parseExprAtom (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:4764:20)
+      at JSXParserMixin.parseExprSubscripts (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11071:23)
+      at JSXParserMixin.parseUpdate (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11056:21)
+      at JSXParserMixin.parseMaybeUnary (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:11036:23)
+      at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10889:61)
+      at JSXParserMixin.parseExprOps (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10894:23)
+      at JSXParserMixin.parseMaybeConditional (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10871:23)
+      at JSXParserMixin.parseMaybeAssign (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10821:21)
+      at /Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10790:39
+      at JSXParserMixin.allowInAnd (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12411:16)
+      at JSXParserMixin.parseMaybeAssignAllowIn (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:10790:17)
+      at JSXParserMixin.parseVar (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13374:91)
+      at JSXParserMixin.parseVarStatement (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13220:10)
+      at JSXParserMixin.parseStatementContent (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12841:23)
+      at JSXParserMixin.parseStatementLike (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12757:17)
+      at JSXParserMixin.parseStatementListItem (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12737:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13306:61)
+      at JSXParserMixin.parseBlockBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13299:10)
+      at JSXParserMixin.parseBlock (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:13287:10)
+      at JSXParserMixin.parseFunctionBody (/Users/doyoung_kim/Documents/Git/report/frontend/node_modules/@babel/parser/lib/index.js:12090:24)
+6:32:19 PM [vite] hmr update /src/components/TemplateEditor.jsx
+6:32:31 PM [vite] hmr update /src/components/TemplateEditor.jsx
+6:32:37 PM [vite] hmr update /src/components/TemplateEditor.jsx

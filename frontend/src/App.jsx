@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import TemplateList from './components/TemplateList'
 import TemplateEditor from './components/TemplateEditor'
+import LanguageSelector from './components/LanguageSelector'
 import './App.css'
 
 const API_BASE = '/api'
 
 function App() {
+  const { t } = useTranslation()
   const [templates, setTemplates] = useState([])
   const [selectedTemplate, setSelectedTemplate] = useState(null)
   const [view, setView] = useState('list') // 'list' | 'editor' | 'render'
@@ -38,12 +41,15 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>PDF 템플릿 자동화 엔진</h1>
-        {view !== 'list' && (
-          <button onClick={handleBackToList} className="btn-back">
-            ← 목록으로
-          </button>
-        )}
+        <h1>{t('app.title')}</h1>
+        <div className="header-actions">
+          {view !== 'list' && (
+            <button onClick={handleBackToList} className="btn-back">
+              {t('app.backToList')}
+            </button>
+          )}
+          <LanguageSelector />
+        </div>
       </header>
 
       <main className="app-main">

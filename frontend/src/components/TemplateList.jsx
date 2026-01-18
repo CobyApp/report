@@ -1,16 +1,18 @@
 import React, { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import './TemplateList.css'
 
 const API_BASE = '/api'
 
 function TemplateList({ templates, onSelect, onRefresh }) {
+  const { t } = useTranslation()
   const fileInputRef = useRef(null)
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0]
     if (!file || file.type !== 'application/pdf') {
-      alert('PDF 파일만 업로드할 수 있습니다.')
+      alert(t('templateList.alerts.pdfOnly'))
       return
     }
 
@@ -24,46 +26,46 @@ function TemplateList({ templates, onSelect, onRefresh }) {
         },
       })
 
-      alert(`템플릿이 업로드되었습니다!\nID: ${response.data.template_id}`)
+      alert(`${t('templateList.alerts.uploadSuccess')}\nID: ${response.data.template_id}`)
       onRefresh()
     } catch (error) {
-      alert('업로드 실패: ' + (error.response?.data?.detail || error.message))
+      alert(t('templateList.alerts.uploadFailed') + ': ' + (error.response?.data?.detail || error.message))
     }
   }
 
   const handleDeleteTemplate = async (templateId, filename, e) => {
     e.stopPropagation() // 카드 클릭 이벤트 방지
     
-    if (!window.confirm(`"${filename || '템플릿'}"을(를) 삭제하시겠습니까?`)) {
+    if (!window.confirm(`"${filename || t('templateList.card.noName')}"${t('templateList.alerts.deleteConfirm')}`)) {
       return
     }
 
     try {
       await axios.delete(`${API_BASE}/templates/${templateId}`)
-      alert('템플릿이 삭제되었습니다.')
+      alert(t('templateList.alerts.deleteSuccess'))
       onRefresh()
     } catch (error) {
-      alert('삭제 실패: ' + (error.response?.data?.detail || error.message))
+      alert(t('templateList.alerts.deleteFailed') + ': ' + (error.response?.data?.detail || error.message))
     }
   }
 
   const handleDeleteAll = async () => {
     if (templates.length === 0) {
-      alert('삭제할 템플릿이 없습니다.')
+      alert(t('templateList.alerts.noTemplatesToDelete'))
       return
     }
 
     const count = templates.length
-    if (!window.confirm(`모든 템플릿 (${count}개)을(를) 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`)) {
+    if (!window.confirm(t('templateList.alerts.deleteAllConfirm', { count }))) {
       return
     }
 
     try {
       const response = await axios.delete(`${API_BASE}/templates`)
-      alert(`모든 템플릿 (${response.data.deleted_count}개)이 삭제되었습니다.`)
+      alert(t('templateList.alerts.deleteAllSuccess', { count: response.data.deleted_count }))
       onRefresh()
     } catch (error) {
-      alert('삭제 실패: ' + (error.response?.data?.detail || error.message))
+      alert(t('templateList.alerts.deleteAllFailed') + ': ' + (error.response?.data?.detail || error.message))
     }
   }
 
@@ -71,14 +73,14 @@ function TemplateList({ templates, onSelect, onRefresh }) {
   return (
     <div className="template-list">
       <div className="template-list-header">
-        <h2>템플릿 목록</h2>
+        <h2>{t('templateList.title')}</h2>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           {templates.length > 0 && (
             <button
               onClick={handleDeleteAll}
               className="btn-delete-all"
             >
-              🗑️ 전체 삭제
+              🗑️ {t('templateList.deleteAll')}
             </button>
           )}
           <input
@@ -92,15 +94,15 @@ function TemplateList({ templates, onSelect, onRefresh }) {
             onClick={() => fileInputRef.current?.click()}
             className="btn-upload"
           >
-            + PDF 템플릿 업로드
+            + {t('templateList.upload')}
           </button>
         </div>
       </div>
 
       {templates.length === 0 ? (
         <div className="empty-state">
-          <p>업로드된 템플릿이 없습니다.</p>
-          <p>PDF 템플릿 파일을 업로드하여 시작하세요.</p>
+          <p>{t('templateList.empty.title')}</p>
+          <p>{t('templateList.empty.description')}</p>
         </div>
       ) : (
         <div className="template-grid">
@@ -111,22 +113,22 @@ function TemplateList({ templates, onSelect, onRefresh }) {
               onClick={() => onSelect(template.template_id)}
             >
               <div className="template-card-header">
-                <h3>{template.filename || '이름 없음'}</h3>
+                <h3>{template.filename || t('templateList.card.noName')}</h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span className="template-id">{template.template_id.slice(0, 8)}...</span>
                   <button
                     className="btn-delete-item"
                     onClick={(e) => handleDeleteTemplate(template.template_id, template.filename, e)}
-                    title="삭제"
+                    title={t('templateList.card.delete')}
                   >
                     ×
                   </button>
                 </div>
               </div>
               <div className="template-card-body">
-                <p>필드 수: {template.element_count || 0}</p>
+                <p>{t('templateList.card.fieldCount')}: {template.element_count || 0}</p>
                 <p className="template-date">
-                  생성일: {new Date(template.created_at).toLocaleDateString('ko-KR')}
+                  {t('templateList.card.createdAt')}: {new Date(template.created_at).toLocaleDateString()}
                 </p>
               </div>
             </div>

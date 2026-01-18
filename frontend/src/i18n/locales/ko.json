@@ -1,0 +1,100 @@
+{
+  "app": {
+    "title": "PDF 템플릿 자동화 엔진",
+    "backToList": "← 목록으로"
+  },
+  "templateList": {
+    "title": "템플릿 목록",
+    "upload": "PDF 템플릿 업로드",
+    "deleteAll": "전체 삭제",
+    "empty": {
+      "title": "업로드된 템플릿이 없습니다.",
+      "description": "PDF 템플릿 파일을 업로드하여 시작하세요."
+    },
+    "card": {
+      "fieldCount": "필드 수",
+      "createdAt": "생성일",
+      "noName": "이름 없음",
+      "delete": "삭제"
+    },
+    "alerts": {
+      "pdfOnly": "PDF 파일만 업로드할 수 있습니다.",
+      "uploadSuccess": "템플릿이 업로드되었습니다!",
+      "uploadFailed": "업로드 실패",
+      "deleteConfirm": "을(를) 삭제하시겠습니까?",
+      "deleteSuccess": "템플릿이 삭제되었습니다.",
+      "deleteFailed": "삭제 실패",
+      "deleteAllConfirm": "모든 템플릿 ({{count}}개)을(를) 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.",
+      "deleteAllSuccess": "모든 템플릿 ({{count}}개)이 삭제되었습니다.",
+      "deleteAllFailed": "삭제 실패",
+      "noTemplatesToDelete": "삭제할 템플릿이 없습니다."
+    }
+  },
+  "templateEditor": {
+    "loading": "템플릿을 불러오는 중...",
+    "page": "페이지",
+    "save": "저장",
+    "testRender": "테스트 렌더링",
+    "delete": "삭제",
+    "blankTemplate": {
+      "title": "A4 빈 템플릿",
+      "size": "595 × 842 pt"
+    },
+    "properties": {
+      "title": "속성 편집",
+      "dataPath": "데이터 경로",
+      "dataPathPlaceholder": "예: customer.name",
+      "x": "X",
+      "y": "Y",
+      "width": "너비",
+      "height": "높이",
+      "fontSize": "폰트 크기",
+      "align": "정렬",
+      "alignLeft": "왼쪽",
+      "alignCenter": "중앙",
+      "alignRight": "오른쪽"
+    },
+    "elementsList": {
+      "title": "필드 목록 (페이지 {{page}})",
+      "empty": "이 페이지에 필드가 없습니다.",
+      "noPath": "(경로 없음)"
+    },
+    "instructions": {
+      "title": "사용 방법",
+      "step1": "템플릿 위에서 드래그하여 필드 영역 선택",
+      "step2": "데이터 경로 입력 (예: customer.name)",
+      "step3": "필드를 클릭하여 속성 편집",
+      "step4": "저장 후 테스트 렌더링"
+    },
+    "modal": {
+      "dataPathTitle": "데이터 경로 입력",
+      "dataPathPlaceholder": "예: customer.name, items[0].price",
+      "confirm": "확인",
+      "cancel": "취소",
+      "imageUploadTitle": "이미지 업로드",
+      "imageUploadDescription": "도장이나 서명 이미지를 선택하세요 (PNG, JPG 등)",
+      "selectImage": "이미지 선택"
+    },
+    "tools": {
+      "title": "도구",
+      "select": "선택",
+      "text": "텍스트",
+      "checkbox": "체크박스",
+      "image": "이미지"
+    },
+    "alerts": {
+      "loadFailed": "템플릿 로드 실패",
+      "saveSuccess": "템플릿 매핑이 저장되었습니다!",
+      "saveFailed": "저장 실패",
+      "renderFailed": "렌더링 실패",
+      "testRenderPrompt": "{{path}}에 넣을 값:",
+      "imageUploadFailed": "이미지 업로드 실패"
+    }
+  },
+  "language": {
+    "select": "언어 선택",
+    "korean": "한국어",
+    "english": "English",
+    "japanese": "日本語"
+  }
+}
