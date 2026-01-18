@@ -31,11 +31,17 @@ PIP_BIN=$(which pip || echo "$PWD/venv/bin/pip")
 if ! $PYTHON_BIN -c "import fastapi" 2>/dev/null; then
     echo "패키지 설치 중..."
     $PIP_BIN install -q -r requirements.txt
+else
+    # passlib, bcrypt 확인 및 설치
+    if ! $PYTHON_BIN -c "import passlib" 2>/dev/null; then
+        echo "인증 패키지 설치 중..."
+        $PIP_BIN install -q passlib[bcrypt] bcrypt
+    fi
 fi
 
 # 백엔드 백그라운드 실행
 echo "✅ 백엔드 서버 시작: http://localhost:8000"
-$PYTHON_BIN -m app.main > ../backend.log 2>&1 &
+$PYTHON_BIN -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload > ../backend.log 2>&1 &
 BACKEND_PID=$!
 
 cd ..

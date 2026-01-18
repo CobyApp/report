@@ -31,13 +31,16 @@ class TemplateService:
         if file_path.exists():
             file_path.unlink()
     
-    def list_templates(self) -> List[Dict[str, Any]]:
-        """템플릿 목록 반환 (기본 정보만)"""
+    def list_templates(self, user_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """템플릿 목록 반환 (기본 정보만) - 사용자별 필터링"""
         templates = []
         for file_path in self.templates_dir.glob("*.json"):
             try:
                 with open(file_path, "r", encoding="utf-8") as f:
                     template = json.load(f)
+                    # user_id가 제공되면 해당 사용자의 템플릿만 반환
+                    if user_id and template.get("user_id") != user_id:
+                        continue
                     templates.append({
                         "template_id": template.get("template_id"),
                         "filename": template.get("filename", ""),

@@ -96,5 +96,31 @@
     "korean": "한국어",
     "english": "English",
     "japanese": "日本語"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "submit": "Login",
+      "loading": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "register": "Register"
+    },
+    "register": {
+      "title": "Register",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Register",
+      "loading": "Registering...",
+      "hasAccount": "Already have an account?",
+      "login": "Login",
+      "passwordMismatch": "Passwords do not match",
+      "passwordTooLong": "Password is too long (maximum 72 bytes)",
+      "success": "Registration completed!"
+    },
+    "logout": "Logout"
   }
 }

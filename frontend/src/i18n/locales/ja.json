@@ -96,5 +96,31 @@
     "korean": "한국어",
     "english": "English",
     "japanese": "日本語"
+  },
+  "auth": {
+    "login": {
+      "title": "ログイン",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "submit": "ログイン",
+      "loading": "ログイン中...",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "register": "登録"
+    },
+    "register": {
+      "title": "登録",
+      "username": "ユーザー名",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "confirmPassword": "パスワード確認",
+      "submit": "登録",
+      "loading": "登録中...",
+      "hasAccount": "既にアカウントをお持ちですか？",
+      "login": "ログイン",
+      "passwordMismatch": "パスワードが一致しません",
+      "passwordTooLong": "パスワードが長すぎます（最大72バイト）",
+      "success": "登録が完了しました！"
+    },
+    "logout": "ログアウト"
   }
 }

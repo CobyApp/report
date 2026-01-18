@@ -26,7 +26,8 @@ function TemplateEditor({ templateId, onBack }) {
   const [resizeHandle, setResizeHandle] = useState(null) // 'nw', 'ne', 'sw', 'se'
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const [currentCursor, setCurrentCursor] = useState('default')
-  const imageCacheRef = useRef(new Map()) // 이미지 캐시
+  const imageCacheRef = useRef(new Map()) // 이미지 캐시 (Image 객체 저장)
+  const blobUrlCacheRef = useRef(new Map()) // Blob URL 캐시 (정리용)
   const [dragStartBbox, setDragStartBbox] = useState(null) // 드래그 시작 시 요소의 원본 bbox
 
   useEffect(() => {
@@ -39,6 +40,23 @@ function TemplateEditor({ templateId, onBack }) {
       setElements(template.elements || [])
     }
   }, [template, currentPage])
+
+  // cleanup: Blob URL 해제
+  useEffect(() => {
+    return () => {
+      // previewImage Blob URL 해제
+      if (previewImage && previewImage.startsWith('blob:')) {
+        URL.revokeObjectURL(previewImage)
+      }
+      // blobUrlCache의 모든 Blob URL 해제
+      blobUrlCacheRef.current.forEach(blobUrl => {
+        if (blobUrl.startsWith('blob:')) {
+          URL.revokeObjectURL(blobUrl)
+        }
+      })
+      blobUrlCacheRef.current.clear()
+    }
+  }, [previewImage])
 
   // 전역 마우스 이벤트 리스너 (드래그가 캔버스 밖으로 나가도 계속 추적)
   useEffect(() => {
@@ -190,14 +208,21 @@ function TemplateEditor({ templateId, onBack }) {
 
   const loadPreviewImage = async () => {
     try {
-      const imageUrl = `${API_BASE}/templates/${templateId}/preview?page=${currentPage}`
-      setPreviewImage(imageUrl)
+      // axios로 blob 이미지를 받아서 Blob URL로 변환 (토큰 포함)
+      const response = await axios.get(`${API_BASE}/templates/${templateId}/preview?page=${currentPage}`, {
+        responseType: 'blob',
+      })
+      
+      // Blob URL 생성
+      const blobUrl = URL.createObjectURL(response.data)
+      setPreviewImage(blobUrl)
     } catch (error) {
       // 빈 템플릿인 경우 이미지 없음 (null로 두면 빈 캔버스 표시)
       if (error.response?.status === 404) {
         setPreviewImage(null)
       } else {
         console.error('미리보기 로드 실패:', error)
+        setPreviewImage(null)
       }
     }
   }

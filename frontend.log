@@ -3,12 +3,7 @@
 > vite
 
 
-  VITE v5.4.21  ready in 94 ms
+  VITE v5.4.21  ready in 98 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: use --host to expose
-11:17:02 AM [vite] hmr update /src/components/TemplateEditor.jsx
-11:17:09 AM [vite] hmr update /src/components/TemplateEditor.jsx
-11:17:21 AM [vite] hmr update /src/components/TemplateEditor.jsx
-11:17:25 AM [vite] hmr update /src/components/TemplateEditor.jsx
-11:17:27 AM [vite] hmr update /src/components/TemplateEditor.jsx
