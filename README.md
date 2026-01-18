@@ -110,7 +110,9 @@ npm run dev
 
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs (Swagger UI)
+- **API Documentation**: 
+  - **Swagger UI** (Interactive): http://localhost:8000/docs
+  - **ReDoc** (Alternative): http://localhost:8000/redoc
 
 ## 📖 Usage
 
@@ -204,20 +206,94 @@ curl -X PUT http://localhost:8000/api/templates/{template_id}/mapping \
 
 #### Generate PDF
 
+Generate a completed PDF by providing field data that matches your template's data paths.
+
+**Request:**
 ```bash
 curl -X POST http://localhost:8000/api/render/{template_id} \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "customer": {"name": "John Doe"},
-    "items": [{"name": "Item1", "price": 10000}]
+    "customer": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "address": "123 Main St"
+    },
+    "items": [
+      {"name": "Item 1", "price": 10000, "quantity": 2},
+      {"name": "Item 2", "price": 20000, "quantity": 1}
+    ],
+    "checked": true,
+    "total": 40000,
+    "date": "2024-01-17"
   }' \
   --output result.pdf
 ```
 
+**Response:**
+- Content-Type: `application/pdf`
+- Body: Binary PDF file
+- Filename: `rendered_{template_id}.pdf`
+
+**Request Body Structure:**
+```json
+{
+  // Field data that matches template data paths
+  // Example: if template has "customer.name", provide:
+  "customer": {
+    "name": "John Doe"
+  },
+  
+  // Array fields: use "items[0].price" in template
+  "items": [
+    {"name": "Item 1", "price": 10000}
+  ],
+  
+  // Simple boolean fields
+  "checked": true,
+  
+  // Optional: Override template elements for testing
+  "_elements": [
+    {
+      "id": "elem1",
+      "type": "text",
+      "page": 1,
+      "bbox": {"x": 100, "y": 100, "w": 200, "h": 20},
+      "data_path": "customer.name"
+    }
+  ]
+}
+```
+
+**Error Responses:**
+
+- `400 Bad Request`: Invalid data or template structure
+  ```json
+  {"detail": "Template structure error: ..."}
+  ```
+
+- `401 Unauthorized`: Authentication required
+  ```json
+  {"detail": "Authentication required"}
+  ```
+
+- `403 Forbidden`: Template does not belong to user
+  ```json
+  {"detail": "Access denied"}
+  ```
+
+- `404 Not Found`: Template not found
+  ```json
+  {"detail": "Template not found"}
+  ```
+
 **Real-time elements transmission (test rendering):**
+
+Include `_elements` in the request body to override template elements without saving:
 
 ```bash
 curl -X POST http://localhost:8000/api/render/{template_id} \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "customer": {"name": "John Doe"},
@@ -233,6 +309,12 @@ curl -X POST http://localhost:8000/api/render/{template_id} \
   }' \
   --output result.pdf
 ```
+
+**API Documentation:**
+
+For interactive API documentation and detailed request/response schemas, visit:
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
 
 ## 📁 Project Structure
 

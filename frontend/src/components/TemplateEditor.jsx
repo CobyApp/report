@@ -769,7 +769,12 @@ function TemplateEditor({ templateId, onBack }) {
       if (element.data_path) {
         ctx.fillStyle = '#2c3e50'
         ctx.font = '12px sans-serif'
-        ctx.fillText(element.data_path, x + 5, y - 5)
+        ctx.textAlign = 'left'
+        ctx.textBaseline = 'top'
+        // Draw text starting from top-left of the area with margins
+        const topMargin = 8 // Margin from top
+        const leftMargin = 8 // Margin from left
+        ctx.fillText(element.data_path, x + leftMargin, y + topMargin)
       }
     }
   }
@@ -926,8 +931,10 @@ function TemplateEditor({ templateId, onBack }) {
 
   const handleDeleteElement = () => {
     if (selectedElement) {
-      setElements(elements.filter(el => el.id !== selectedElement.id))
+      const updatedElements = elements.filter(el => el.id !== selectedElement.id)
+      setElements(updatedElements)
       setSelectedElement(null)
+      redrawCanvas()
     }
   }
 
@@ -1265,6 +1272,11 @@ function TemplateEditor({ templateId, onBack }) {
                     <option value="center">{t('templateEditor.properties.alignCenter')}</option>
                     <option value="right">{t('templateEditor.properties.alignRight')}</option>
                   </select>
+                </div>
+                <div className="property-row">
+                  <button onClick={handleDeleteElement} className="btn-delete-element">
+                    🗑️ {t('templateEditor.delete')}
+                  </button>
                 </div>
               </div>
             </div>

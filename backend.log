@@ -1,937 +1,785 @@
 INFO:     Will watch for changes in these directories: ['/Users/doyoung_kim/Documents/Git/report/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [11022] using WatchFiles
+INFO:     Started reloader process [67333] using WatchFiles
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [11032]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [67336]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:57420 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57457 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57461 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57470 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57473 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57479 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57481 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57483 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57485 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-✓ 페이지 1에 폰트 등록: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
-✓ 페이지 1에 폰트 등록: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
-INFO:     127.0.0.1:57551 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58675 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58676 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58679 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58689 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58688 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58693 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58737 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58738 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58741 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58790 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58792 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58795 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58863 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58866 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58870 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58873 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58896 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58897 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58900 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58928 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58929 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:58933 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61707 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61713 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61715 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61717 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61719 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61961 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61963 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61967 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61982 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61984 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:61987 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62016 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62018 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62021 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62039 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62040 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:62043 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64130 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64131 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64134 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64190 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64192 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64195 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64498 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64500 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64503 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64526 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64525 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64529 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64614 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64616 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64619 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64668 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64669 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64672 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64692 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64693 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64696 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
+INFO:     127.0.0.1:51781 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52352 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52360 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52372 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52384 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52432 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52455 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52464 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52506 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52523 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52553 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52677 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52747 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60659 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60662 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60665 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60668 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60719 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60726 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60728 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60730 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61023 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61351 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61596 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61599 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61637 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61654 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61669 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61671 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61832 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61835 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61901 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61906 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61908 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62843 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62845 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62852 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62854 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62860 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62862 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62864 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62866 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62885 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62888 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62971 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62973 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62976 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62994 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62996 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63006 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63008 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63024 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63026 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63037 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63039 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63053 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63056 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63066 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63068 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63120 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63122 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63266 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63268 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63273 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63275 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63280 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63282 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63288 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63290 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63292 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63294 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63317 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63320 - "GET /api/templates HTTP/1.1" 200 OK
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+INFO:     127.0.0.1:63550 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63669 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63672 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63675 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63678 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64445 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64448 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64455 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64458 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+INFO:     127.0.0.1:64493 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64525 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64528 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64531 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64534 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64595 - "PUT /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/mapping HTTP/1.1" 200 OK
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+✓ Using Unicode font: NotoSansJP
+INFO:     127.0.0.1:64610 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+✓ Using Unicode font: NotoSansJP
+INFO:     127.0.0.1:64670 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64988 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64990 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64993 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [11032]
+INFO:     Finished server process [67336]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27529]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27529]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27546]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27546]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27583]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27583]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27592]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27592]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27609]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27609]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27618]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27618]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27626]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27626]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27645]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27645]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27660]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27660]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27677]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27677]
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27687]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27687]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27709]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27709]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27711]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27711]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27728]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27728]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27736]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27736]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27744]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27744]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27752]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27752]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27767]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27767]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27797]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27797]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27814]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27814]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27851]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27851]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27852]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27852]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27860]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27860]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27889]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27889]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27898]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27898]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27929]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27929]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27931]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27931]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27946]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py', 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27946]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [27990]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [27990]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28007]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28007]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28015]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28015]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28023]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28023]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28031]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28031]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28047]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28047]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28062]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28062]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28063]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28063]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28078]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28078]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28079]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28079]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28087]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28087]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28095]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28095]
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28107]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28107]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28122]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28122]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28123]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28123]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28131]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28131]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28139]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/template_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28139]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28147]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/template_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28147]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28163]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/template_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28163]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28172]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28172]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28180]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/template_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28180]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28188]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/template_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28188]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28204]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28204]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28207]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28207]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28223]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/template_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28223]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28224]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28224]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28239]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/template_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28239]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28256]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28256]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28271]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28271]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28287]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28287]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28296]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'app/services/pdf_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [28296]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28328]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [94834]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28328]
+INFO:     Finished server process [94834]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28530]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [94892]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28530]
+INFO:     Finished server process [94892]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28545]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [94908]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28545]
+INFO:     Finished server process [94908]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28568]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [94917]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28568]
+INFO:     Finished server process [94917]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28585]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [94943]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28585]
+INFO:     Finished server process [94943]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28601]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [94999]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28601]
+INFO:     Finished server process [94999]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28623]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95007]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28623]
+INFO:     Finished server process [95007]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28898]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95034]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28898]
+INFO:     Finished server process [95034]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [28927]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95111]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:65141 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     127.0.0.1:65142 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95111]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95112]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:65150 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95112]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95139]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [28927]
+INFO:     Finished server process [95139]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [29073]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95150]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [29073]
+INFO:     Finished server process [95150]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [29109]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95172]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:65215 - "PUT /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/mapping HTTP/1.1" 200 OK
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+✓ Using Unicode font: NotoSansJP
+INFO:     127.0.0.1:65233 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65391 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65393 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65396 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95172]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95594]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [29109]
+INFO:     Finished server process [95594]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [29140]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95619]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [29140]
+INFO:     Finished server process [95619]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [29170]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95653]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [29170]
+INFO:     Finished server process [95653]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [29430]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95711]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:65464 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     127.0.0.1:65466 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95711]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95719]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:65470 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95719]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95734]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [29430]
+INFO:     Finished server process [95734]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [29471]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     127.0.0.1:49706 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49708 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49711 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49727 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49728 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49731 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49745 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49746 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49753 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49762 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49764 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49767 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49785 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49787 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49790 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49794 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49796 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49803 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49816 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49818 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49821 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49841 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49842 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49845 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49860 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49861 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49864 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49955 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49957 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49960 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49995 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49996 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:49999 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50044 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50045 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50052 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50062 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50064 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50067 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50090 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50091 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50094 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50108 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50109 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50112 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50125 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50127 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50130 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50145 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50147 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50150 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50179 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50181 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50184 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50209 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50210 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50213 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50261 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50263 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50266 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50293 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50295 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50298 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50320 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50322 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50325 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50340 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50342 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50345 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50824 - "GET /api/templates HTTP/1.1" 200 OK
-INFO:     127.0.0.1:50855 - "GET /api/templates HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'app/main.py', 'app/services/pdf_service.py', 'app/services/template_service.py', 'app/services/render_service.py', 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [29471]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [31867]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     127.0.0.1:51215 - "GET /api/templates HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'app/main.py', 'app/services/pdf_service.py', 'app/services/template_service.py', 'app/services/render_service.py', 'app/services/auth_service.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [31867]
-/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [31911]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95771]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [31911]
+INFO:     Finished server process [95771]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [34930]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95772]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+✓ Using Unicode font: NotoSansJP
+INFO:     127.0.0.1:65514 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95772]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [95795]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49239 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49241 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49244 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95795]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96045]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [34930]
+INFO:     Finished server process [96045]
 /Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
   from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
-INFO:     Started server process [34988]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96062]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96062]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96114]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96114]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96144]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49308 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     127.0.0.1:49310 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96144]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96153]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     127.0.0.1:49314 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96153]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96154]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96154]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96170]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49344 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49345 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49348 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96170]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96218]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+✓ Using Unicode font: NotoSansJP
+INFO:     127.0.0.1:49377 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96218]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96241]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49391 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49394 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49401 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49404 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49407 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49410 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49526 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49528 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49538 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96241]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96676]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96676]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96697]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96697]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96746]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96746]
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96786]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96786]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96823]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96823]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96880]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49701 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49703 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49706 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96880]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96896]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96896]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96957]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'app/services/render_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [96957]
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pypdf/_crypt_providers/_cryptography.py:32: CryptographyDeprecationWarning: ARC4 has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.ARC4 and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
+  from cryptography.hazmat.primitives.ciphers.algorithms import AES, ARC4
+/Users/doyoung_kim/Documents/Git/report/backend/venv/lib/python3.9/site-packages/pydantic/_internal/_config.py:318: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [96979]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+✓ Using Unicode font: NotoSansJP
+INFO:     127.0.0.1:49781 - "POST /api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49857 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49860 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49884 - "POST /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49891 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49900 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49903 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49906 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49909 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49949 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49952 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49963 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49966 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49998 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50001 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50004 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50007 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50296 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50298 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50305 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50314 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50316 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50319 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50332 - "PUT /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/mapping HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50339 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50342 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50353 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50356 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50387 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50390 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50419 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50422 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50425 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50435 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50436 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50440 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50443 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50446 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50462 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50465 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50581 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50584 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50587 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50590 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51085 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51087 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51089 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51091 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51106 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51110 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51111 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51113 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51143 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51145 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51147 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51149 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51338 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51340 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51342 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51344 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51599 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51602 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51609 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51612 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51615 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51618 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51626 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51629 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51636 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51639 - "GET /api/templates/2dceb4e0-5d04-4843-8fe7-365b39e2858e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51650 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51653 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51656 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51733 - "PUT /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/mapping HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51754 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51757 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51764 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51767 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51784 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51802 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51817 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51832 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51849 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51864 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51881 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+✓ Font registered on page 1: NotoSansJP (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansJP-VF.ttf)
+✓ Font registered on page 1: NotoSansKR (/Users/doyoung_kim/Documents/Git/report/backend/fonts/NotoSansKR-VF.ttf)
+INFO:     127.0.0.1:51891 - "POST /api/render/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51899 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51915 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51934 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51937 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51940 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51943 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22/preview?page=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52060 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52063 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52086 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52089 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52106 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52121 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52137 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52153 - "GET /api/templates/1da8b6a4-e06e-40a8-b39c-1f9b2bf3ed22 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52309 - "GET /api/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52311 - "GET /api/templates HTTP/1.1" 200 OK

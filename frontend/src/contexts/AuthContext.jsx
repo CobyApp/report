@@ -27,18 +27,8 @@ axios.interceptors.request.use(
   }
 )
 
-// axios interceptor setup: logout on 401 error
-axios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('user')
-      window.location.href = '/login'
-    }
-    return Promise.reject(error)
-  }
-)
+// axios interceptor for 401 errors will be set up in App.jsx with navigate
+// This allows React Router to handle navigation properly
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)

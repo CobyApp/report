@@ -239,14 +239,26 @@ class RenderService:
         # PyMuPDF coordinate system: top-left is (0, 0)
         # insert_text's point is the text's baseline position
         # y_screen is screen coordinate system (top is 0)
-        # Place baseline at approximately 70% of field area to center text in field
-        # (approximately 75% of font size is above baseline)
-        y_text = y_screen + h * 0.7  # Place baseline at approximately 70% of field area
+        # Place baseline at top of field area with margin (approximately 80% of font size is above baseline)
+        # For top alignment: baseline should be at y_screen + font_size * 0.8 + margin
+        top_margin = 5  # Margin from top (in points)
+        y_text = y_screen + font_size * 0.8 + top_margin  # Place baseline near top of field area with margin
+        
+        # Left margin (only for left alignment)
+        left_margin = 5  # Margin from left (in points)
+        x_text = x  # Default to x position
         
         # Alignment handling
         if align == "center":
-            # PyMuPDF supports alignment in insert_textbox
-            pass
+            # Center alignment: adjust by calculating text width
+            try:
+                if font_name_to_use:
+                    text_width = page.get_text_length(text, fontsize=font_size, fontname=font_name_to_use)
+                else:
+                    text_width = page.get_text_length(text, fontsize=font_size)
+                x_text = x + (w - text_width) / 2
+            except:
+                x_text = x + left_margin
         elif align == "right":
             # Right alignment: adjust by calculating text width
             try:
@@ -254,16 +266,19 @@ class RenderService:
                     text_width = page.get_text_length(text, fontsize=font_size, fontname=font_name_to_use)
                 else:
                     text_width = page.get_text_length(text, fontsize=font_size)
-                x = x + w - text_width
+                x_text = x + w - text_width - left_margin
             except:
-                pass
+                x_text = x + w - left_margin
+        else:
+            # Left alignment: add left margin
+            x_text = x + left_margin
         
         # Insert text (recognized as PDF text, selectable/searchable)
         try:
             if font_name_to_use:
                 # Insert text using registered font name
                 page.insert_text(
-                    point=(x, y_text),
+                    point=(x_text, y_text),
                     text=text,
                     fontsize=font_size,
                     fontname=font_name_to_use,
@@ -274,7 +289,7 @@ class RenderService:
                 # Unicode without font may cause errors
                 print(f"⚠ Warning: Unicode text without font, using default font (may break): {text[:20]}...")
                 page.insert_text(
-                    point=(x, y_text),
+                    point=(x_text, y_text),
                     text=text,
                     fontsize=font_size,
                     color=(0, 0, 0)
@@ -282,7 +297,7 @@ class RenderService:
             else:
                 # Use default font (English, etc.)
                 page.insert_text(
-                    point=(x, y_text),
+                    point=(x_text, y_text),
                     text=text,
                     fontsize=font_size,
                     color=(0, 0, 0)
@@ -427,6 +442,9 @@ class RenderService:
                     style = elem.get("style", {})
                     font_size = style.get("size", 10)
                     text = str(value)
+                    # Calculate text Y position: top of row + font_size * 0.8 + margin (baseline position)
+                    top_margin = 5  # Margin from top (in points)
+                    text_y = current_y + font_size * 0.8 + top_margin
                     
                     # Language detection and font selection for each text
                     item_has_korean = any('\uAC00' <= c <= '\uD7A3' for c in text)
@@ -449,7 +467,10 @@ class RenderService:
                             if registered_fonts:
                                 item_font_name_to_use = list(registered_fonts.values())[0]
                     
-                    text_x = col_x
+                    # Left margin (only for left alignment)
+                    left_margin = 5  # Margin from left (in points)
+                    text_x = col_x  # Default to column x position
+                    
                     # Alignment handling
                     if col_align == "center" or col_align == "right":
                         try:
@@ -459,15 +480,17 @@ class RenderService:
                                 text_width = page.get_text_length(text, fontsize=font_size)
                             
                             if col_align == "right":
-                                text_x = col_x + col_w - text_width
+                                text_x = col_x + col_w - text_width - left_margin
                             elif col_align == "center":
                                 text_x = col_x + (col_w - text_width) / 2
                         except:
-                            pass
+                            text_x = col_x + left_margin
+                    else:
+                        # Left alignment: add left margin
+                        text_x = col_x + left_margin
                     
                     # Insert text (use appropriate font for each text)
-                    # Y coordinate: place baseline at center of row_height
-                    text_y = current_y + row_height - (row_height - font_size * 0.2) / 2
+                    # Y coordinate: text_y already set above to start from top (current_y + font_size * 0.8)
                     
                     try:
                         if item_font_name_to_use:

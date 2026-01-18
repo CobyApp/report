@@ -1,13 +1,32 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
+import TemplateApiModal from './TemplateApiModal'
 import './TemplateList.css'
 
 const API_BASE = '/api'
 
-function TemplateList({ templates, onSelect, onRefresh }) {
+function TemplateList({ onSelect, onRefresh }) {
   const { t } = useTranslation()
   const fileInputRef = useRef(null)
+  const [templates, setTemplates] = useState([])
+  const [selectedApiTemplate, setSelectedApiTemplate] = useState(null)
+
+  useEffect(() => {
+    loadTemplates()
+  }, [])
+
+  const loadTemplates = async () => {
+    try {
+      const response = await axios.get(`${API_BASE}/templates`)
+      setTemplates(response.data.templates || [])
+      if (onRefresh) {
+        onRefresh()
+      }
+    } catch (error) {
+      console.error('Template list load failed:', error)
+    }
+  }
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0]
@@ -27,7 +46,7 @@ function TemplateList({ templates, onSelect, onRefresh }) {
       })
 
       alert(`${t('templateList.alerts.uploadSuccess')}\nID: ${response.data.template_id}`)
-      onRefresh()
+      loadTemplates()
     } catch (error) {
       alert(t('templateList.alerts.uploadFailed') + ': ' + (error.response?.data?.detail || error.message))
     }
@@ -43,7 +62,7 @@ function TemplateList({ templates, onSelect, onRefresh }) {
     try {
       await axios.delete(`${API_BASE}/templates/${templateId}`)
       alert(t('templateList.alerts.deleteSuccess'))
-      onRefresh()
+      loadTemplates()
     } catch (error) {
       alert(t('templateList.alerts.deleteFailed') + ': ' + (error.response?.data?.detail || error.message))
     }
@@ -63,7 +82,7 @@ function TemplateList({ templates, onSelect, onRefresh }) {
     try {
       const response = await axios.delete(`${API_BASE}/templates`)
       alert(t('templateList.alerts.deleteAllSuccess', { count: response.data.deleted_count }))
-      onRefresh()
+      loadTemplates()
     } catch (error) {
       alert(t('templateList.alerts.deleteAllFailed') + ': ' + (error.response?.data?.detail || error.message))
     }
@@ -117,6 +136,16 @@ function TemplateList({ templates, onSelect, onRefresh }) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span className="template-id">{template.template_id.slice(0, 8)}...</span>
                   <button
+                    className="btn-api-item"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setSelectedApiTemplate(template)
+                    }}
+                    title={t('templateList.card.apiDocs', 'API Documentation')}
+                  >
+                    📄 API
+                  </button>
+                  <button
                     className="btn-delete-item"
                     onClick={(e) => handleDeleteTemplate(template.template_id, template.filename, e)}
                     title={t('templateList.card.delete')}
@@ -134,6 +163,13 @@ function TemplateList({ templates, onSelect, onRefresh }) {
             </div>
           ))}
         </div>
+      )}
+
+      {selectedApiTemplate && (
+        <TemplateApiModal
+          template={selectedApiTemplate}
+          onClose={() => setSelectedApiTemplate(null)}
+        />
       )}
     </div>
   )

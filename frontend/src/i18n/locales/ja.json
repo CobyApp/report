@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "PDFテンプレート自動化エンジン",
-    "backToList": "← リストに戻る"
+    "backToList": "← リストに戻る",
+    "apiDocs": "APIドキュメント"
   },
   "templateList": {
     "title": "テンプレート一覧",
@@ -15,7 +16,8 @@
       "fieldCount": "フィールド数",
       "createdAt": "作成日",
       "noName": "名前なし",
-      "delete": "削除"
+      "delete": "削除",
+      "apiDocs": "APIドキュメント"
     },
     "alerts": {
       "pdfOnly": "PDFファイルのみアップロードできます。",
@@ -122,5 +124,83 @@
       "success": "登録が完了しました！"
     },
     "logout": "ログアウト"
+  },
+  "api": {
+    "title": "APIドキュメント",
+    "subtitle": "PDFテンプレート自動化エンジンAPI完全リファレンス",
+    "intro": {
+      "title": "はじめに",
+      "description": "このAPIは、フィールドデータを提供することにより、テンプレートからPDFをプログラム的に生成できます。すべてのエンドポイントには、Authorizationヘッダー内のBearerトークンによる認証が必要です。"
+    },
+    "auth": {
+      "title": "認証",
+      "description": "Authorizationヘッダーにアクセストークンを含めてください:",
+      "note": "/api/auth/loginでログインしてアクセストークンを取得してください",
+      "required": "認証必須"
+    },
+    "request": {
+      "title": "リクエスト",
+      "contentType": "Content-Type",
+      "body": "リクエスト本文",
+      "optional": "オプション",
+      "optionalElements": "テストレンダリングのために_elementsを含めてください"
+    },
+    "response": {
+      "title": "レスポンス",
+      "contentType": "Content-Type",
+      "body": "レスポンス本文",
+      "filename": "ファイル名"
+    },
+    "example": {
+      "title": "例"
+    },
+    "errors": {
+      "title": "エラーレスポンス"
+    },
+    "moreInfo": {
+      "title": "詳細情報",
+      "description": "ライブテストが可能な対話型APIドキュメントについては、以下をご覧ください:"
+    }
+  },
+  "templateApi": {
+    "title": "APIドキュメント",
+    "template": "テンプレート",
+    "templateId": "テンプレートID",
+    "endpoint": {
+      "title": "エンドポイント",
+      "copy": "URLをコピー"
+    },
+    "description": {
+      "title": "説明",
+      "text": "このテンプレートにフィールドデータをマッピングして完成したPDFを生成します。リクエスト本文には、テンプレートに定義されたデータパスと一致するJSONデータが含まれている必要があります。"
+    },
+    "request": {
+      "title": "リクエスト",
+      "contentType": "Content-Type",
+      "body": "リクエスト本文",
+      "note": "テンプレートのデータパスに応じてフィールド名と値を調整してください。",
+      "noFields": "このテンプレートに定義されたフィールドがありません。まずテンプレートにフィールドを追加してください。"
+    },
+    "response": {
+      "title": "レスポンス",
+      "contentType": "Content-Type",
+      "description": "生成されたPDFファイルをバイナリストリームとして返します。",
+      "filename": "ファイル名"
+    },
+    "authentication": {
+      "title": "認証",
+      "description": "このエンドポイントには認証が必要です。Authorizationヘッダーにアクセストークンを含めてください:",
+      "yourToken": "アクセストークン"
+    },
+    "examples": {
+      "title": "例"
+    },
+    "errors": {
+      "title": "エラーレスポンス",
+      "badRequest": "不正なリクエスト - 無効なデータまたはテンプレート構造",
+      "unauthorized": "認証が必要です",
+      "forbidden": "アクセス拒否 - テンプレートがユーザーに属していません",
+      "notFound": "テンプレートが見つかりません"
+    }
   }
 }

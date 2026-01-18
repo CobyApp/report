@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { Routes, Route, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import { useAuth } from './contexts/AuthContext'
@@ -7,98 +8,133 @@ import TemplateEditor from './components/TemplateEditor'
 import LanguageSelector from './components/LanguageSelector'
 import Login from './components/Login'
 import Register from './components/Register'
+import ProtectedRoute from './components/ProtectedRoute'
+import Layout from './components/Layout'
 import './App.css'
 
 const API_BASE = '/api'
 
-function App() {
-  const { t } = useTranslation()
-  const { user, loading: authLoading, logout } = useAuth()
-  const [templates, setTemplates] = useState([])
-  const [selectedTemplate, setSelectedTemplate] = useState(null)
-  const [view, setView] = useState('list') // 'list' | 'editor' | 'render'
-  const [authView, setAuthView] = useState('login') // 'login' | 'register'
+// Component to setup axios interceptor with navigate
+function AxiosInterceptorSetup() {
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (user) {
-      loadTemplates()
-    }
-  }, [user])
+    // Setup axios interceptor to use navigate instead of window.location.href
+    const responseInterceptor = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401) {
+          localStorage.removeItem('access_token')
+          localStorage.removeItem('user')
+          // Use navigate instead of window.location.href
+          navigate('/login', { replace: true })
+        }
+        return Promise.reject(error)
+      }
+    )
 
-  const loadTemplates = async () => {
-    try {
-      const response = await axios.get(`${API_BASE}/templates`)
-      setTemplates(response.data.templates || [])
-    } catch (error) {
-      console.error('Template list load failed:', error)
+    return () => {
+      // Cleanup interceptor
+      axios.interceptors.response.eject(responseInterceptor)
     }
-  }
+  }, [navigate])
+
+  return null
+}
+
+function TemplatesPage() {
+  const navigate = useNavigate()
 
   const handleTemplateSelect = (templateId) => {
-    setSelectedTemplate(templateId)
-    setView('editor')
+    navigate(`/templates/${templateId}/edit`)
   }
 
-  const handleBackToList = () => {
-    setSelectedTemplate(null)
-    setView('list')
-    loadTemplates()
+  return <TemplateList onSelect={handleTemplateSelect} />
+}
+
+function TemplateEditPage() {
+  const { id } = useParams()
+  const navigate = useNavigate()
+
+  const handleBack = () => {
+    navigate('/templates')
   }
 
-  // Don't display anything while loading
-  if (authLoading) {
-    return <div className="loading">{t('templateEditor.loading')}</div>
-  }
+  return <TemplateEditor templateId={id} onBack={handleBack} />
+}
 
-  // Show login/register page if not logged in
-  if (!user) {
-    return (
-      <>
-        {authView === 'login' ? (
-          <Login onSwitchToRegister={() => setAuthView('register')} />
-        ) : (
-          <Register onSwitchToLogin={() => setAuthView('login')} />
-        )}
-      </>
-    )
+function LoginPage() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { user } = useAuth()
+
+  // If already logged in, redirect to templates
+  if (user) {
+    const from = location.state?.from?.pathname || '/templates'
+    return <Navigate to={from} replace />
   }
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>{t('app.title')}</h1>
-        <div className="header-actions">
-          {view !== 'list' && (
-            <button onClick={handleBackToList} className="btn-back">
-              {t('app.backToList')}
-            </button>
-          )}
-          <div className="user-info">
-            <span>{user.username}</span>
-            <button onClick={logout} className="btn-logout">
-              {t('auth.logout')}
-            </button>
-          </div>
-          <LanguageSelector />
-        </div>
-      </header>
+    <Login
+      onSwitchToRegister={() => navigate('/register')}
+      onLoginSuccess={() => {
+        const from = location.state?.from?.pathname || '/templates'
+        navigate(from, { replace: true })
+      }}
+    />
+  )
+}
 
-      <main className="app-main">
-        {view === 'list' && (
-          <TemplateList
-            templates={templates}
-            onSelect={handleTemplateSelect}
-            onRefresh={loadTemplates}
-          />
-        )}
-        {view === 'editor' && selectedTemplate && (
-          <TemplateEditor
-            templateId={selectedTemplate}
-            onBack={handleBackToList}
-          />
-        )}
-      </main>
-    </div>
+function RegisterPage() {
+  const navigate = useNavigate()
+  const { user } = useAuth()
+
+  // If already logged in, redirect to templates
+  if (user) {
+    return <Navigate to="/templates" replace />
+  }
+
+  return (
+    <Register
+      onSwitchToLogin={() => navigate('/login')}
+      onRegisterSuccess={() => {
+        navigate('/login', { replace: true })
+      }}
+    />
+  )
+}
+
+function App() {
+  return (
+    <>
+      <AxiosInterceptorSetup />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/templates"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <TemplatesPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/templates/:id/edit"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <TemplateEditPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/" element={<Navigate to="/templates" replace />} />
+        <Route path="*" element={<Navigate to="/templates" replace />} />
+      </Routes>
+    </>
   )
 }
 

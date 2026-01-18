@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "PDF 템플릿 자동화 엔진",
-    "backToList": "← 목록으로"
+    "backToList": "← 목록으로",
+    "apiDocs": "API 문서"
   },
   "templateList": {
     "title": "템플릿 목록",
@@ -15,7 +16,8 @@
       "fieldCount": "필드 수",
       "createdAt": "생성일",
       "noName": "이름 없음",
-      "delete": "삭제"
+      "delete": "삭제",
+      "apiDocs": "API 문서"
     },
     "alerts": {
       "pdfOnly": "PDF 파일만 업로드할 수 있습니다.",
@@ -122,5 +124,83 @@
       "success": "회원가입이 완료되었습니다!"
     },
     "logout": "로그아웃"
+  },
+  "api": {
+    "title": "API 문서",
+    "subtitle": "PDF 템플릿 자동화 엔진 API 완전 참조",
+    "intro": {
+      "title": "소개",
+      "description": "이 API는 필드 데이터를 제공하여 템플릿에서 PDF를 프로그래밍 방식으로 생성할 수 있게 합니다. 모든 엔드포인트는 Authorization 헤더의 Bearer 토큰을 통한 인증이 필요합니다."
+    },
+    "auth": {
+      "title": "인증",
+      "description": "Authorization 헤더에 액세스 토큰을 포함하세요:",
+      "note": "/api/auth/login에서 로그인하여 액세스 토큰을 받으세요",
+      "required": "인증 필요"
+    },
+    "request": {
+      "title": "요청",
+      "contentType": "Content-Type",
+      "body": "요청 본문",
+      "optional": "선택사항",
+      "optionalElements": "테스트 렌더링을 위해 _elements를 포함하세요"
+    },
+    "response": {
+      "title": "응답",
+      "contentType": "Content-Type",
+      "body": "응답 본문",
+      "filename": "파일명"
+    },
+    "example": {
+      "title": "예제"
+    },
+    "errors": {
+      "title": "에러 응답"
+    },
+    "moreInfo": {
+      "title": "추가 정보",
+      "description": "라이브 테스트가 가능한 대화형 API 문서는 다음을 방문하세요:"
+    }
+  },
+  "templateApi": {
+    "title": "API 문서",
+    "template": "템플릿",
+    "templateId": "템플릿 ID",
+    "endpoint": {
+      "title": "엔드포인트",
+      "copy": "URL 복사"
+    },
+    "description": {
+      "title": "설명",
+      "text": "이 템플릿에 필드 데이터를 매핑하여 완성된 PDF를 생성합니다. 요청 본문에는 템플릿에 정의된 데이터 경로와 일치하는 JSON 데이터가 포함되어야 합니다."
+    },
+    "request": {
+      "title": "요청",
+      "contentType": "Content-Type",
+      "body": "요청 본문",
+      "note": "템플릿의 데이터 경로에 따라 필드 이름과 값을 조정하세요.",
+      "noFields": "이 템플릿에 정의된 필드가 없습니다. 먼저 템플릿에 필드를 추가해주세요."
+    },
+    "response": {
+      "title": "응답",
+      "contentType": "Content-Type",
+      "description": "생성된 PDF 파일을 바이너리 스트림으로 반환합니다.",
+      "filename": "파일명"
+    },
+    "authentication": {
+      "title": "인증",
+      "description": "이 엔드포인트는 인증이 필요합니다. Authorization 헤더에 액세스 토큰을 포함하세요:",
+      "yourToken": "액세스 토큰"
+    },
+    "examples": {
+      "title": "예제"
+    },
+    "errors": {
+      "title": "에러 응답",
+      "badRequest": "잘못된 요청 - 유효하지 않은 데이터 또는 템플릿 구조",
+      "unauthorized": "인증 필요",
+      "forbidden": "접근 거부 - 템플릿이 사용자에게 속하지 않음",
+      "notFound": "템플릿을 찾을 수 없음"
+    }
   }
 }

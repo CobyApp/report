@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "PDF Template Automation Engine",
-    "backToList": "← Back to List"
+    "backToList": "← Back to List",
+    "apiDocs": "API Docs"
   },
   "templateList": {
     "title": "Template List",
@@ -15,7 +16,8 @@
       "fieldCount": "Fields",
       "createdAt": "Created",
       "noName": "No name",
-      "delete": "Delete"
+      "delete": "Delete",
+      "apiDocs": "API Documentation"
     },
     "alerts": {
       "pdfOnly": "Only PDF files can be uploaded.",
@@ -122,5 +124,83 @@
       "success": "Registration completed!"
     },
     "logout": "Logout"
+  },
+  "api": {
+    "title": "API Documentation",
+    "subtitle": "Complete API reference for PDF Template Automation Engine",
+    "intro": {
+      "title": "Introduction",
+      "description": "This API allows you to programmatically generate PDFs from templates by providing field data. All endpoints require authentication via Bearer token in the Authorization header."
+    },
+    "auth": {
+      "title": "Authentication",
+      "description": "Include your access token in the Authorization header:",
+      "note": "Get your access token by logging in at /api/auth/login",
+      "required": "Auth Required"
+    },
+    "request": {
+      "title": "Request",
+      "contentType": "Content-Type",
+      "body": "Request Body",
+      "optional": "Optional",
+      "optionalElements": "Include _elements for test rendering"
+    },
+    "response": {
+      "title": "Response",
+      "contentType": "Content-Type",
+      "body": "Response Body",
+      "filename": "filename"
+    },
+    "example": {
+      "title": "Example"
+    },
+    "errors": {
+      "title": "Error Responses"
+    },
+    "moreInfo": {
+      "title": "More Information",
+      "description": "For interactive API documentation with live testing, visit:"
+    }
+  },
+  "templateApi": {
+    "title": "API Documentation",
+    "template": "Template",
+    "templateId": "Template ID",
+    "endpoint": {
+      "title": "Endpoint",
+      "copy": "Copy URL"
+    },
+    "description": {
+      "title": "Description",
+      "text": "Generate a completed PDF by mapping field data to this template. The request body should contain JSON data that matches the data paths defined in your template."
+    },
+    "request": {
+      "title": "Request",
+      "contentType": "Content-Type",
+      "body": "Request Body",
+      "note": "Adjust the field names and values according to your template's data paths.",
+      "noFields": "No fields defined in this template. Please add fields to your template first."
+    },
+    "response": {
+      "title": "Response",
+      "contentType": "Content-Type",
+      "description": "Returns the generated PDF file as a binary stream.",
+      "filename": "Filename"
+    },
+    "authentication": {
+      "title": "Authentication",
+      "description": "This endpoint requires authentication. Include your access token in the Authorization header:",
+      "yourToken": "Your Access Token"
+    },
+    "examples": {
+      "title": "Examples"
+    },
+    "errors": {
+      "title": "Error Responses",
+      "badRequest": "Bad request - Invalid data or template structure",
+      "unauthorized": "Unauthorized - Authentication required",
+      "forbidden": "Forbidden - Template does not belong to user",
+      "notFound": "Template not found"
+    }
   }
 }

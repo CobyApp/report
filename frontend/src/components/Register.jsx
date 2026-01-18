@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../contexts/AuthContext'
 import './Login.css'
 
-function Register({ onSwitchToLogin }) {
+function Register({ onSwitchToLogin, onRegisterSuccess }) {
   const { t } = useTranslation()
   const { register } = useAuth()
   const [username, setUsername] = useState('')
@@ -36,11 +36,13 @@ function Register({ onSwitchToLogin }) {
     if (result.success) {
       // Switch to login after successful registration
       alert(t('auth.register.success'))
-      onSwitchToLogin()
       setUsername('')
       setEmail('')
       setPassword('')
       setConfirmPassword('')
+      if (onRegisterSuccess) {
+        onRegisterSuccess()
+      }
     } else {
       setError(result.error)
     }

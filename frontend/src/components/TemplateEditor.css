@@ -277,6 +277,26 @@
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
+.btn-delete-element {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  background-color: var(--danger);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.btn-delete-element:hover {
+  background-color: var(--danger-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
 .elements-list-section {
   border-top: 1px solid #eee;
   padding-top: 1rem;

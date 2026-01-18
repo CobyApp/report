@@ -16,7 +16,45 @@ from app.services.template_service import TemplateService
 from app.services.render_service import RenderService
 from app.services.auth_service import AuthService
 
-app = FastAPI(title="PDF Template Automation Engine", version="1.0.0")
+app = FastAPI(
+    title="PDF Template Automation Engine",
+    version="1.0.0",
+    description="""
+    ## PDF Template Automation Engine API
+    
+    Automatically generate completed PDFs by mapping JSON data to PDF templates.
+    
+    ### Features
+    
+    * 📄 Upload and manage PDF templates
+    * 🎨 Visual field mapping interface
+    * ⚡ Real-time PDF generation
+    * 🔐 User authentication and data isolation
+    * 📱 RESTful API for programmatic access
+    
+    ### Authentication
+    
+    Most endpoints require authentication. Include your access token in the Authorization header:
+    
+    ```
+    Authorization: Bearer YOUR_ACCESS_TOKEN
+    ```
+    
+    Get your access token by logging in at `/api/auth/login`
+    
+    ### API Documentation
+    
+    * **Swagger UI**: Available at `/docs` (interactive API explorer)
+    * **ReDoc**: Available at `/redoc` (alternative documentation)
+    """,
+    contact={
+        "name": "PDF Template Automation Engine",
+        "url": "https://github.com/CobyApp/report"
+    },
+    license_info={
+        "name": "MIT License"
+    }
+)
 
 # CORS configuration (for frontend communication)
 app.add_middleware(
@@ -58,6 +96,57 @@ class RegisterRequest(BaseModel):
 class LoginRequest(BaseModel):
     username: str
     password: str
+
+
+# ===== PDF Rendering Models =====
+class RenderRequest(BaseModel):
+    """Request model for PDF rendering
+    
+    This model accepts field data that will be mapped to template fields.
+    Data paths in the template will be used to extract values from this object.
+    
+    Example:
+        {
+            "customer": {
+                "name": "John Doe",
+                "email": "john@example.com"
+            },
+            "items": [
+                {"name": "Item 1", "price": 10000},
+                {"name": "Item 2", "price": 20000}
+            ],
+            "checked": true,
+            "_elements": [  # Optional: for test rendering
+                {
+                    "id": "elem1",
+                    "type": "text",
+                    "page": 1,
+                    "bbox": {"x": 100, "y": 100, "w": 200, "h": 20},
+                    "data_path": "customer.name"
+                }
+            ]
+        }
+    """
+    # Allow any additional fields for flexible data structure
+    class Config:
+        extra = "allow"
+        schema_extra = {
+            "example": {
+                "customer": {
+                    "name": "John Doe",
+                    "email": "john@example.com",
+                    "address": "123 Main St"
+                },
+                "items": [
+                    {"name": "Product 1", "price": 10000, "quantity": 2},
+                    {"name": "Product 2", "price": 20000, "quantity": 1}
+                ],
+                "checked": True,
+                "total": 40000,
+                "date": "2024-01-17",
+                "notes": "Payment due within 30 days"
+            }
+        }
 
 
 # ===== Authentication Helper Functions =====
@@ -262,9 +351,112 @@ async def preview_template(template_id: str, page: int = 1, current_user: Dict =
 
 
 # ===== PDF Rendering =====
-@app.post("/api/render/{template_id}")
-async def render_pdf(template_id: str, data: Dict[str, Any], current_user: Dict = Depends(require_auth)):
-    """Generate completed PDF with data (authentication required)"""
+@app.post(
+    "/api/render/{template_id}",
+    response_class=FileResponse,
+    summary="Generate PDF from Template",
+    description="""
+    Generate a completed PDF by mapping field data to a saved template.
+    
+    ## Request Body
+    
+    The request body should contain a JSON object with data that matches the data paths defined in your template.
+    
+    ### Field Data Mapping
+    
+    - **Nested Objects**: Use dot notation in template (e.g., `customer.name`)
+    - **Arrays**: Use bracket notation in template (e.g., `items[0].price`)
+    - **Simple Values**: Direct field names (e.g., `checked`, `date`)
+    
+    ### Optional: Test Rendering
+    
+    Include `_elements` in the request body to override template elements for testing.
+    This allows you to test rendering without saving changes to the template.
+    
+    ## Response
+    
+    Returns the generated PDF file as a binary stream with `application/pdf` content type.
+    
+    ## Authentication
+    
+    Requires authentication via Bearer token in the Authorization header.
+    You can only render templates that belong to your account.
+    """,
+    responses={
+        200: {
+            "description": "PDF file generated successfully",
+            "content": {
+                "application/pdf": {
+                    "schema": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            }
+        },
+        400: {
+            "description": "Bad request - Invalid data or template structure",
+            "content": {
+                "application/json": {
+                    "example": {"detail": "Template structure error: ..."}
+                }
+            }
+        },
+        401: {
+            "description": "Unauthorized - Authentication required",
+            "content": {
+                "application/json": {
+                    "example": {"detail": "Authentication required"}
+                }
+            }
+        },
+        403: {
+            "description": "Forbidden - Template does not belong to user",
+            "content": {
+                "application/json": {
+                    "example": {"detail": "Access denied"}
+                }
+            }
+        },
+        404: {
+            "description": "Template not found",
+            "content": {
+                "application/json": {
+                    "example": {"detail": "Template not found"}
+                }
+            }
+        }
+    },
+    tags=["PDF Rendering"]
+)
+async def render_pdf(
+    template_id: str,
+    data: RenderRequest,
+    current_user: Dict = Depends(require_auth)
+):
+    """
+    Generate completed PDF with field data (authentication required)
+    
+    **Parameters:**
+    - `template_id`: UUID of the template to use for rendering
+    - `data`: JSON object containing field values to map to template fields
+    
+    **Returns:**
+    - PDF file (application/pdf)
+    
+    **Example Request:**
+    ```bash
+    curl -X POST http://localhost:8000/api/render/2dceb4e0-5d04-4843-8fe7-365b39e2858e \\
+      -H "Authorization: Bearer YOUR_TOKEN" \\
+      -H "Content-Type: application/json" \\
+      -d '{
+        "customer": {"name": "John Doe"},
+        "items": [{"name": "Item 1", "price": 10000}],
+        "checked": true
+      }' \\
+      --output result.pdf
+    ```
+    """
     try:
         # Verify template ownership
         template = template_service.get_template(template_id)
@@ -274,18 +466,21 @@ async def render_pdf(template_id: str, data: Dict[str, Any], current_user: Dict 
         if template.get("user_id") != current_user["user_id"]:
             raise HTTPException(status_code=403, detail="Access denied")
         
+        # Convert Pydantic model to dict
+        data_dict = data.dict(exclude_unset=True)
+        
         # Use _elements if provided, otherwise use saved template
-        elements_override = data.pop("_elements", None)
+        elements_override = data_dict.pop("_elements", None)
         
         if elements_override is not None:
             # Use temporary template (when elements are provided)
             # Temporarily update elements for rendering
             temp_template = template.copy()
             temp_template["elements"] = elements_override
-            output_path = await render_service.render_with_template(temp_template, data, template_id)
+            output_path = await render_service.render_with_template(temp_template, data_dict, template_id)
         else:
             # Use saved template (existing method)
-            output_path = await render_service.render(template_id, data)
+            output_path = await render_service.render(template_id, data_dict)
         
         return FileResponse(
             output_path,
