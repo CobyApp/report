@@ -26,9 +26,9 @@ function TemplateEditor({ templateId, onBack }) {
   const [resizeHandle, setResizeHandle] = useState(null) // 'nw', 'ne', 'sw', 'se'
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const [currentCursor, setCurrentCursor] = useState('default')
-  const imageCacheRef = useRef(new Map()) // 이미지 캐시 (Image 객체 저장)
-  const blobUrlCacheRef = useRef(new Map()) // Blob URL 캐시 (정리용)
-  const [dragStartBbox, setDragStartBbox] = useState(null) // 드래그 시작 시 요소의 원본 bbox
+  const imageCacheRef = useRef(new Map()) // Image cache (stores Image objects)
+  const blobUrlCacheRef = useRef(new Map()) // Blob URL cache (for cleanup)
+  const [dragStartBbox, setDragStartBbox] = useState(null) // Original bbox of element when drag starts
 
   useEffect(() => {
     loadTemplate()
@@ -41,7 +41,7 @@ function TemplateEditor({ templateId, onBack }) {
     }
   }, [template, currentPage])
 
-  // 도구 선택 시 커서 변경
+  // Change cursor when tool is selected
   useEffect(() => {
     if (selectedTool === 'select') {
       setCurrentCursor('default')
@@ -56,14 +56,14 @@ function TemplateEditor({ templateId, onBack }) {
     }
   }, [selectedTool])
 
-  // cleanup: Blob URL 해제
+  // cleanup: Revoke Blob URLs
   useEffect(() => {
     return () => {
-      // previewImage Blob URL 해제
+      // Revoke previewImage Blob URL
       if (previewImage && previewImage.startsWith('blob:')) {
         URL.revokeObjectURL(previewImage)
       }
-      // blobUrlCache의 모든 Blob URL 해제
+      // Revoke all Blob URLs in blobUrlCache
       blobUrlCacheRef.current.forEach(blobUrl => {
         if (blobUrl.startsWith('blob:')) {
           URL.revokeObjectURL(blobUrl)
@@ -73,7 +73,7 @@ function TemplateEditor({ templateId, onBack }) {
     }
   }, [previewImage])
 
-  // 전역 마우스 이벤트 리스너 (드래그가 캔버스 밖으로 나가도 계속 추적)
+  // Global mouse event listeners (continue tracking even when drag goes outside canvas)
   useEffect(() => {
     if (!isDraggingElement && !isResizing) return
 
@@ -223,20 +223,20 @@ function TemplateEditor({ templateId, onBack }) {
 
   const loadPreviewImage = async () => {
     try {
-      // axios로 blob 이미지를 받아서 Blob URL로 변환 (토큰 포함)
+      // Get blob image via axios and convert to Blob URL (includes token)
       const response = await axios.get(`${API_BASE}/templates/${templateId}/preview?page=${currentPage}`, {
         responseType: 'blob',
       })
       
-      // Blob URL 생성
+      // Create Blob URL
       const blobUrl = URL.createObjectURL(response.data)
       setPreviewImage(blobUrl)
     } catch (error) {
-      // 빈 템플릿인 경우 이미지 없음 (null로 두면 빈 캔버스 표시)
+      // No image for empty template (null shows empty canvas)
       if (error.response?.status === 404) {
         setPreviewImage(null)
       } else {
-        console.error('미리보기 로드 실패:', error)
+        console.error('Preview load failed:', error)
         setPreviewImage(null)
       }
     }
@@ -267,13 +267,13 @@ function TemplateEditor({ templateId, onBack }) {
     }
   }
 
-  // 클릭한 위치의 요소 찾기
+  // Find element at clicked position
   const getElementAtPoint = (x, y) => {
     const displaySize = getDisplaySize()
     const pdfSize = getPDFSize()
     const pointPDF = screenToPDF(x, y, displaySize.width, displaySize.height, pdfSize.width, pdfSize.height)
     
-    // 역순으로 검색 (마지막에 그린 것이 위에 있음)
+    // Search in reverse order (last drawn is on top)
     const pageElements = elements.filter(el => el.page === currentPage)
     for (let i = pageElements.length - 1; i >= 0; i--) {
       const el = pageElements[i]
@@ -286,24 +286,24 @@ function TemplateEditor({ templateId, onBack }) {
     return null
   }
 
-  // 리사이즈 핸들 위치 확인
+  // Check resize handle position
   const getResizeHandle = (element, x, y) => {
     if (!element) return null
     
     const displaySize = getDisplaySize()
     const pdfSize = getPDFSize()
     
-    // 스크린 좌표로 변환 (PDF 좌표가 아닌 스크린 좌표로 직접 계산)
+    // Convert to screen coordinates (calculate directly in screen coordinates, not PDF coordinates)
     const screenCoords = pdfToScreen(element.bbox.x, element.bbox.y, pdfSize.width, pdfSize.height, displaySize.width, displaySize.height)
     const screenSize = pdfToScreen(element.bbox.w, element.bbox.h, pdfSize.width, pdfSize.height, displaySize.width, displaySize.height)
     
-    const handleSize = 12 // 핸들 크기 (픽셀, 약간 크게 해서 호버하기 쉽게)
+    const handleSize = 12 // Handle size (pixels, slightly larger for easier hovering)
     const x1 = screenCoords.x
     const y1 = screenCoords.y
     const x2 = x1 + screenSize.x
     const y2 = y1 + screenSize.y
     
-    // 모서리 핸들 확인 (스크린 좌표 기준)
+    // Check corner handles (screen coordinate based)
     if (Math.abs(x - x1) <= handleSize && Math.abs(y - y1) <= handleSize) return 'nw'
     if (Math.abs(x - x2) <= handleSize && Math.abs(y - y1) <= handleSize) return 'ne'
     if (Math.abs(x - x1) <= handleSize && Math.abs(y - y2) <= handleSize) return 'sw'
@@ -322,45 +322,45 @@ function TemplateEditor({ templateId, onBack }) {
     const pdfSize = getPDFSize()
 
     if (selectedTool === 'select') {
-      // 선택 도구: 요소 선택, 이동, 리사이즈
+      // Select tool: element selection, movement, resizing
       const handle = selectedElement ? getResizeHandle(selectedElement, x, y) : null
       
       if (handle) {
-        // 리사이즈 시작
+        // Start resizing
         setIsResizing(true)
         setResizeHandle(handle)
-        setDragStartBbox({ ...selectedElement.bbox }) // 원본 bbox 저장
-        setDrawStart({ x, y }) // 리사이즈 시작 위치 저장
-        e.preventDefault() // 기본 동작 방지
+        setDragStartBbox({ ...selectedElement.bbox }) // Save original bbox
+        setDrawStart({ x, y }) // Save resize start position
+        e.preventDefault() // Prevent default behavior
       } else {
         const clickedElement = getElementAtPoint(x, y)
         
         if (clickedElement) {
-          // 요소 선택 및 이동 시작
+          // Start element selection and movement
           setSelectedElement(clickedElement)
           setIsDraggingElement(true)
-          setDragStartBbox({ ...clickedElement.bbox }) // 원본 bbox 저장
-          setDrawStart({ x, y }) // 드래그 시작 위치 저장
-          e.preventDefault() // 기본 동작 방지
+          setDragStartBbox({ ...clickedElement.bbox }) // Save original bbox
+          setDrawStart({ x, y }) // Save drag start position
+          e.preventDefault() // Prevent default behavior
         } else {
-          // 빈 공간 클릭 시 선택 해제
+          // Deselect when clicking empty space
           setSelectedElement(null)
         }
       }
     } else if (selectedTool === 'checkbox') {
-      // 체크박스: 드래그로 영역 생성 (텍스트처럼)
+      // Checkbox: create area by dragging (like text)
       setIsDrawing(true)
       setDrawStart({ x, y })
-      // 모달이 열려있으면 닫기
+      // Close modal if open
       setShowDataPathInput(false)
       setTempElement(null)
     } else if (selectedTool === 'image') {
-      // 이미지: 클릭으로 영역 선택 시작 (기본 크기로 시작)
+      // Image: start area selection by clicking (start with default size)
       setIsDrawing(true)
       setDrawStart({ x, y })
       
-      // 기본 영역 크기로 시작
-      const defaultSize = 50 // 기본 이미지 영역 크기 (표시 크기)
+      // Start with default area size
+      const defaultSize = 50 // Default image area size (display size)
       const tempBbox = {
         x: x - defaultSize / 2,
         y: y - defaultSize / 2,
@@ -385,7 +385,7 @@ function TemplateEditor({ templateId, onBack }) {
         data_path: '',
       })
     } else {
-      // 텍스트 도구: 드래그로 영역 생성
+      // Text tool: create area by dragging
       setIsDrawing(true)
       setDrawStart({ x, y })
     }
@@ -400,7 +400,7 @@ function TemplateEditor({ templateId, onBack }) {
     const currentX = e.clientX - rect.left
     const currentY = e.clientY - rect.top
     
-    // 캔버스를 표시 크기와 정확히 맞춤
+    // Match canvas to display size exactly
     const dpr = window.devicePixelRatio || 1
     canvasRef.current.width = displaySize.width * dpr
     canvasRef.current.height = displaySize.height * dpr
@@ -410,12 +410,12 @@ function TemplateEditor({ templateId, onBack }) {
     const ctx = canvasRef.current.getContext('2d')
     ctx.scale(dpr, dpr)
 
-    // 드래그/리사이즈는 전역 리스너에서 처리 (캔버스 밖으로 나가도 계속 추적)
-    // 여기서는 커서, 미리보기, 핸들 그리기만 처리
+    // Drag/resize is handled by global listeners (continue tracking even when outside canvas)
+    // Here we only handle cursor, preview, and handle drawing
     if (selectedTool === 'select') {
-      // 커서 및 리사이즈 핸들 그리기
+      // Draw cursor and resize handles
     } else if ((selectedTool === 'text' || selectedTool === 'image' || selectedTool === 'checkbox') && isDrawing && drawStart) {
-      // 텍스트/이미지/체크박스 드래그 미리보기
+      // Text/image/checkbox drag preview
       let bbox = {
         x: Math.min(drawStart.x, currentX),
         y: Math.min(drawStart.y, currentY),
@@ -423,14 +423,14 @@ function TemplateEditor({ templateId, onBack }) {
         h: Math.abs(currentY - drawStart.y),
       }
 
-      // 체크박스는 정사각형으로 미리보기
+      // Preview checkbox as square
       if (selectedTool === 'checkbox') {
         const size = Math.max(bbox.w, bbox.h, 5)
         bbox.w = size
         bbox.h = size
       }
 
-      // 기존 요소들 다시 그리기
+      // Redraw existing elements
       const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
       elements
         .filter(el => el.page === currentPage)
@@ -445,9 +445,9 @@ function TemplateEditor({ templateId, onBack }) {
       return
     }
 
-    // 기존 요소들 다시 그리기 (select 도구용)
+    // Redraw existing elements (for select tool)
     if (selectedTool === 'select') {
-      // elements 배열에서 최신 요소를 찾아 사용 (selectedElement는 오래된 bbox를 가질 수 있음)
+      // Find latest element from elements array (selectedElement may have old bbox)
       const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
       elements
         .filter(el => el.page === currentPage)
@@ -455,13 +455,13 @@ function TemplateEditor({ templateId, onBack }) {
           drawElement(ctx, el, currentSelectedElement)
         })
       
-      // 커서 모양 결정 및 리사이즈 핸들 그리기
+      // Determine cursor shape and draw resize handles
       if (!isDraggingElement && !isResizing) {
-        // 리사이즈 핸들 확인 (선택된 요소의 핸들 위에 있으면)
+        // Check resize handle (if hovering over selected element's handle)
         const handle = currentSelectedElement ? getResizeHandle(currentSelectedElement, currentX, currentY) : null
         const hoveredElement = getElementAtPoint(currentX, currentY)
         
-        // 커서 모양 설정 (리사이즈 핸들 우선)
+        // Set cursor shape (resize handle priority)
         if (handle) {
           const cursors = { nw: 'nw-resize', ne: 'ne-resize', sw: 'sw-resize', se: 'se-resize' }
           setCurrentCursor(cursors[handle])
@@ -471,7 +471,7 @@ function TemplateEditor({ templateId, onBack }) {
           setCurrentCursor('default')
         }
       } else {
-        // 드래그/리사이즈 중에도 커서 유지
+        // Maintain cursor during drag/resize
         if (isDraggingElement) {
           setCurrentCursor('move')
         } else if (isResizing && resizeHandle) {
@@ -480,8 +480,8 @@ function TemplateEditor({ templateId, onBack }) {
         }
       }
       
-      // 선택된 요소의 리사이즈 핸들 그리기 (드래그/리사이즈 중에도 업데이트된 위치에 그리기)
-      // elements 배열에서 최신 요소를 찾아 사용 (selectedElement는 오래된 bbox를 가질 수 있음)
+      // Draw resize handles for selected element (draw at updated position even during drag/resize)
+      // Find latest element from elements array (selectedElement may have old bbox)
       if (selectedElement) {
         const currentElement = elements.find(el => el.id === selectedElement.id)
         if (currentElement) {
@@ -497,7 +497,7 @@ function TemplateEditor({ templateId, onBack }) {
           ctx.strokeStyle = '#fff'
           ctx.lineWidth = 2
           
-          // 리사이즈 핸들 그리기 (업데이트된 위치)
+          // Draw resize handles (updated position)
           const handleSize = 8
           const handles = [
             [x1 - handleSize/2, y1 - handleSize/2], // nw
@@ -513,7 +513,7 @@ function TemplateEditor({ templateId, onBack }) {
         }
       }
     } else {
-      // 다른 도구 선택 시 도구별 커서 설정
+      // Set tool-specific cursor when other tools are selected
       if (selectedTool === 'text') {
         setCurrentCursor('crosshair')
       } else if (selectedTool === 'checkbox') {
@@ -535,16 +535,16 @@ function TemplateEditor({ templateId, onBack }) {
     if (!imageRef.current || !template) return
 
     if (selectedTool === 'select') {
-      // 선택 도구: 드래그/리사이즈 종료
+      // Select tool: end drag/resize
       if (isDraggingElement || isResizing) {
         setIsDraggingElement(false)
         setIsResizing(false)
         setResizeHandle(null)
         setDrawStart(null)
         
-        // 체크박스는 정사각형으로 정규화 (elements 배열에서 최신 요소 사용)
+        // Normalize checkbox to square (use latest element from elements array)
         if (selectedElement && selectedElement.type === 'checkbox') {
-          // elements 배열에서 최신 요소를 찾아서 사용
+          // Find latest element from elements array
           const currentElement = elements.find(el => el.id === selectedElement.id)
           if (currentElement) {
             const bbox = currentElement.bbox
@@ -555,7 +555,7 @@ function TemplateEditor({ templateId, onBack }) {
                 : el
             )
             setElements(updated)
-            // selectedElement도 업데이트
+            // Also update selectedElement
             setSelectedElement(updated.find(el => el.id === selectedElement.id))
           }
         }
@@ -566,7 +566,7 @@ function TemplateEditor({ templateId, onBack }) {
       return
     }
 
-    // 텍스트/이미지 도구: 드래그로 영역 생성
+    // Text/image tools: create area by dragging
     if (!isDrawing || !drawStart) return
 
     const rect = imageRef.current.getBoundingClientRect()
@@ -587,7 +587,7 @@ function TemplateEditor({ templateId, onBack }) {
     }
 
     if (selectedTool === 'image') {
-      // 이미지 도구: 드래그가 끝나면 이미지 업로드 모달 표시
+      // Image tool: show image upload modal when drag ends
       if (bbox.w > 5 && bbox.h > 5 || tempElement) {
         const finalBbox = bbox.w > 5 && bbox.h > 5 ? bbox : (tempElement?.bbox || bbox)
         setTempElement({
@@ -604,7 +604,7 @@ function TemplateEditor({ templateId, onBack }) {
         }
       }
     } else if (selectedTool === 'text' && bbox.w > 5 && bbox.h > 5) {
-      // 텍스트 도구: 데이터 경로 입력 모달
+      // Text tool: data path input modal
       const newElement = {
         id: `elem_${Date.now()}`,
         type: 'text',
@@ -617,7 +617,7 @@ function TemplateEditor({ templateId, onBack }) {
       setTempElement(newElement)
       setShowDataPathInput(true)
     } else if (selectedTool === 'checkbox' && bbox.w > 5 && bbox.h > 5) {
-      // 체크박스: 드래그로 영역 생성 (정사각형으로 정규화)
+      // Checkbox: create area by dragging (normalized to square)
       const size = Math.max(bbox.w, bbox.h, 5)
       const normalizedBbox = {
         x: bbox.x,
@@ -651,12 +651,12 @@ function TemplateEditor({ templateId, onBack }) {
     const pdfSize = getPDFSize()
     
     const bbox = element.bbox
-    // PDF 좌표를 표시 크기 좌표로 변환
+    // Convert PDF coordinates to display size coordinates
     const screenCoords = pdfToScreen(bbox.x, bbox.y, pdfSize.width, pdfSize.height, displaySize.width, displaySize.height)
     const screenSize = pdfToScreen(bbox.w, bbox.h, pdfSize.width, pdfSize.height, displaySize.width, displaySize.height)
     
     const x = screenCoords.x
-    const y = screenCoords.y // 화면 좌표계 (위가 0)
+    const y = screenCoords.y // Screen coordinate system (top is 0)
     const w = screenSize.x
     const h = screenSize.y
     
@@ -665,15 +665,15 @@ function TemplateEditor({ templateId, onBack }) {
     ctx.lineWidth = isSelected ? 3 : 2
     ctx.setLineDash([])
     
-    // 요소 타입별로 다른 스타일
+    // Different styles by element type
     if (element.type === 'checkbox') {
-      // 체크박스: 항상 영역 표시 + 체크 표시도 화면에 그리기
+      // Checkbox: always show area + draw checkmark on screen
       ctx.strokeStyle = isSelected ? '#e74c3c' : '#3498db'
       ctx.lineWidth = element === selectedElement ? 3 : 2
       ctx.setLineDash(element === selectedElement ? [3, 3] : [5, 5])
       ctx.strokeRect(x, y, w, h)
       
-      // 체크 표시 그리기 (data_path가 있으면 체크된 것으로 간주)
+      // Draw checkmark (if data_path exists, consider it checked)
       if (element.data_path) {
         const size = Math.min(w, h)
         const checkSize = size * 0.6
@@ -687,28 +687,28 @@ function TemplateEditor({ templateId, onBack }) {
         ctx.lineJoin = 'round'
         ctx.setLineDash([])
         
-        // 체크 표시 (더 굵고 명확한 ✓ 모양)
+        // Checkmark (bolder and clearer ✓ shape)
         const offset = checkSize * 0.3
         ctx.beginPath()
-        // 왼쪽 아래에서 시작
+        // Start from bottom-left
         ctx.moveTo(centerX - offset * 0.8, centerY)
-        // 중앙으로
+        // To center
         ctx.lineTo(centerX - offset * 0.2, centerY + offset * 0.6)
-        // 오른쪽 위로
+        // To top-right
         ctx.lineTo(centerX + offset * 1.0, centerY - offset * 0.4)
         ctx.stroke()
       }
     } else if (element.type === 'image') {
-      // 이미지: 실제 이미지를 캔버스에 그리기
+      // Image: draw actual image on canvas
       if (element.image_path) {
         const imagePath = `${API_BASE}/uploads/${element.image_path}`
         const cachedImg = imageCacheRef.current.get(imagePath)
         
         if (cachedImg && cachedImg.complete) {
-          // 캐시된 이미지 사용
+          // Use cached image
           try {
             ctx.drawImage(cachedImg, x, y, w, h)
-            // 선택된 경우 테두리 표시
+            // Show border if selected
             if (isSelected) {
               ctx.strokeStyle = '#e74c3c'
               ctx.lineWidth = 3
@@ -716,16 +716,16 @@ function TemplateEditor({ templateId, onBack }) {
               ctx.strokeRect(x, y, w, h)
             }
           } catch (e) {
-            // 이미지 그리기 실패 시 점선 사각형 표시
+            // Show dashed rectangle if image drawing fails
             ctx.setLineDash([5, 5])
             ctx.strokeStyle = isSelected ? '#e74c3c' : '#3498db'
             ctx.strokeRect(x, y, w, h)
             ctx.fillStyle = '#2c3e50'
             ctx.font = '12px sans-serif'
-            ctx.fillText('🖼️ 이미지', x + 5, y - 5)
+            ctx.fillText('🖼️ Image', x + 5, y - 5)
           }
         } else {
-          // 이미지 로드 중이거나 캐시에 없음
+          // Image loading or not in cache
           const img = new Image()
           img.crossOrigin = 'anonymous'
           
@@ -735,36 +735,36 @@ function TemplateEditor({ templateId, onBack }) {
           }
           
           img.onerror = () => {
-            // 이미지 로드 실패 시 점선 사각형 표시
+            // Show dashed rectangle if image load fails
             ctx.setLineDash([5, 5])
             ctx.strokeStyle = isSelected ? '#e74c3c' : '#3498db'
             ctx.strokeRect(x, y, w, h)
             ctx.fillStyle = '#2c3e50'
             ctx.font = '12px sans-serif'
-            ctx.fillText('🖼️ (로드 실패)', x + 5, y - 5)
+            ctx.fillText('🖼️ (Load failed)', x + 5, y - 5)
           }
           
           img.src = imagePath
           
-          // 로딩 중 표시
+          // Show loading indicator
           ctx.setLineDash([5, 5])
           ctx.strokeStyle = isSelected ? '#e74c3c' : '#3498db'
           ctx.strokeRect(x, y, w, h)
           ctx.fillStyle = '#2c3e50'
           ctx.font = '12px sans-serif'
-          ctx.fillText('🖼️ 로딩...', x + 5, y - 5)
+          ctx.fillText('🖼️ Loading...', x + 5, y - 5)
         }
       } else {
-        // 이미지 경로가 없음
+        // No image path
         ctx.setLineDash([5, 5])
         ctx.strokeStyle = isSelected ? '#e74c3c' : '#3498db'
         ctx.strokeRect(x, y, w, h)
         ctx.fillStyle = '#2c3e50'
         ctx.font = '12px sans-serif'
-        ctx.fillText('🖼️ (이미지 없음)', x + 5, y - 5)
+        ctx.fillText('🖼️ (No image)', x + 5, y - 5)
       }
     } else {
-      // 텍스트는 일반 사각형
+      // Text is a regular rectangle
       ctx.strokeRect(x, y, w, h)
       if (element.data_path) {
         ctx.fillStyle = '#2c3e50'
@@ -791,12 +791,12 @@ function TemplateEditor({ templateId, onBack }) {
     formData.append('file', file)
 
     try {
-      // 이미지 업로드
+      // Upload image
       const uploadResponse = await axios.post(`${API_BASE}/images`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       
-      // 이미지 크기 확인하여 bbox 자동 조정
+      // Check image size and auto-adjust bbox
       const img = new Image()
       const imageUrl = URL.createObjectURL(file)
       
@@ -804,7 +804,7 @@ function TemplateEditor({ templateId, onBack }) {
         const displaySize = getDisplaySize()
         const pdfSize = getPDFSize()
         
-        // 이미지 비율 유지하면서 bbox 조정
+        // Adjust bbox while maintaining image aspect ratio
         const imgWidth = img.width
         const imgHeight = img.height
         const imgAspect = imgWidth / imgHeight
@@ -814,10 +814,10 @@ function TemplateEditor({ templateId, onBack }) {
         const currentAspect = newW / newH
         
         if (imgAspect > currentAspect) {
-          // 이미지가 더 넓음: 너비 기준
+          // Image is wider: base on width
           newH = newW / imgAspect
         } else {
-          // 이미지가 더 높음: 높이 기준
+          // Image is taller: base on height
           newW = newH * imgAspect
         }
         
@@ -836,7 +836,7 @@ function TemplateEditor({ templateId, onBack }) {
       }
       
       img.onerror = () => {
-        // 이미지 로드 실패 시 기본 크기 유지
+        // Keep default size if image load fails
         tempElement.image_path = uploadResponse.data.image_path
         setElements([...elements, tempElement])
         setShowImageUpload(false)
@@ -861,20 +861,20 @@ function TemplateEditor({ templateId, onBack }) {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     
-    // 캔버스 크기를 표시 크기와 정확히 맞춤
+    // Match canvas size to display size exactly
     canvas.width = displaySize.width * dpr
     canvas.height = displaySize.height * dpr
     canvas.style.width = `${displaySize.width}px`
     canvas.style.height = `${displaySize.height}px`
     
-    // 고해상도 디스플레이 대응
+    // Support high-resolution displays
     ctx.scale(dpr, dpr)
     
-    // 캔버스 초기화
+    // Initialize canvas
     ctx.clearRect(0, 0, displaySize.width, displaySize.height)
 
-    // 요소들 그리기
-    // selectedElement와 비교할 때 최신 요소를 사용하기 위해 selectedElement를 elements에서 찾음
+    // Draw elements
+    // Find selectedElement from elements to use latest element when comparing
     const currentSelectedElement = selectedElement ? elements.find(el => el.id === selectedElement.id) : null
     elements
       .filter(el => el.page === currentPage)
@@ -882,8 +882,8 @@ function TemplateEditor({ templateId, onBack }) {
         drawElement(ctx, el, currentSelectedElement)
       })
     
-    // 선택된 요소의 리사이즈 핸들 그리기 (redrawCanvas에서도 처리)
-    // elements 배열에서 최신 요소를 찾아 사용
+    // Draw resize handles for selected element (also handled in redrawCanvas)
+    // Find latest element from elements array
     if (selectedElement && selectedTool === 'select') {
       const currentElement = elements.find(el => el.id === selectedElement.id)
       if (currentElement) {
@@ -899,7 +899,7 @@ function TemplateEditor({ templateId, onBack }) {
         ctx.strokeStyle = '#fff'
         ctx.lineWidth = 2
         
-        // 리사이즈 핸들 그리기
+        // Draw resize handles
         const handleSize = 8
         const handles = [
           [x1 - handleSize/2, y1 - handleSize/2], // nw
@@ -946,9 +946,9 @@ function TemplateEditor({ templateId, onBack }) {
   const handleTestRender = async () => {
     const testData = {}
     
-    // 데이터 입력받기 (간단한 프롬프트로)
+    // Get data input (via simple prompt)
     elements.forEach(el => {
-      // 체크박스는 프롬프트 없이 자동으로 true 값 설정
+      // Checkbox: automatically set to true without prompt
       if (el.type === 'checkbox' && el.data_path === 'checked') {
         if (!testData['checked']) {
           testData['checked'] = true
@@ -956,7 +956,7 @@ function TemplateEditor({ templateId, onBack }) {
         return
       }
       
-      // 이미지는 프롬프트 없이 건너뛰기
+      // Skip images without prompt
       if (el.type === 'image') {
         return
       }
@@ -976,12 +976,12 @@ function TemplateEditor({ templateId, onBack }) {
     })
 
     try {
-      // 현재 메모리의 elements를 함께 전송 (저장 전에도 반영)
+      // Send elements from current memory (reflects changes before saving)
       const response = await axios.post(
         `${API_BASE}/render/${templateId}`,
         {
           ...testData,
-          _elements: elements, // 임시로 elements 전송
+          _elements: elements, // Temporarily send elements
         },
         { responseType: 'blob' }
       )
@@ -1037,7 +1037,7 @@ function TemplateEditor({ templateId, onBack }) {
       </div>
 
       <div className="editor-content">
-        {/* 플로팅 도구함 */}
+        {/* Floating toolbox */}
         <div className="floating-toolbar">
           <div className="floating-tools">
             <button
@@ -1090,7 +1090,7 @@ function TemplateEditor({ templateId, onBack }) {
                 alt="PDF Preview"
                 style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
                 onLoad={() => {
-                  // 이미지 로드 후 캔버스 크기 조정
+                  // Adjust canvas size after image loads
                   setTimeout(redrawCanvas, 100)
                 }}
                 draggable={false}

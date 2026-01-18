@@ -1,180 +1,179 @@
-# PDF 템플릿 자동화 엔진
+# PDF Template Automation Engine
 
-PDF 템플릿에 데이터를 자동으로 매핑하여 완성된 PDF를 생성하는 웹 애플리케이션입니다.
+A web application that automatically maps data to PDF templates to generate completed PDFs.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.9+-green)
 ![React](https://img.shields.io/badge/react-18.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## 📋 목차
+## 📋 Table of Contents
 
-- [주요 기능](#주요-기능)
-- [기술 스택](#기술-스택)
-- [빠른 시작](#빠른-시작)
-- [사용 방법](#사용-방법)
-- [API 문서](#api-문서)
-- [프로젝트 구조](#프로젝트-구조)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Project Structure](#project-structure)
 
-## ✨ 주요 기능
+## ✨ Key Features
 
-### 🎯 핵심 기능
+### 🎯 Core Features
 
-- **📄 PDF 템플릿 업로드**: A4 PDF 템플릿을 업로드하고 관리
-- **🎨 시각적 필드 매핑**: 드래그 앤 드롭으로 템플릿 필드에 데이터 경로 지정
-- **⚡ 실시간 미리보기**: 필드 배치를 즉시 확인
-- **💾 실시간 테스트**: 저장 전에도 테스트 렌더링 가능
-- **🔄 자동 PDF 생성**: JSON 데이터로 완성된 PDF 자동 생성
-- **🔌 REST API**: HTTP API로 프로그램에서 사용 가능
+- **📄 PDF Template Upload**: Upload and manage A4 PDF templates
+- **🎨 Visual Field Mapping**: Drag and drop to specify data paths for template fields
+- **⚡ Real-time Preview**: Instantly check field placement
+- **💾 Real-time Testing**: Test rendering before saving
+- **🔄 Automatic PDF Generation**: Automatically generate completed PDFs from JSON data
+- **🔌 REST API**: Use via HTTP API from programs
 
-### 🛠️ 편집 기능
+### 🛠️ Editing Features
 
-- **속성 편집**: 위치(X, Y), 크기(너비, 높이), 폰트, 정렬 실시간 조정
-- **필드 관리**: 필드 추가, 삭제, 선택
-- **템플릿 관리**: 개별/전체 삭제 지원
+- **Property Editing**: Real-time adjustment of position (X, Y), size (width, height), font, alignment
+- **Field Management**: Add, delete, select fields
+- **Template Management**: Individual/bulk delete support
 
-## 🏗️ 기술 스택
+## 🏗️ Tech Stack
 
 ### Backend
 
-- **FastAPI** (0.104.1) - 고성능 Python 웹 프레임워크
-- **PyMuPDF (fitz)** (1.23.8) - PDF 정보 추출 및 이미지 렌더링
-- **ReportLab** (4.0.7) - 오버레이 PDF 생성
-- **pypdf** (3.17.1) - PDF 병합
-- **Uvicorn** - ASGI 서버
+- **FastAPI** (0.104.1) - High-performance Python web framework
+- **PyMuPDF (fitz)** (1.23.8) - PDF information extraction and image rendering
+- **pypdf** (3.17.1) - PDF merging
+- **Uvicorn** - ASGI server
 
 ### Frontend
 
-- **React** (18.2.0) - UI 프레임워크
-- **Vite** (5.0.8) - 빠른 빌드 도구
-- **Axios** (1.6.2) - HTTP 클라이언트
+- **React** (18.2.0) - UI framework
+- **Vite** (5.0.8) - Fast build tool
+- **Axios** (1.6.2) - HTTP client
 
-## 🚀 빠른 시작
+## 🚀 Quick Start
 
-### 사전 요구사항
+### Prerequisites
 
-- Python 3.9 이상
-- Node.js 16 이상
-- npm 또는 yarn
+- Python 3.9 or higher
+- Node.js 16 or higher
+- npm or yarn
 
-### 1. 저장소 클론
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/CobyApp/report.git
 cd report
 ```
 
-### 2. 한 번에 실행 (권장)
+### 2. Run All at Once (Recommended)
 
 ```bash
-# 백엔드 + 프론트엔드 동시 실행
+# Start backend + frontend simultaneously
 ./start.sh
 
-# 종료
+# Stop
 ./stop.sh
 
-# 재시작
+# Restart
 ./restart.sh
 ```
 
-### 3. 개별 실행
+### 3. Run Individually
 
-**터미널 1 - 백엔드:**
+**Terminal 1 - Backend:**
 
 ```bash
 cd backend
 
-# 가상환경 생성 (최초 1회)
+# Create virtual environment (first time only)
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# 패키지 설치 (최초 1회)
+# Install packages (first time only)
 pip install -r requirements.txt
 
-# 서버 실행
+# Run server
 python -m app.main
 ```
 
-**터미널 2 - 프론트엔드:**
+**Terminal 2 - Frontend:**
 
 ```bash
 cd frontend
 
-# 패키지 설치 (최초 1회)
+# Install packages (first time only)
 npm install
 
-# 개발 서버 실행
+# Run development server
 npm run dev
 ```
 
-### 4. 접속
+### 4. Access
 
-- **프론트엔드**: http://localhost:3000
-- **백엔드 API**: http://localhost:8000
-- **API 문서**: http://localhost:8000/docs (Swagger UI)
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs (Swagger UI)
 
-## 📖 사용 방법
+## 📖 Usage
 
-### 1. 템플릿 업로드
+### 1. Upload Template
 
-1. 웹 브라우저에서 `http://localhost:3000` 접속
-2. "PDF 템플릿 업로드" 버튼 클릭
-3. A4 PDF 템플릿 파일 선택
+1. Access `http://localhost:3000` in web browser
+2. Click "Upload PDF Template" button
+3. Select A4 PDF template file
 
-### 2. 필드 매핑
+### 2. Field Mapping
 
-1. 업로드된 템플릿 카드를 클릭하여 편집 모드 진입
-2. PDF 미리보기에서 **드래그**하여 필드 영역 선택
-3. 데이터 경로 입력 팝업에서 경로 입력 (예: `customer.name`, `items[0].price`)
-4. 필요한 만큼 필드 추가
+1. Click uploaded template card to enter edit mode
+2. **Drag** on PDF preview to select field area
+3. Enter data path in input popup (e.g., `customer.name`, `items[0].price`)
+4. Add fields as needed
 
-### 3. 속성 편집
+### 3. Property Editing
 
-1. 필드를 클릭하여 선택
-2. 오른쪽 속성 패널에서 수정:
-   - **데이터 경로**: 필드에 매핑할 JSON 경로
-   - **X, Y**: 필드 위치 (PDF 좌표)
-   - **너비, 높이**: 필드 크기
-   - **폰트 크기**: 텍스트 크기
-   - **정렬**: 왼쪽/중앙/오른쪽
+1. Click field to select
+2. Modify in right property panel:
+   - **Data Path**: JSON path to map to field
+   - **X, Y**: Field position (PDF coordinates)
+   - **Width, Height**: Field size
+   - **Font Size**: Text size
+   - **Alignment**: Left/Center/Right
 
-### 4. 테스트 렌더링
+### 4. Test Rendering
 
-1. "🧪 테스트 렌더링" 버튼 클릭
-2. 각 필드에 넣을 값 입력 (프롬프트)
-3. 완성된 PDF 자동 다운로드
-4. **저장 전에도 변경사항이 반영됩니다**
+1. Click "🧪 Test Rendering" button
+2. Enter values for each field (prompt)
+3. Completed PDF automatically downloads
+4. **Changes are reflected before saving**
 
-### 5. 저장
+### 5. Save
 
-1. "💾 저장" 버튼 클릭
-2. 템플릿 매핑 정보가 서버에 저장됨
+1. Click "💾 Save" button
+2. Template mapping information is saved to server
 
-## 📡 API 문서
+## 📡 API Documentation
 
-### 엔드포인트 목록
+### Endpoint List
 
-| 메서드 | 경로 | 설명 |
-|--------|------|------|
-| `POST` | `/api/templates` | PDF 템플릿 업로드 |
-| `GET` | `/api/templates` | 템플릿 목록 조회 |
-| `GET` | `/api/templates/{id}` | 템플릿 상세 조회 |
-| `PUT` | `/api/templates/{id}/mapping` | 템플릿 매핑 저장 |
-| `POST` | `/api/render/{id}` | PDF 생성 (데이터 필요) |
-| `GET` | `/api/templates/{id}/preview` | 페이지 미리보기 이미지 |
-| `DELETE` | `/api/templates/{id}` | 템플릿 삭제 |
-| `DELETE` | `/api/templates` | 전체 템플릿 삭제 |
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/api/templates` | Upload PDF template |
+| `GET` | `/api/templates` | List templates |
+| `GET` | `/api/templates/{id}` | Get template details |
+| `PUT` | `/api/templates/{id}/mapping` | Save template mapping |
+| `POST` | `/api/render/{id}` | Generate PDF (requires data) |
+| `GET` | `/api/templates/{id}/preview` | Page preview image |
+| `DELETE` | `/api/templates/{id}` | Delete template |
+| `DELETE` | `/api/templates` | Delete all templates |
 
-### 사용 예시
+### Usage Examples
 
-#### 템플릿 업로드
+#### Upload Template
 
 ```bash
 curl -X POST http://localhost:8000/api/templates \
   -F "file=@template.pdf"
 ```
 
-**응답:**
+**Response:**
 ```json
 {
   "template_id": "uuid-here",
@@ -184,7 +183,7 @@ curl -X POST http://localhost:8000/api/templates \
 }
 ```
 
-#### 템플릿 매핑 저장
+#### Save Template Mapping
 
 ```bash
 curl -X PUT http://localhost:8000/api/templates/{template_id}/mapping \
@@ -203,25 +202,25 @@ curl -X PUT http://localhost:8000/api/templates/{template_id}/mapping \
   }'
 ```
 
-#### PDF 생성
+#### Generate PDF
 
 ```bash
 curl -X POST http://localhost:8000/api/render/{template_id} \
   -H "Content-Type: application/json" \
   -d '{
-    "customer": {"name": "홍길동"},
-    "items": [{"name": "상품1", "price": 10000}]
+    "customer": {"name": "John Doe"},
+    "items": [{"name": "Item1", "price": 10000}]
   }' \
   --output result.pdf
 ```
 
-**실시간 elements 전송 (테스트 렌더링):**
+**Real-time elements transmission (test rendering):**
 
 ```bash
 curl -X POST http://localhost:8000/api/render/{template_id} \
   -H "Content-Type: application/json" \
   -d '{
-    "customer": {"name": "홍길동"},
+    "customer": {"name": "John Doe"},
     "_elements": [
       {
         "id": "elem1",
@@ -235,39 +234,41 @@ curl -X POST http://localhost:8000/api/render/{template_id} \
   --output result.pdf
 ```
 
-## 📁 프로젝트 구조
+## 📁 Project Structure
 
 ```
 report/
-├── backend/                 # FastAPI 백엔드
+├── backend/                 # FastAPI backend
 │   ├── app/
-│   │   ├── main.py         # FastAPI 앱 및 API 엔드포인트
+│   │   ├── main.py         # FastAPI app and API endpoints
 │   │   └── services/
-│   │       ├── pdf_service.py      # PDF 처리 (업로드, 미리보기)
-│   │       ├── template_service.py # 템플릿 저장/로드
-│   │       └── render_service.py   # PDF 렌더링 엔진
-│   ├── templates/          # 템플릿 JSON 저장 (자동 생성)
-│   ├── uploads/            # 업로드된 PDF 및 생성된 PDF (자동 생성)
-│   └── requirements.txt    # Python 패키지 의존성
+│   │       ├── pdf_service.py      # PDF processing (upload, preview)
+│   │       ├── template_service.py # Template save/load
+│   │       ├── render_service.py   # PDF rendering engine
+│   │       └── auth_service.py    # Authentication service
+│   ├── templates/          # Template JSON storage (auto-generated)
+│   ├── uploads/            # Uploaded PDFs and generated PDFs (auto-generated)
+│   ├── users/              # User data (auto-generated)
+│   └── requirements.txt    # Python package dependencies
 │
-├── frontend/               # React 프론트엔드
+├── frontend/               # React frontend
 │   ├── src/
-│   │   ├── App.jsx         # 메인 앱 컴포넌트
+│   │   ├── App.jsx         # Main app component
 │   │   └── components/
-│   │       ├── TemplateList.jsx    # 템플릿 목록
-│   │       └── TemplateEditor.jsx  # 템플릿 편집기
-│   ├── package.json        # Node.js 패키지 의존성
-│   └── vite.config.js      # Vite 설정
+│   │       ├── TemplateList.jsx    # Template list
+│   │       └── TemplateEditor.jsx  # Template editor
+│   ├── package.json        # Node.js package dependencies
+│   └── vite.config.js      # Vite configuration
 │
-├── start.sh               # 백엔드 + 프론트엔드 동시 실행
-├── stop.sh                # 서버 종료
-├── restart.sh             # 서버 재시작
-└── README.md              # 이 파일
+├── start.sh               # Start backend + frontend simultaneously
+├── stop.sh                # Stop servers
+├── restart.sh             # Restart servers
+└── README.md              # This file
 ```
 
-## 📐 템플릿 JSON 구조
+## 📐 Template JSON Structure
 
-템플릿은 JSON 형식으로 저장됩니다:
+Templates are saved in JSON format:
 
 ```json
 {
@@ -313,75 +314,76 @@ report/
 }
 ```
 
-### 필드 설명
+### Field Descriptions
 
-- `bbox`: 필드 위치 및 크기 (PDF 좌표계, 포인트 단위)
-  - `x`, `y`: 왼쪽 위 모서리 좌표 (화면 좌표계로 저장, 렌더링 시 변환)
-  - `w`, `h`: 너비, 높이
-- `data_path`: JSON 데이터 경로 (예: `customer.name`, `items[0].price`)
-- `style`: 텍스트 스타일 설정
-- `overflow`: 텍스트 넘침 처리 (현재 `shrink_to_fit` 지원)
+- `bbox`: Field position and size (PDF coordinate system, point units)
+  - `x`, `y`: Top-left corner coordinates (stored in screen coordinates, converted during rendering)
+  - `w`, `h`: Width, height
+- `data_path`: JSON data path (e.g., `customer.name`, `items[0].price`)
+- `style`: Text style settings
+- `overflow`: Text overflow handling (currently supports `shrink_to_fit`)
 
-## ✅ 지원 기능
+## ✅ Supported Features
 
-- ✅ **텍스트 필드**: 데이터 경로 매핑, 정렬, 자동 축소
-- ✅ **체크박스**: Boolean 값 표시
-- ✅ **반복 테이블**: 리스트 데이터 반복 렌더링
-- ✅ **다중 페이지**: 여러 페이지 지원
-- ✅ **실시간 편집**: 저장 전에도 테스트 가능
-- ✅ **속성 편집**: 위치, 크기, 스타일 실시간 조정
+- ✅ **Text Fields**: Data path mapping, alignment, auto-shrink
+- ✅ **Checkboxes**: Boolean value display
+- ✅ **Repeat Tables**: List data repeat rendering
+- ✅ **Multi-page**: Multiple page support
+- ✅ **Real-time Editing**: Test before saving
+- ✅ **Property Editing**: Real-time adjustment of position, size, style
+- ✅ **User Authentication**: Login/registration for user-specific data management
 
-## 🔮 향후 개선 사항
+## 🔮 Future Improvements
 
-- [ ] 이미지 필드 (서명, 도장, QR 코드)
-- [ ] 조건부 표시 (if 문)
-- [ ] 페이지 넘침 자동 처리
-- [ ] 한글 폰트 지원 개선
-- [ ] 리치텍스트 (부분 bold, 색상 등)
-- [ ] 데이터 스키마 검증 UI
-- [ ] 템플릿 버전 관리
-- [ ] 사용자 인증 및 권한 관리
+- [ ] Image fields (signatures, stamps, QR codes)
+- [ ] Conditional display (if statements)
+- [ ] Automatic page overflow handling
+- [ ] Improved CJK font support
+- [ ] Rich text (partial bold, colors, etc.)
+- [ ] Data schema validation UI
+- [ ] Template version management
+- [ ] User authentication and permission management
 
-## 🐛 문제 해결
+## 🐛 Troubleshooting
 
-### 포트가 이미 사용 중
+### Port Already in Use
 
 ```bash
-# 포트 확인
-lsof -ti:8000  # 백엔드
-lsof -ti:3000  # 프론트엔드
+# Check ports
+lsof -ti:8000  # Backend
+lsof -ti:3000  # Frontend
 
-# 프로세스 종료
+# Kill processes
 kill -9 $(lsof -ti:8000)
 kill -9 $(lsof -ti:3000)
 ```
 
-### 패키지 설치 오류
+### Package Installation Errors
 
-**백엔드:**
+**Backend:**
 ```bash
-# 가상환경 확인
+# Check virtual environment
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-**프론트엔드:**
+**Frontend:**
 ```bash
-# 캐시 정리 후 재설치
+# Clear cache and reinstall
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-## 🤝 기여
+## 🤝 Contributing
 
-이슈와 풀 리퀘스트를 환영합니다!
+Issues and pull requests are welcome!
 
-## 📄 라이선스
+## 📄 License
 
 MIT License
 
 ---
 
-**프로젝트 링크**: [https://github.com/CobyApp/report](https://github.com/CobyApp/report)
+**Project Link**: [https://github.com/CobyApp/report](https://github.com/CobyApp/report)

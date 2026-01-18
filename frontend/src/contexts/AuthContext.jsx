@@ -13,7 +13,7 @@ export const useAuth = () => {
 
 const API_BASE = '/api'
 
-// axios 인터셉터 설정: 모든 요청에 토큰 포함
+// axios interceptor setup: include token in all requests
 axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access_token')
@@ -27,7 +27,7 @@ axios.interceptors.request.use(
   }
 )
 
-// axios 인터셉터 설정: 401 에러 시 로그아웃
+// axios interceptor setup: logout on 401 error
 axios.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // 저장된 토큰으로 사용자 정보 확인
+    // Check user info with saved token
     const token = localStorage.getItem('access_token')
     const savedUser = localStorage.getItem('user')
     

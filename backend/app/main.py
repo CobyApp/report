@@ -16,9 +16,9 @@ from app.services.template_service import TemplateService
 from app.services.render_service import RenderService
 from app.services.auth_service import AuthService
 
-app = FastAPI(title="PDF 템플릿 자동화 엔진", version="1.0.0")
+app = FastAPI(title="PDF Template Automation Engine", version="1.0.0")
 
-# CORS 설정 (프론트엔드와 통신을 위해)
+# CORS configuration (for frontend communication)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://localhost:5173"],
@@ -27,7 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 디렉토리 생성
+# Create directories
 BASE_DIR = Path(__file__).parent.parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 UPLOADS_DIR = BASE_DIR / "uploads"
@@ -38,17 +38,17 @@ UPLOADS_DIR.mkdir(exist_ok=True)
 IMAGES_DIR.mkdir(exist_ok=True)
 USERS_DIR.mkdir(exist_ok=True)
 
-# 서비스 초기화
+# Initialize services
 pdf_service = PDFService()
 template_service = TemplateService(TEMPLATES_DIR)
 render_service = RenderService(TEMPLATES_DIR, UPLOADS_DIR)
 auth_service = AuthService(USERS_DIR)
 
-# 정적 파일 서빙 (업로드된 이미지)
+# Static file serving (uploaded images)
 app.mount("/api/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
 
 
-# ===== 인증 관련 Pydantic 모델 =====
+# ===== Authentication Pydantic Models =====
 class RegisterRequest(BaseModel):
     username: str
     email: str
@@ -60,17 +60,17 @@ class LoginRequest(BaseModel):
     password: str
 
 
-# ===== 인증 헬퍼 함수 =====
+# ===== Authentication Helper Functions =====
 from fastapi import Depends, Header
 from typing import Optional
 
 async def get_current_user(authorization: Optional[str] = Header(None)) -> Optional[Dict]:
-    """JWT 토큰에서 현재 사용자 정보 추출"""
+    """Extract current user information from JWT token"""
     if not authorization:
         return None
     
     try:
-        # "Bearer <token>" 형식에서 토큰 추출
+        # Extract token from "Bearer <token>" format
         token = authorization.replace("Bearer ", "")
         payload = auth_service.verify_token(token)
         if payload:
@@ -89,17 +89,17 @@ async def get_current_user(authorization: Optional[str] = Header(None)) -> Optio
 
 
 async def require_auth(authorization: Optional[str] = Header(None)) -> Dict:
-    """인증이 필요한 엔드포인트에서 사용"""
+    """Use for endpoints that require authentication"""
     user = await get_current_user(authorization)
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
     return user
 
 
-# ===== 회원가입 =====
+# ===== User Registration =====
 @app.post("/api/auth/register")
 async def register(request: RegisterRequest):
-    """사용자 회원가입"""
+    """User registration"""
     try:
         user = auth_service.register_user(
             username=request.username,
@@ -119,15 +119,15 @@ async def register(request: RegisterRequest):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ===== 로그인 =====
+# ===== User Login =====
 @app.post("/api/auth/login")
 async def login(request: LoginRequest):
-    """사용자 로그인"""
+    """User login"""
     user = auth_service.authenticate_user(request.username, request.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid username or password")
     
-    # JWT 토큰 생성
+    # Create JWT token
     token_data = {"sub": user["username"]}
     access_token = auth_service.create_access_token(token_data)
     
@@ -139,30 +139,30 @@ async def login(request: LoginRequest):
     }
 
 
-# ===== 사용자 정보 조회 =====
+# ===== Get Current User Info =====
 @app.get("/api/auth/me")
 async def get_current_user_info(current_user: Dict = Depends(require_auth)):
-    """현재 로그인한 사용자 정보 조회"""
+    """Get current logged-in user information"""
     return current_user
 
 
-# ===== 템플릿 업로드 =====
+# ===== Template Upload =====
 @app.post("/api/templates")
 async def upload_template(file: UploadFile = File(...), current_user: Dict = Depends(require_auth)):
-    """PDF 템플릿 업로드 (인증 필요)"""
+    """Upload PDF template (authentication required)"""
     try:
         template_id = str(uuid.uuid4())
         
-        # PDF 파일 저장
+        # Save PDF file
         file_path = UPLOADS_DIR / f"{template_id}.pdf"
         with open(file_path, "wb") as f:
             content = await file.read()
             f.write(content)
         
-        # PDF 정보 추출
+        # Extract PDF information
         pdf_info = pdf_service.extract_info(file_path)
         
-        # 기본 템플릿 구조 생성 (user_id 포함)
+        # Create basic template structure (including user_id)
         template = {
             "template_id": template_id,
             "user_id": current_user["user_id"],
@@ -186,20 +186,20 @@ async def upload_template(file: UploadFile = File(...), current_user: Dict = Dep
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ===== 템플릿 매핑 저장 =====
+# ===== Save Template Mapping =====
 @app.put("/api/templates/{template_id}/mapping")
 async def save_template_mapping(template_id: str, mapping: Dict[str, Any], current_user: Dict = Depends(require_auth)):
-    """템플릿 매핑 정보 저장 (인증 필요)"""
+    """Save template mapping information (authentication required)"""
     try:
         template = template_service.get_template(template_id)
         if not template:
             raise HTTPException(status_code=404, detail="Template not found")
         
-        # 사용자 소유권 확인
+        # Verify user ownership
         if template.get("user_id") != current_user["user_id"]:
             raise HTTPException(status_code=403, detail="Access denied")
         
-        # 매핑 정보 업데이트
+        # Update mapping information
         template["elements"] = mapping.get("elements", [])
         template["pages"] = mapping.get("pages", template.get("pages", []))
         
@@ -212,35 +212,35 @@ async def save_template_mapping(template_id: str, mapping: Dict[str, Any], curre
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ===== 템플릿 조회 =====
+# ===== Get Template =====
 @app.get("/api/templates/{template_id}")
 async def get_template(template_id: str, current_user: Dict = Depends(require_auth)):
-    """템플릿 정보 조회 (인증 필요)"""
+    """Get template information (authentication required)"""
     template = template_service.get_template(template_id)
     if not template:
         raise HTTPException(status_code=404, detail="Template not found")
     
-    # 사용자 소유권 확인
+    # Verify user ownership
     if template.get("user_id") != current_user["user_id"]:
         raise HTTPException(status_code=403, detail="Access denied")
     
     return template
 
 
-# ===== 템플릿 목록 =====
+# ===== List Templates =====
 @app.get("/api/templates")
 async def list_templates(current_user: Dict = Depends(require_auth)):
-    """템플릿 목록 조회 (인증 필요, 현재 사용자의 템플릿만)"""
+    """List templates (authentication required, only current user's templates)"""
     templates = template_service.list_templates(user_id=current_user["user_id"])
     return {"templates": templates}
 
 
-# ===== PDF 미리보기 (이미지) =====
+# ===== PDF Preview (Image) =====
 @app.get("/api/templates/{template_id}/preview")
 async def preview_template(template_id: str, page: int = 1, current_user: Dict = Depends(require_auth)):
-    """템플릿 페이지 미리보기 (이미지) (인증 필요)"""
+    """Template page preview (image) (authentication required)"""
     try:
-        # 템플릿 소유권 확인
+        # Verify template ownership
         template = template_service.get_template(template_id)
         if not template:
             raise HTTPException(status_code=404, detail="Template not found")
@@ -261,12 +261,12 @@ async def preview_template(template_id: str, page: int = 1, current_user: Dict =
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ===== PDF 렌더링 =====
+# ===== PDF Rendering =====
 @app.post("/api/render/{template_id}")
 async def render_pdf(template_id: str, data: Dict[str, Any], current_user: Dict = Depends(require_auth)):
-    """데이터를 넣어 완성된 PDF 생성 (인증 필요)"""
+    """Generate completed PDF with data (authentication required)"""
     try:
-        # 템플릿 소유권 확인
+        # Verify template ownership
         template = template_service.get_template(template_id)
         if not template:
             raise HTTPException(status_code=404, detail="Template not found")
@@ -274,17 +274,17 @@ async def render_pdf(template_id: str, data: Dict[str, Any], current_user: Dict 
         if template.get("user_id") != current_user["user_id"]:
             raise HTTPException(status_code=403, detail="Access denied")
         
-        # _elements가 제공되면 임시로 사용, 없으면 저장된 템플릿 사용
+        # Use _elements if provided, otherwise use saved template
         elements_override = data.pop("_elements", None)
         
         if elements_override is not None:
-            # 임시 템플릿 사용 (elements가 제공된 경우)
-            # elements를 임시로 업데이트하여 렌더링
+            # Use temporary template (when elements are provided)
+            # Temporarily update elements for rendering
             temp_template = template.copy()
             temp_template["elements"] = elements_override
             output_path = await render_service.render_with_template(temp_template, data, template_id)
         else:
-            # 저장된 템플릿 사용 (기존 방식)
+            # Use saved template (existing method)
             output_path = await render_service.render(template_id, data)
         
         return FileResponse(
@@ -298,16 +298,16 @@ async def render_pdf(template_id: str, data: Dict[str, Any], current_user: Dict 
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ===== 템플릿 삭제 =====
+# ===== Delete Template =====
 @app.delete("/api/templates/{template_id}")
 async def delete_template(template_id: str, current_user: Dict = Depends(require_auth)):
-    """템플릿 삭제 (인증 필요)"""
+    """Delete template (authentication required)"""
     try:
         template = template_service.get_template(template_id)
         if not template:
             raise HTTPException(status_code=404, detail="Template not found")
         
-        # 사용자 소유권 확인
+        # Verify user ownership
         if template.get("user_id") != current_user["user_id"]:
             raise HTTPException(status_code=403, detail="Access denied")
         
@@ -316,7 +316,7 @@ async def delete_template(template_id: str, current_user: Dict = Depends(require
         if pdf_path.exists():
             pdf_path.unlink()
         
-        # 미리보기 이미지도 삭제
+        # Also delete preview images
         preview_dir = UPLOADS_DIR / "previews"
         if preview_dir.exists():
             for preview_file in preview_dir.glob(f"{template_id}_*.png"):
@@ -329,12 +329,12 @@ async def delete_template(template_id: str, current_user: Dict = Depends(require
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ===== 전체 템플릿 삭제 =====
+# ===== Delete All Templates =====
 @app.delete("/api/templates")
 async def delete_all_templates(current_user: Dict = Depends(require_auth)):
-    """현재 사용자의 모든 템플릿 삭제 (인증 필요)"""
+    """Delete all templates of current user (authentication required)"""
     try:
-        # 현재 사용자의 템플릿만 조회
+        # Get only current user's templates
         templates = template_service.list_templates(user_id=current_user["user_id"])
         deleted_count = 0
         
@@ -350,10 +350,10 @@ async def delete_all_templates(current_user: Dict = Depends(require_auth)):
                 except:
                     pass
         
-        # 미리보기 디렉토리 정리 (현재 사용자의 템플릿만)
+        # Clean up preview directory (only current user's templates)
         preview_dir = UPLOADS_DIR / "previews"
         if preview_dir.exists():
-            # 템플릿 ID 목록을 기반으로 미리보기 파일 삭제
+            # Delete preview files based on template ID list
             for template in templates:
                 template_id = template.get("template_id")
                 if template_id:
@@ -365,17 +365,17 @@ async def delete_all_templates(current_user: Dict = Depends(require_auth)):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# ===== 이미지 업로드 =====
+# ===== Image Upload =====
 @app.post("/api/images")
 async def upload_image(file: UploadFile = File(...), current_user: Dict = Depends(require_auth)):
-    """도장/서명 이미지 업로드 (인증 필요)"""
+    """Upload stamp/signature image (authentication required)"""
     try:
-        # 이미지 파일만 허용
+        # Only allow image files
         if not file.content_type or not file.content_type.startswith('image/'):
             raise HTTPException(status_code=400, detail="Image files only")
         
         image_id = str(uuid.uuid4())
-        # 원본 확장자 유지
+        # Preserve original extension
         ext = Path(file.filename).suffix if file.filename else '.png'
         image_path = IMAGES_DIR / f"{image_id}{ext}"
         
@@ -383,7 +383,7 @@ async def upload_image(file: UploadFile = File(...), current_user: Dict = Depend
             content = await file.read()
             f.write(content)
         
-        # 상대 경로 반환 (uploads/images/image_id.ext)
+        # Return relative path (uploads/images/image_id.ext)
         relative_path = f"images/{image_id}{ext}"
         
         return {"image_path": relative_path, "image_id": image_id}
@@ -393,7 +393,7 @@ async def upload_image(file: UploadFile = File(...), current_user: Dict = Depend
 
 @app.get("/")
 async def root():
-    return {"message": "PDF 템플릿 자동화 엔진 API", "version": "1.0.0"}
+    return {"message": "PDF Template Automation Engine API", "version": "1.0.0"}
 
 
 if __name__ == "__main__":

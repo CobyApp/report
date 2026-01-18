@@ -7,10 +7,10 @@ from typing import Dict, Any
 
 
 class PDFService:
-    """PDF 처리 서비스 (업로드, 정보 추출, 이미지 변환)"""
+    """PDF processing service (upload, info extraction, image conversion)"""
     
     def extract_info(self, pdf_path: Path) -> Dict[str, Any]:
-        """PDF 정보 추출 (페이지 수, 페이지 크기 등)"""
+        """Extract PDF information (page count, page size, etc.)"""
         doc = fitz.open(pdf_path)
         
         pages_info = []
@@ -22,17 +22,17 @@ class PDFService:
                 "page": page_num + 1,
                 "width": rect.width,
                 "height": rect.height,
-                "width_pt": rect.width,  # PyMuPDF는 포인트 단위
+                "width_pt": rect.width,  # PyMuPDF uses point units
                 "height_pt": rect.height,
             })
         
         first_page = doc[0]
         first_rect = first_page.rect
         
-        # 페이지 수 저장 (doc.close() 전에)
+        # Save page count (before doc.close())
         page_count = len(doc)
         
-        # AcroForm 필드 탐지
+        # Detect AcroForm fields
         form_fields = []
         try:
             for field in first_page.widgets():
@@ -49,7 +49,7 @@ class PDFService:
         except:
             pass
         
-        # 페이지 크기 저장
+        # Save page size
         page_size_w = first_rect.width
         page_size_h = first_rect.height
         
@@ -68,7 +68,7 @@ class PDFService:
         }
     
     def render_page_as_image(self, pdf_path: Path, page_index: int = 0, dpi: int = 150) -> Path:
-        """PDF 페이지를 이미지로 렌더링 (GUI 미리보기용)"""
+        """Render PDF page as image (for GUI preview)"""
         doc = fitz.open(pdf_path)
         
         if page_index >= len(doc):
@@ -76,15 +76,15 @@ class PDFService:
         
         page = doc[page_index]
         
-        # 렌더링 (스케일 설정: dpi/72)
+        # Render (scale setting: dpi/72)
         mat = fitz.Matrix(dpi / 72, dpi / 72)
         pix = page.get_pixmap(matrix=mat)
         
-        # PIL Image로 변환
+        # Convert to PIL Image
         img_data = pix.tobytes("png")
         img = Image.open(io.BytesIO(img_data))
         
-        # 이미지 저장
+        # Save image
         output_dir = Path(pdf_path).parent / "previews"
         output_dir.mkdir(exist_ok=True)
         
@@ -96,7 +96,7 @@ class PDFService:
         return output_path
     
     def get_page_count(self, pdf_path: Path) -> int:
-        """PDF 페이지 수 반환"""
+        """Return PDF page count"""
         doc = fitz.open(pdf_path)
         count = len(doc)
         doc.close()

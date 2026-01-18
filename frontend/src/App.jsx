@@ -30,7 +30,7 @@ function App() {
       const response = await axios.get(`${API_BASE}/templates`)
       setTemplates(response.data.templates || [])
     } catch (error) {
-      console.error('템플릿 목록 로드 실패:', error)
+      console.error('Template list load failed:', error)
     }
   }
 
@@ -45,12 +45,12 @@ function App() {
     loadTemplates()
   }
 
-  // 로딩 중이면 아무것도 표시하지 않음
+  // Don't display anything while loading
   if (authLoading) {
     return <div className="loading">{t('templateEditor.loading')}</div>
   }
 
-  // 로그인하지 않은 경우 로그인/회원가입 페이지 표시
+  // Show login/register page if not logged in
   if (!user) {
     return (
       <>

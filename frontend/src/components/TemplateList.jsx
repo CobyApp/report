@@ -34,7 +34,7 @@ function TemplateList({ templates, onSelect, onRefresh }) {
   }
 
   const handleDeleteTemplate = async (templateId, filename, e) => {
-    e.stopPropagation() // 카드 클릭 이벤트 방지
+    e.stopPropagation() // Prevent card click event
     
     if (!window.confirm(`"${filename || t('templateList.card.noName')}"${t('templateList.alerts.deleteConfirm')}`)) {
       return

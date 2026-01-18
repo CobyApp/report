@@ -22,7 +22,7 @@ function Register({ onSwitchToLogin }) {
       return
     }
 
-    // 비밀번호 길이 제한 (bcrypt는 72바이트로 제한)
+    // Password length limit (bcrypt is limited to 72 bytes)
     const passwordBytes = new TextEncoder().encode(password).length
     if (passwordBytes > 72) {
       setError(t('auth.register.passwordTooLong'))
@@ -34,7 +34,7 @@ function Register({ onSwitchToLogin }) {
     const result = await register(username, email, password)
     
     if (result.success) {
-      // 회원가입 성공 후 로그인으로 전환
+      // Switch to login after successful registration
       alert(t('auth.register.success'))
       onSwitchToLogin()
       setUsername('')
