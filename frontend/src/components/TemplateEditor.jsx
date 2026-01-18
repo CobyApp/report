@@ -41,6 +41,21 @@ function TemplateEditor({ templateId, onBack }) {
     }
   }, [template, currentPage])
 
+  // 도구 선택 시 커서 변경
+  useEffect(() => {
+    if (selectedTool === 'select') {
+      setCurrentCursor('default')
+    } else if (selectedTool === 'text') {
+      setCurrentCursor('crosshair')
+    } else if (selectedTool === 'checkbox') {
+      setCurrentCursor('crosshair')
+    } else if (selectedTool === 'image') {
+      setCurrentCursor('crosshair')
+    } else {
+      setCurrentCursor('default')
+    }
+  }, [selectedTool])
+
   // cleanup: Blob URL 해제
   useEffect(() => {
     return () => {
@@ -273,26 +288,26 @@ function TemplateEditor({ templateId, onBack }) {
 
   // 리사이즈 핸들 위치 확인
   const getResizeHandle = (element, x, y) => {
-    if (!element || element !== selectedElement) return null
+    if (!element) return null
     
     const displaySize = getDisplaySize()
     const pdfSize = getPDFSize()
-    const pointPDF = screenToPDF(x, y, displaySize.width, displaySize.height, pdfSize.width, pdfSize.height)
     
+    // 스크린 좌표로 변환 (PDF 좌표가 아닌 스크린 좌표로 직접 계산)
     const screenCoords = pdfToScreen(element.bbox.x, element.bbox.y, pdfSize.width, pdfSize.height, displaySize.width, displaySize.height)
     const screenSize = pdfToScreen(element.bbox.w, element.bbox.h, pdfSize.width, pdfSize.height, displaySize.width, displaySize.height)
     
-    const handleSize = 8 // 핸들 크기 (픽셀)
+    const handleSize = 12 // 핸들 크기 (픽셀, 약간 크게 해서 호버하기 쉽게)
     const x1 = screenCoords.x
     const y1 = screenCoords.y
     const x2 = x1 + screenSize.x
     const y2 = y1 + screenSize.y
     
-    // 모서리 핸들 확인
-    if (Math.abs(x - x1) < handleSize && Math.abs(y - y1) < handleSize) return 'nw'
-    if (Math.abs(x - x2) < handleSize && Math.abs(y - y1) < handleSize) return 'ne'
-    if (Math.abs(x - x1) < handleSize && Math.abs(y - y2) < handleSize) return 'sw'
-    if (Math.abs(x - x2) < handleSize && Math.abs(y - y2) < handleSize) return 'se'
+    // 모서리 핸들 확인 (스크린 좌표 기준)
+    if (Math.abs(x - x1) <= handleSize && Math.abs(y - y1) <= handleSize) return 'nw'
+    if (Math.abs(x - x2) <= handleSize && Math.abs(y - y1) <= handleSize) return 'ne'
+    if (Math.abs(x - x1) <= handleSize && Math.abs(y - y2) <= handleSize) return 'sw'
+    if (Math.abs(x - x2) <= handleSize && Math.abs(y - y2) <= handleSize) return 'se'
     
     return null
   }
@@ -333,29 +348,12 @@ function TemplateEditor({ templateId, onBack }) {
         }
       }
     } else if (selectedTool === 'checkbox') {
-      // 체크박스: 클릭으로 바로 추가 (모달 없이)
-      const pointPDF = screenToPDF(x, y, displaySize.width, displaySize.height, pdfSize.width, pdfSize.height)
-      const size = 15 // 기본 체크박스 크기 (pt)
-      
-      const newElement = {
-        id: `elem_${Date.now()}`,
-        type: 'checkbox',
-        page: currentPage,
-        bbox: {
-          x: pointPDF.x - size / 2,
-          y: pointPDF.y - size / 2,
-          w: size,
-          h: size,
-        },
-        data_path: 'checked',
-      }
-      
+      // 체크박스: 드래그로 영역 생성 (텍스트처럼)
+      setIsDrawing(true)
+      setDrawStart({ x, y })
       // 모달이 열려있으면 닫기
       setShowDataPathInput(false)
       setTempElement(null)
-      
-      setElements([...elements, newElement])
-      redrawCanvas()
     } else if (selectedTool === 'image') {
       // 이미지: 클릭으로 영역 선택 시작 (기본 크기로 시작)
       setIsDrawing(true)
@@ -416,13 +414,20 @@ function TemplateEditor({ templateId, onBack }) {
     // 여기서는 커서, 미리보기, 핸들 그리기만 처리
     if (selectedTool === 'select') {
       // 커서 및 리사이즈 핸들 그리기
-    } else if ((selectedTool === 'text' || selectedTool === 'image') && isDrawing && drawStart) {
-      // 텍스트/이미지 드래그 미리보기
-      const bbox = {
+    } else if ((selectedTool === 'text' || selectedTool === 'image' || selectedTool === 'checkbox') && isDrawing && drawStart) {
+      // 텍스트/이미지/체크박스 드래그 미리보기
+      let bbox = {
         x: Math.min(drawStart.x, currentX),
         y: Math.min(drawStart.y, currentY),
         w: Math.abs(currentX - drawStart.x),
         h: Math.abs(currentY - drawStart.y),
+      }
+
+      // 체크박스는 정사각형으로 미리보기
+      if (selectedTool === 'checkbox') {
+        const size = Math.max(bbox.w, bbox.h, 5)
+        bbox.w = size
+        bbox.h = size
       }
 
       // 기존 요소들 다시 그리기
@@ -452,10 +457,11 @@ function TemplateEditor({ templateId, onBack }) {
       
       // 커서 모양 결정 및 리사이즈 핸들 그리기
       if (!isDraggingElement && !isResizing) {
+        // 리사이즈 핸들 확인 (선택된 요소의 핸들 위에 있으면)
         const handle = currentSelectedElement ? getResizeHandle(currentSelectedElement, currentX, currentY) : null
         const hoveredElement = getElementAtPoint(currentX, currentY)
         
-        // 커서 모양 설정
+        // 커서 모양 설정 (리사이즈 핸들 우선)
         if (handle) {
           const cursors = { nw: 'nw-resize', ne: 'ne-resize', sw: 'sw-resize', se: 'se-resize' }
           setCurrentCursor(cursors[handle])
@@ -507,7 +513,16 @@ function TemplateEditor({ templateId, onBack }) {
         }
       }
     } else {
-      setCurrentCursor('default')
+      // 다른 도구 선택 시 도구별 커서 설정
+      if (selectedTool === 'text') {
+        setCurrentCursor('crosshair')
+      } else if (selectedTool === 'checkbox') {
+        setCurrentCursor('crosshair')
+      } else if (selectedTool === 'image') {
+        setCurrentCursor('crosshair')
+      } else {
+        setCurrentCursor('default')
+      }
       elements
         .filter(el => el.page === currentPage)
         .forEach(el => {
@@ -526,20 +541,26 @@ function TemplateEditor({ templateId, onBack }) {
         setIsResizing(false)
         setResizeHandle(null)
         setDrawStart(null)
-        setDragStartBbox(null)
         
-        // 체크박스는 정사각형으로 정규화
+        // 체크박스는 정사각형으로 정규화 (elements 배열에서 최신 요소 사용)
         if (selectedElement && selectedElement.type === 'checkbox') {
-          const bbox = selectedElement.bbox
-          const size = Math.max(bbox.w, bbox.h, 5)
-          const updated = elements.map(el => 
-            el.id === selectedElement.id 
-              ? { ...el, bbox: { ...el.bbox, w: size, h: size } }
-              : el
-          )
-          setElements(updated)
+          // elements 배열에서 최신 요소를 찾아서 사용
+          const currentElement = elements.find(el => el.id === selectedElement.id)
+          if (currentElement) {
+            const bbox = currentElement.bbox
+            const size = Math.max(bbox.w, bbox.h, 5)
+            const updated = elements.map(el => 
+              el.id === selectedElement.id 
+                ? { ...el, bbox: { ...el.bbox, w: size, h: size } }
+                : el
+            )
+            setElements(updated)
+            // selectedElement도 업데이트
+            setSelectedElement(updated.find(el => el.id === selectedElement.id))
+          }
         }
         
+        setDragStartBbox(null)
         redrawCanvas()
       }
       return
@@ -595,11 +616,28 @@ function TemplateEditor({ templateId, onBack }) {
 
       setTempElement(newElement)
       setShowDataPathInput(true)
-    } else if (selectedTool === 'checkbox') {
-      // 체크박스는 handleMouseDown에서 이미 처리되므로 여기서는 아무것도 하지 않음
-      // 혹시 모를 모달 표시 방지
+    } else if (selectedTool === 'checkbox' && bbox.w > 5 && bbox.h > 5) {
+      // 체크박스: 드래그로 영역 생성 (정사각형으로 정규화)
+      const size = Math.max(bbox.w, bbox.h, 5)
+      const normalizedBbox = {
+        x: bbox.x,
+        y: bbox.y,
+        w: size,
+        h: size,
+      }
+      
+      const newElement = {
+        id: `elem_${Date.now()}`,
+        type: 'checkbox',
+        page: currentPage,
+        bbox: normalizedBbox,
+        data_path: 'checked',
+      }
+      
+      setElements([...elements, newElement])
       setShowDataPathInput(false)
       setTempElement(null)
+      redrawCanvas()
     }
 
     setIsDrawing(false)
