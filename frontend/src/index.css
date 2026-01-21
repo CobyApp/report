@@ -5,23 +5,28 @@
 }
 
 :root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --success: #10b981;
-  --success-hover: #059669;
-  --danger: #ef4444;
-  --danger-hover: #dc2626;
-  --bg: #f8fafc;
+  /* Calm, muted color palette */
+  --primary: #6b7280;
+  --primary-hover: #4b5563;
+  --primary-light: #9ca3af;
+  --success: #059669;
+  --success-hover: #047857;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --bg: #f9fafb;
   --bg-card: #ffffff;
-  --border: #e2e8f0;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --radius: 8px;
-  --radius-sm: 6px;
+  --bg-secondary: #f3f4f6;
+  --border: #e5e7eb;
+  --border-light: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --radius: 12px;
+  --radius-sm: 8px;
 }
 
 body {
@@ -32,6 +37,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg);
   color: var(--text-primary);
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 code {

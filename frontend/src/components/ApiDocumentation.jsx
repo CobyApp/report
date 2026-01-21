@@ -8,7 +8,8 @@ function ApiDocumentation() {
   const { user } = useAuth()
   const [copiedCode, setCopiedCode] = useState(null)
 
-  const apiBase = 'http://localhost:8000/api'
+  // Use current host origin for API base URL (works in both development and production)
+  const apiBase = `${window.location.origin}/api`
   const token = user ? localStorage.getItem('access_token') : 'YOUR_ACCESS_TOKEN'
 
   const copyToClipboard = (text, id) => {
@@ -327,8 +328,8 @@ function ApiDocumentation() {
           <h2>{t('api.moreInfo.title', 'More Information')}</h2>
           <p>{t('api.moreInfo.description', 'For interactive API documentation with live testing, visit:')}</p>
           <ul>
-            <li><strong>Swagger UI:</strong> <a href="http://localhost:8000/docs" target="_blank" rel="noopener noreferrer">http://localhost:8000/docs</a></li>
-            <li><strong>ReDoc:</strong> <a href="http://localhost:8000/redoc" target="_blank" rel="noopener noreferrer">http://localhost:8000/redoc</a></li>
+            <li><strong>Swagger UI:</strong> <a href={`${window.location.origin}/docs`} target="_blank" rel="noopener noreferrer">{`${window.location.origin}/docs`}</a></li>
+            <li><strong>ReDoc:</strong> <a href={`${window.location.origin}/redoc`} target="_blank" rel="noopener noreferrer">{`${window.location.origin}/redoc`}</a></li>
           </ul>
         </div>
       </div>

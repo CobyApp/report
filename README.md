@@ -52,9 +52,9 @@ A web application that automatically maps data to PDF templates to generate comp
 
 ### Prerequisites
 
-- Python 3.9 or higher
-- Node.js 16 or higher
-- npm or yarn
+- **Docker** and **Docker Compose** (for local development)
+- **AWS CLI** (for deployment)
+- Python 3.9+ and Node.js 16+ (optional, for development without Docker)
 
 ### 1. Clone Repository
 
@@ -63,35 +63,42 @@ git clone https://github.com/CobyApp/report.git
 cd report
 ```
 
-### 2. Run All at Once (Recommended)
+### 2. Run with Docker Compose (Recommended)
 
 ```bash
-# Start backend + frontend simultaneously
-./start.sh
+# Start all services
+docker-compose up -d
 
-# Stop
-./stop.sh
+# View logs
+docker-compose logs -f
 
-# Restart
-./restart.sh
+# Stop all services
+docker-compose down
 ```
 
-### 3. Run Individually
+**Access:**
+- **Frontend**: http://localhost
+- **Backend API**: http://localhost:8000
+- **API Documentation**: 
+  - **Swagger UI**: http://localhost:8000/docs
+  - **ReDoc**: http://localhost:8000/redoc
+
+### 3. Run Individually (Development)
 
 **Terminal 1 - Backend:**
 
 ```bash
 cd backend
 
-# Create virtual environment (first time only)
+# Create virtual environment
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install packages (first time only)
+# Install packages
 pip install -r requirements.txt
 
 # Run server
-python -m app.main
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 **Terminal 2 - Frontend:**
@@ -99,28 +106,70 @@ python -m app.main
 ```bash
 cd frontend
 
-# Install packages (first time only)
+# Install packages
 npm install
 
 # Run development server
 npm run dev
 ```
 
-### 4. Access
-
+**Access:**
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
-- **API Documentation**: 
-  - **Swagger UI** (Interactive): http://localhost:8000/docs
-  - **ReDoc** (Alternative): http://localhost:8000/redoc
+
+## 🚀 AWS Deployment
+
+### Prerequisites
+
+1. **AWS Account** with appropriate permissions
+2. **AWS CLI** installed and configured
+3. **Docker** installed and running
+
+### Step 1: Setup IAM Roles (First Time Only)
+
+```bash
+# Setup IAM roles for Elastic Beanstalk
+./setup-iam.sh
+```
+
+### Step 2: Deploy to AWS
+
+```bash
+# Deploy to AWS Elastic Beanstalk (Tokyo region)
+./deploy.sh
+```
+
+This script will:
+1. Build Docker images for backend and frontend
+2. Push images to AWS ECR (Elastic Container Registry)
+3. Package the application with Dockerfile
+4. Deploy to Elastic Beanstalk environment
+
+**Note:** First deployment may take 10-15 minutes.
+
+### Step 3: Access Deployed Application
+
+After deployment completes, get your application URL:
+
+```bash
+aws elasticbeanstalk describe-environments \
+  --application-name pdf-template-engine \
+  --environment-names pdf-template-prod \
+  --region ap-northeast-1 \
+  --query 'Environments[0].CNAME' \
+  --output text
+```
+
+Access your application at: `http://<your-cname>.elasticbeanstalk.com`
 
 ## 📖 Usage
 
 ### 1. Upload Template
 
-1. Access `http://localhost:3000` in web browser
-2. Click "Upload PDF Template" button
-3. Select A4 PDF template file
+1. Access the application in your web browser (http://localhost for Docker, http://localhost:3000 for dev)
+2. Register or login to your account
+3. Click "Upload PDF Template" button
+4. Select A4 PDF template file
 
 ### 2. Field Mapping
 
@@ -331,21 +380,28 @@ report/
 │   ├── templates/          # Template JSON storage (auto-generated)
 │   ├── uploads/            # Uploaded PDFs and generated PDFs (auto-generated)
 │   ├── users/              # User data (auto-generated)
+│   ├── fonts/              # Font files (NotoSansJP, NotoSansKR)
 │   └── requirements.txt    # Python package dependencies
 │
 ├── frontend/               # React frontend
 │   ├── src/
 │   │   ├── App.jsx         # Main app component
-│   │   └── components/
-│   │       ├── TemplateList.jsx    # Template list
-│   │       └── TemplateEditor.jsx  # Template editor
+│   │   ├── components/     # React components
+│   │   ├── contexts/       # React contexts (Auth)
+│   │   └── i18n/           # Internationalization
+│   ├── nginx.conf          # Nginx configuration
 │   ├── package.json        # Node.js package dependencies
 │   └── vite.config.js      # Vite configuration
 │
-├── start.sh               # Start backend + frontend simultaneously
-├── stop.sh                # Stop servers
-├── restart.sh             # Restart servers
-└── README.md              # This file
+├── .ebextensions/          # Elastic Beanstalk configuration
+│   ├── 01_nginx.config     # Nginx configuration
+│   └── 02_storage.config   # Storage configuration
+│
+├── Dockerfile              # Combined Dockerfile for production
+├── docker-compose.yml      # Docker Compose configuration
+├── deploy.sh               # AWS deployment script
+├── setup-iam.sh            # IAM roles setup script
+└── README.md               # This file
 ```
 
 ## 📐 Template JSON Structure
@@ -424,20 +480,54 @@ Templates are saved in JSON format:
 - [ ] Rich text (partial bold, colors, etc.)
 - [ ] Data schema validation UI
 - [ ] Template version management
-- [ ] User authentication and permission management
 
 ## 🐛 Troubleshooting
+
+### Docker Issues
+
+```bash
+# Check Docker is running
+docker ps
+
+# View container logs
+docker-compose logs -f
+
+# Restart containers
+docker-compose restart
+
+# Rebuild containers
+docker-compose up -d --build
+```
 
 ### Port Already in Use
 
 ```bash
 # Check ports
 lsof -ti:8000  # Backend
-lsof -ti:3000  # Frontend
+lsof -ti:80    # Frontend (Docker)
+lsof -ti:3000  # Frontend (Dev mode)
 
 # Kill processes
 kill -9 $(lsof -ti:8000)
+kill -9 $(lsof -ti:80)
 kill -9 $(lsof -ti:3000)
+```
+
+### AWS Deployment Issues
+
+```bash
+# Check deployment status
+aws elasticbeanstalk describe-environments \
+  --application-name pdf-template-engine \
+  --environment-names pdf-template-prod \
+  --region ap-northeast-1
+
+# View deployment logs
+aws elasticbeanstalk request-environment-info \
+  --application-name pdf-template-engine \
+  --environment-name pdf-template-prod \
+  --info-type tail \
+  --region ap-northeast-1
 ```
 
 ### Package Installation Errors

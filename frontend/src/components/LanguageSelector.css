@@ -18,8 +18,8 @@
 }
 
 .language-button:hover {
-  background: var(--bg-light);
-  border-color: var(--primary);
+  background: var(--bg-secondary);
+  border-color: var(--text-muted);
 }
 
 .language-flag {
@@ -67,11 +67,11 @@
 }
 
 .language-option:hover {
-  background: var(--bg-light);
+  background: var(--bg-secondary);
 }
 
 .language-option.active {
-  background: var(--primary);
+  background: var(--text-primary);
   color: white;
 }
 

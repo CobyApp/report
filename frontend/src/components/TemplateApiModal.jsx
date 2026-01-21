@@ -12,7 +12,8 @@ function TemplateApiModal({ template, onClose }) {
   const [copiedCode, setCopiedCode] = useState(null)
   const [templateData, setTemplateData] = useState(null)
 
-  const apiBase = 'http://localhost:8000/api'
+  // Use current host origin for API base URL (works in both development and production)
+  const apiBase = `${window.location.origin}/api`
   const token = user ? localStorage.getItem('access_token') : 'YOUR_ACCESS_TOKEN'
   const templateId = template?.template_id || '{template_id}'
 
@@ -35,10 +36,65 @@ function TemplateApiModal({ template, onClose }) {
     }
   }, [templateId, template])
 
-  const copyToClipboard = (text, id) => {
-    navigator.clipboard.writeText(text)
-    setCopiedCode(id)
-    setTimeout(() => setCopiedCode(null), 2000)
+  const copyToClipboard = async (text, id) => {
+    try {
+      // Try modern clipboard API first
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text)
+        setCopiedCode(id)
+        setTimeout(() => setCopiedCode(null), 2000)
+      } else {
+        // Fallback for older browsers or non-HTTPS
+        const textArea = document.createElement('textarea')
+        textArea.value = text
+        textArea.style.position = 'fixed'
+        textArea.style.left = '-999999px'
+        textArea.style.top = '-999999px'
+        document.body.appendChild(textArea)
+        textArea.focus()
+        textArea.select()
+        
+        try {
+          const successful = document.execCommand('copy')
+          if (successful) {
+            setCopiedCode(id)
+            setTimeout(() => setCopiedCode(null), 2000)
+          } else {
+            throw new Error('Copy command failed')
+          }
+        } catch (err) {
+          console.error('Failed to copy:', err)
+          alert('Failed to copy to clipboard. Please copy manually.')
+        } finally {
+          document.body.removeChild(textArea)
+        }
+      }
+    } catch (err) {
+      console.error('Failed to copy:', err)
+      // Fallback: try execCommand
+      try {
+        const textArea = document.createElement('textarea')
+        textArea.value = text
+        textArea.style.position = 'fixed'
+        textArea.style.left = '-999999px'
+        textArea.style.top = '-999999px'
+        document.body.appendChild(textArea)
+        textArea.focus()
+        textArea.select()
+        const successful = document.execCommand('copy')
+        document.body.removeChild(textArea)
+        
+        if (successful) {
+          setCopiedCode(id)
+          setTimeout(() => setCopiedCode(null), 2000)
+        } else {
+          alert('Failed to copy to clipboard. Please copy manually.')
+        }
+      } catch (fallbackErr) {
+        console.error('Fallback copy also failed:', fallbackErr)
+        alert('Failed to copy to clipboard. Please copy manually.')
+      }
+    }
   }
 
   // Generate example request based on template elements

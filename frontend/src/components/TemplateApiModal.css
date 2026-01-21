@@ -4,7 +4,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,8 +15,9 @@
 
 .template-api-modal {
   background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   max-width: 900px;
   width: 100%;
   max-height: 90vh;
@@ -38,9 +40,10 @@
 
 .template-api-modal-header h2 {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-primary);
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .template-api-modal-close {
@@ -73,10 +76,10 @@
 }
 
 .template-api-info {
-  background: var(--bg);
-  padding: 1rem;
+  background: var(--bg-secondary);
+  padding: 1.25rem;
   border-radius: var(--radius-sm);
-  border-left: 3px solid var(--primary);
+  border-left: 3px solid var(--text-primary);
 }
 
 .template-api-name {
@@ -107,16 +110,18 @@
 
 .template-api-section h3 {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-primary);
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .template-api-section h4 {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-primary);
   margin: 0 0 0.5rem 0;
+  letter-spacing: -0.01em;
 }
 
 .template-api-section p {
@@ -127,7 +132,7 @@
 
 .template-api-section strong {
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .endpoint-info {
@@ -157,7 +162,7 @@
 }
 
 .method-post {
-  background-color: #10b981;
+  background-color: var(--text-primary);
   color: white;
 }
 
@@ -205,6 +210,9 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  z-index: 10;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .copy-btn:hover {
@@ -213,6 +221,11 @@
 
 .copy-btn:active {
   transform: scale(0.95);
+}
+
+.copy-btn:focus {
+  outline: 2px solid #64748b;
+  outline-offset: 2px;
 }
 
 .api-doc-note {
@@ -268,9 +281,10 @@
 
 .token-display {
   margin-bottom: 1rem;
-  padding: 1rem;
-  background: #f0f9ff;
-  border-left: 3px solid #3b82f6;
+  padding: 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--text-primary);
   border-radius: var(--radius-sm);
 }
 
@@ -283,5 +297,5 @@
 .token-value {
   word-break: break-all;
   font-size: 0.8125rem;
-  color: #1e40af;
+  color: var(--text-secondary);
 }
