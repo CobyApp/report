@@ -796,53 +796,53 @@ function TemplateEditor({ templateId, onBack }) {
         const lineHeight = style.line_height || 1.2
         const letterSpacing = style.letter_spacing || 0
         
+        // Set font first for accurate measurement
         ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
-        ctx.textAlign = 'left' // Always use left for measurement, we'll adjust position manually
-        ctx.textBaseline = 'alphabetic' // Use alphabetic to match backend (PyMuPDF uses baseline)
+        ctx.textAlign = 'left'
+        ctx.textBaseline = 'alphabetic' // PyMuPDF insert_text uses baseline
         
-        // Calculate text metrics
+        // Calculate text metrics (measure actual text that will be rendered)
         const textMetrics = ctx.measureText(element.data_path)
         const textWidth = textMetrics.width
-        const textHeight = fontSize * lineHeight
         
-        // Margins matching backend (5 points each)
+        // Get actual text metrics including ascent/descent for precise positioning
+        // Canvas measureText provides width, but for height we need to estimate based on font size
+        // PyMuPDF uses baseline for insert_text, and approximately 80% of font size is above baseline
+        const actualFontHeight = fontSize // Font height in points
+        const ascentRatio = 0.8 // Approximately 80% of font size is above baseline (typical for most fonts)
+        
+        // Margins matching backend exactly (5 points each)
         const topMargin = 5
         const leftMargin = 5
         
-        // Calculate text position based on alignment (matching backend exactly)
+        // Calculate text position based on alignment (matching backend render_service.py EXACTLY)
         let textX = x
         let textY = y
         
-        // Horizontal alignment (matching backend render_service.py)
-        // Backend uses left_margin for left, calculates center based on text_width, right uses text_width + left_margin
+        // Horizontal alignment - match backend calculations exactly
+        // Backend: left: x + left_margin, center: x + (w - text_width) / 2, right: x + w - text_width - left_margin
         if (style.align === 'center') {
-          // Center: x + (w - text_width) / 2
           textX = x + (w - textWidth) / 2
-          ctx.textAlign = 'left' // Use left align and calculate position
         } else if (style.align === 'right') {
-          // Right: x + w - text_width - left_margin
           textX = x + w - textWidth - leftMargin
-          ctx.textAlign = 'left' // Use left align and calculate position
         } else {
-          // Left: x + left_margin
           textX = x + leftMargin
-          ctx.textAlign = 'left'
         }
         
-        // Vertical alignment (matching backend render_service.py exactly)
-        // Backend uses: top: y_screen + font_size * 0.8 + top_margin
-        //               middle: y_screen + h / 2 + font_size * 0.3
-        //               bottom: y_screen + h - font_size * 0.2 - top_margin
-        const baselineOffset = fontSize * 0.8 // Approximate baseline offset from top (80% of font size)
+        // Vertical alignment - match backend calculations EXACTLY
+        // Backend PyMuPDF insert_text uses baseline position:
+        // - top: y_screen + font_size * 0.8 + top_margin (baseline from top)
+        // - middle: y_screen + h / 2 + font_size * 0.3 (baseline adjustment for middle)
+        // - bottom: y_screen + h - font_size * 0.2 - top_margin (baseline near bottom)
         if (style.vertical_align === 'middle') {
-          // Middle: y + h / 2 + font_size * 0.3
+          // Middle: baseline at center + small adjustment
           textY = y + h / 2 + fontSize * 0.3
         } else if (style.vertical_align === 'bottom') {
-          // Bottom: y + h - font_size * 0.2 - top_margin
+          // Bottom: baseline near bottom of field
           textY = y + h - fontSize * 0.2 - topMargin
         } else {
-          // Top: y + font_size * 0.8 + top_margin
-          textY = y + baselineOffset + topMargin
+          // Top: baseline at top with margin (80% of font size above baseline)
+          textY = y + fontSize * 0.8 + topMargin
         }
         
         // Calculate actual text width (accounting for letter spacing)
