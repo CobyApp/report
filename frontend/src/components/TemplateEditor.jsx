@@ -611,7 +611,18 @@ function TemplateEditor({ templateId, onBack }) {
         page: currentPage,
         bbox: bbox,
         data_path: '',
-        style: { font: 'Helvetica', size: 10, align: 'left' },
+        style: { 
+          size: 10, 
+          align: 'left',
+          weight: 'normal',
+          color: '#000000',
+          background_color: '#ffffff',
+          underline: false,
+          strikethrough: false,
+          line_height: 1.2,
+          letter_spacing: 0,
+          vertical_align: 'top'
+        },
       }
 
       setTempElement(newElement)
@@ -765,16 +776,102 @@ function TemplateEditor({ templateId, onBack }) {
       }
     } else {
       // Text is a regular rectangle
+      const style = element.style || {}
+      
+      // Draw background color if specified
+      if (style.background_color && style.background_color.toLowerCase() !== 'transparent' && style.background_color !== '#ffffff') {
+        ctx.fillStyle = style.background_color
+        ctx.fillRect(x, y, w, h)
+      }
+      
       ctx.strokeRect(x, y, w, h)
       if (element.data_path) {
-        ctx.fillStyle = '#2c3e50'
-        ctx.font = '12px sans-serif'
-        ctx.textAlign = 'left'
+        // Use text color from style, default to dark gray
+        ctx.fillStyle = style.color || '#2c3e50'
+        
+        // Build font string from element style (always use Noto Sans)
+        const fontSize = style.size || 12
+        const fontWeight = style.weight === 'bold' ? 'bold' : 'normal'
+        const fontFamily = 'Noto Sans JP, Noto Sans KR, sans-serif'
+        
+        ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
+        
+        // For bold, simulate if browser doesn't support it
+        const useBoldSimulation = fontWeight === 'bold'
+        ctx.textAlign = style.align || 'left'
         ctx.textBaseline = 'top'
-        // Draw text starting from top-left of the area with margins
+        
+        // Calculate text position based on alignment
         const topMargin = 8 // Margin from top
         const leftMargin = 8 // Margin from left
-        ctx.fillText(element.data_path, x + leftMargin, y + topMargin)
+        let textX = x + leftMargin
+        let textY = y + topMargin
+        
+        // Vertical alignment
+        if (style.vertical_align === 'middle') {
+          textY = y + h / 2 - fontSize / 2
+        } else if (style.vertical_align === 'bottom') {
+          textY = y + h - fontSize - topMargin
+        }
+        
+        // Horizontal alignment
+        if (style.align === 'center') {
+          ctx.textAlign = 'center'
+          textX = x + w / 2
+        } else if (style.align === 'right') {
+          ctx.textAlign = 'right'
+          textX = x + w - leftMargin
+        }
+        
+        // Draw text
+        if (useBoldSimulation) {
+          // Simulate bold by drawing text multiple times with slight offset
+          ctx.fillText(element.data_path, textX, textY)
+          ctx.fillText(element.data_path, textX + 0.5, textY)
+          ctx.fillText(element.data_path, textX, textY + 0.5)
+        } else {
+          ctx.fillText(element.data_path, textX, textY)
+        }
+        
+        // Draw underline if specified
+        if (style.underline) {
+          const textWidth = ctx.measureText(element.data_path).width
+          const underlineY = textY + fontSize + 2
+          ctx.strokeStyle = style.color || '#2c3e50'
+          ctx.lineWidth = Math.max(1, fontSize * 0.05)
+          ctx.beginPath()
+          if (style.align === 'center') {
+            ctx.moveTo(textX - textWidth / 2, underlineY)
+            ctx.lineTo(textX + textWidth / 2, underlineY)
+          } else if (style.align === 'right') {
+            ctx.moveTo(textX - textWidth, underlineY)
+            ctx.lineTo(textX, underlineY)
+          } else {
+            ctx.moveTo(textX, underlineY)
+            ctx.lineTo(textX + textWidth, underlineY)
+          }
+          ctx.stroke()
+        }
+        
+        // Draw strikethrough if specified
+        if (style.strikethrough) {
+          const textWidth = ctx.measureText(element.data_path).width
+          const strikethroughY = textY + fontSize / 2
+          ctx.strokeStyle = style.color || '#2c3e50'
+          ctx.lineWidth = Math.max(1, fontSize * 0.05)
+          ctx.beginPath()
+          if (style.align === 'center') {
+            ctx.moveTo(textX - textWidth / 2, strikethroughY)
+            ctx.lineTo(textX + textWidth / 2, strikethroughY)
+          } else if (style.align === 'right') {
+            ctx.moveTo(textX - textWidth, strikethroughY)
+            ctx.lineTo(textX, strikethroughY)
+          } else {
+            ctx.moveTo(textX, strikethroughY)
+            ctx.lineTo(textX + textWidth, strikethroughY)
+          }
+          ctx.stroke()
+        }
       }
     }
   }
@@ -1236,43 +1333,262 @@ function TemplateEditor({ templateId, onBack }) {
                     }}
                   />
                 </div>
-                <div className="property-row">
-                  <label>{t('templateEditor.properties.fontSize')}:</label>
-                  <input
-                    type="number"
-                    value={selectedElement.style?.size || 10}
-                    onChange={(e) => {
-                      const size = parseFloat(e.target.value) || 10
-                      const updated = elements.map(el => 
-                        el.id === selectedElement.id 
-                          ? { ...el, style: { ...el.style, size } }
-                          : el
-                      )
-                      setElements(updated)
-                      setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, size } })
-                    }}
-                  />
-                </div>
-                <div className="property-row">
-                  <label>{t('templateEditor.properties.align')}:</label>
-                  <select
-                    value={selectedElement.style?.align || 'left'}
-                    onChange={(e) => {
-                      const align = e.target.value
-                      const updated = elements.map(el => 
-                        el.id === selectedElement.id 
-                          ? { ...el, style: { ...el.style, align } }
-                          : el
-                      )
-                      setElements(updated)
-                      setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, align } })
-                    }}
-                  >
-                    <option value="left">{t('templateEditor.properties.alignLeft')}</option>
-                    <option value="center">{t('templateEditor.properties.alignCenter')}</option>
-                    <option value="right">{t('templateEditor.properties.alignRight')}</option>
-                  </select>
-                </div>
+                {selectedElement.type === 'text' && (
+                  <>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.fontSize')}:</label>
+                      <input
+                        type="number"
+                        min="6"
+                        max="72"
+                        step="1"
+                        value={selectedElement.style?.size || 10}
+                        onChange={(e) => {
+                          const size = parseFloat(e.target.value) || 10
+                          const updated = elements.map(el => 
+                            el.id === selectedElement.id 
+                              ? { ...el, style: { ...el.style, size } }
+                              : el
+                          )
+                          setElements(updated)
+                          setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, size } })
+                        }}
+                      />
+                    </div>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.fontWeight')}:</label>
+                      <select
+                        value={selectedElement.style?.weight || 'normal'}
+                        onChange={(e) => {
+                          const weight = e.target.value
+                          const updated = elements.map(el => 
+                            el.id === selectedElement.id 
+                              ? { ...el, style: { ...el.style, weight } }
+                              : el
+                          )
+                          setElements(updated)
+                          setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, weight } })
+                        }}
+                      >
+                        <option value="normal">{t('templateEditor.properties.normal')}</option>
+                        <option value="bold">{t('templateEditor.properties.bold')}</option>
+                      </select>
+                    </div>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.align')}:</label>
+                      <select
+                        value={selectedElement.style?.align || 'left'}
+                        onChange={(e) => {
+                          const align = e.target.value
+                          const updated = elements.map(el => 
+                            el.id === selectedElement.id 
+                              ? { ...el, style: { ...el.style, align } }
+                              : el
+                          )
+                          setElements(updated)
+                          setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, align } })
+                        }}
+                      >
+                        <option value="left">{t('templateEditor.properties.alignLeft')}</option>
+                        <option value="center">{t('templateEditor.properties.alignCenter')}</option>
+                        <option value="right">{t('templateEditor.properties.alignRight')}</option>
+                      </select>
+                    </div>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.textColor')}:</label>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flex: 1 }}>
+                        <input
+                          type="color"
+                          value={selectedElement.style?.color || '#000000'}
+                          onChange={(e) => {
+                            const color = e.target.value
+                            const updated = elements.map(el => 
+                              el.id === selectedElement.id 
+                                ? { ...el, style: { ...el.style, color } }
+                                : el
+                            )
+                            setElements(updated)
+                            setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, color } })
+                          }}
+                          style={{ width: '45px', height: '38px', cursor: 'pointer' }}
+                        />
+                        <input
+                          type="text"
+                          value={selectedElement.style?.color || '#000000'}
+                          onChange={(e) => {
+                            const color = e.target.value
+                            const updated = elements.map(el => 
+                              el.id === selectedElement.id 
+                                ? { ...el, style: { ...el.style, color } }
+                                : el
+                            )
+                            setElements(updated)
+                            setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, color } })
+                          }}
+                          placeholder="#000000"
+                          style={{ width: '80px', flexShrink: 0 }}
+                        />
+                      </div>
+                    </div>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.background')}:</label>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flex: 1 }}>
+                        <input
+                          type="color"
+                          value={selectedElement.style?.background_color || '#ffffff'}
+                          onChange={(e) => {
+                            const background_color = e.target.value
+                            const updated = elements.map(el => 
+                              el.id === selectedElement.id 
+                                ? { ...el, style: { ...el.style, background_color } }
+                                : el
+                            )
+                            setElements(updated)
+                            setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, background_color } })
+                          }}
+                          style={{ width: '45px', height: '38px', cursor: 'pointer' }}
+                        />
+                        <input
+                          type="text"
+                          value={selectedElement.style?.background_color || '#ffffff'}
+                          onChange={(e) => {
+                            const background_color = e.target.value
+                            const updated = elements.map(el => 
+                              el.id === selectedElement.id 
+                                ? { ...el, style: { ...el.style, background_color } }
+                                : el
+                            )
+                            setElements(updated)
+                            setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, background_color } })
+                          }}
+                          placeholder="#ffffff or transparent"
+                          style={{ width: '80px', flexShrink: 0 }}
+                        />
+                      </div>
+                    </div>
+                    <div className="property-row" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+                      <label style={{ marginBottom: '0.25rem' }}>{t('templateEditor.properties.textDecoration')}:</label>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                          <input
+                            type="checkbox"
+                            checked={selectedElement.style?.underline || false}
+                            onChange={(e) => {
+                              const underline = e.target.checked
+                              const updated = elements.map(el => 
+                                el.id === selectedElement.id 
+                                  ? { ...el, style: { ...el.style, underline } }
+                                  : el
+                              )
+                              setElements(updated)
+                              setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, underline } })
+                            }}
+                          />
+                          <span>{t('templateEditor.properties.underline')}</span>
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                          <input
+                            type="checkbox"
+                            checked={selectedElement.style?.strikethrough || false}
+                            onChange={(e) => {
+                              const strikethrough = e.target.checked
+                              const updated = elements.map(el => 
+                                el.id === selectedElement.id 
+                                  ? { ...el, style: { ...el.style, strikethrough } }
+                                  : el
+                              )
+                              setElements(updated)
+                              setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, strikethrough } })
+                            }}
+                          />
+                          <span>{t('templateEditor.properties.strikethrough')}</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.lineHeight')}:</label>
+                      <input
+                        type="number"
+                        min="0.5"
+                        max="3"
+                        step="0.1"
+                        value={selectedElement.style?.line_height || 1.2}
+                        onChange={(e) => {
+                          const line_height = parseFloat(e.target.value) || 1.2
+                          const updated = elements.map(el => 
+                            el.id === selectedElement.id 
+                              ? { ...el, style: { ...el.style, line_height } }
+                              : el
+                          )
+                          setElements(updated)
+                          setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, line_height } })
+                        }}
+                      />
+                    </div>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.letterSpacing')}:</label>
+                      <input
+                        type="number"
+                        min="-2"
+                        max="10"
+                        step="0.1"
+                        value={selectedElement.style?.letter_spacing || 0}
+                        onChange={(e) => {
+                          const letter_spacing = parseFloat(e.target.value) || 0
+                          const updated = elements.map(el => 
+                            el.id === selectedElement.id 
+                              ? { ...el, style: { ...el.style, letter_spacing } }
+                              : el
+                          )
+                          setElements(updated)
+                          setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, letter_spacing } })
+                        }}
+                      />
+                    </div>
+                    <div className="property-row">
+                      <label>{t('templateEditor.properties.verticalAlign')}:</label>
+                      <select
+                        value={selectedElement.style?.vertical_align || 'top'}
+                        onChange={(e) => {
+                          const vertical_align = e.target.value
+                          const updated = elements.map(el => 
+                            el.id === selectedElement.id 
+                              ? { ...el, style: { ...el.style, vertical_align } }
+                              : el
+                          )
+                          setElements(updated)
+                          setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, vertical_align } })
+                        }}
+                      >
+                        <option value="top">{t('templateEditor.properties.verticalAlignTop')}</option>
+                        <option value="middle">{t('templateEditor.properties.verticalAlignMiddle')}</option>
+                        <option value="bottom">{t('templateEditor.properties.verticalAlignBottom')}</option>
+                      </select>
+                    </div>
+                  </>
+                )}
+                {selectedElement.type !== 'text' && (
+                  <div className="property-row">
+                    <label>{t('templateEditor.properties.align')}:</label>
+                    <select
+                      value={selectedElement.style?.align || 'left'}
+                      onChange={(e) => {
+                        const align = e.target.value
+                        const updated = elements.map(el => 
+                          el.id === selectedElement.id 
+                            ? { ...el, style: { ...el.style, align } }
+                            : el
+                        )
+                        setElements(updated)
+                        setSelectedElement({ ...selectedElement, style: { ...selectedElement.style, align } })
+                      }}
+                    >
+                      <option value="left">{t('templateEditor.properties.alignLeft')}</option>
+                      <option value="center">{t('templateEditor.properties.alignCenter')}</option>
+                      <option value="right">{t('templateEditor.properties.alignRight')}</option>
+                    </select>
+                  </div>
+                )}
                 <div className="property-row">
                   <button onClick={handleDeleteElement} className="btn-delete-element">
                     🗑️ {t('templateEditor.delete')}

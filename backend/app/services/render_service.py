@@ -74,15 +74,74 @@ class RenderService:
         registered_fonts = {}  # Font file path -> font name mapping
         
         if project_font_dir.exists():
-            # Noto Sans JP (Japanese)
+            # Japanese fonts (priority: MS Gothic > MS Mincho > Noto Sans JP)
+            # MS Gothic (ゴシック体) - Most common in Japanese government documents
+            msgothic_path = project_font_dir / "msgothic.ttc"
+            if msgothic_path.exists():
+                registered_fonts[str(msgothic_path)] = "MSGothic"
+            else:
+                # Try alternative names
+                for alt_name in ["msgothic.ttf", "MS-Gothic.ttf", "msgothic.otf"]:
+                    alt_path = project_font_dir / alt_name
+                    if alt_path.exists():
+                        registered_fonts[str(alt_path)] = "MSGothic"
+                        break
+            
+            # MS Mincho (明朝体) - For formal documents
+            msmincho_path = project_font_dir / "msmincho.ttc"
+            if msmincho_path.exists():
+                registered_fonts[str(msmincho_path)] = "MSMincho"
+            else:
+                for alt_name in ["msmincho.ttf", "MS-Mincho.ttf", "msmincho.otf"]:
+                    alt_path = project_font_dir / alt_name
+                    if alt_path.exists():
+                        registered_fonts[str(alt_path)] = "MSMincho"
+                        break
+            
+            # Noto Sans JP (fallback for Japanese)
             jp_font_path = project_font_dir / "NotoSansJP-VF.ttf"
             if jp_font_path.exists():
                 registered_fonts[str(jp_font_path)] = "NotoSansJP"
+            # Noto Sans JP Bold (if available)
+            jp_bold_path = project_font_dir / "NotoSansJP-Bold.ttf"
+            if jp_bold_path.exists():
+                registered_fonts[str(jp_bold_path)] = "NotoSansJP-Bold"
             
-            # Noto Sans KR (Korean)
+            # Korean fonts (priority: Malgun Gothic > Nanum Gothic > Noto Sans KR)
+            # Malgun Gothic (맑은 고딕) - Windows default, common in Korean documents
+            malgun_path = project_font_dir / "malgun.ttf"
+            if malgun_path.exists():
+                registered_fonts[str(malgun_path)] = "MalgunGothic"
+            else:
+                for alt_name in ["malgun.ttc", "malgun.otf", "Malgun-Gothic.ttf"]:
+                    alt_path = project_font_dir / alt_name
+                    if alt_path.exists():
+                        registered_fonts[str(alt_path)] = "MalgunGothic"
+                        break
+            
+            # Nanum Gothic (나눔고딕) - Common in public institutions
+            nanum_path = project_font_dir / "NanumGothic.ttf"
+            if nanum_path.exists():
+                registered_fonts[str(nanum_path)] = "NanumGothic"
+            else:
+                for alt_name in ["NanumGothic-Regular.ttf", "NanumGothic.otf"]:
+                    alt_path = project_font_dir / alt_name
+                    if alt_path.exists():
+                        registered_fonts[str(alt_path)] = "NanumGothic"
+                        break
+            
+            # Noto Sans KR (fallback for Korean)
             kr_font_path = project_font_dir / "NotoSansKR-VF.ttf"
             if kr_font_path.exists():
                 registered_fonts[str(kr_font_path)] = "NotoSansKR"
+            # Noto Sans KR Bold (if available)
+            kr_bold_path = project_font_dir / "NotoSansKR-Bold.ttf"
+            if kr_bold_path.exists():
+                registered_fonts[str(kr_bold_path)] = "NotoSansKR-Bold"
+            # Nanum Gothic Bold (if available)
+            nanum_bold_path = project_font_dir / "NanumGothic-Bold.ttf"
+            if nanum_bold_path.exists():
+                registered_fonts[str(nanum_bold_path)] = "NanumGothic-Bold"
         
         # Process each page
         max_page = max(pages_elements.keys()) if pages_elements else 1
@@ -194,10 +253,18 @@ class RenderService:
         style = elem.get("style", {})
         font_size = style.get("size", 10)
         align = style.get("align", "left")
+        font_weight = style.get("weight", "normal")  # normal or bold
+        text_color = style.get("color", "#000000")  # Text color (hex format)
+        background_color = style.get("background_color", None)  # Background color (hex format or None)
+        underline = style.get("underline", False)  # Underline decoration
+        strikethrough = style.get("strikethrough", False)  # Strikethrough decoration
+        line_height = style.get("line_height", 1.2)  # Line height multiplier
+        letter_spacing = style.get("letter_spacing", 0)  # Letter spacing in points
+        vertical_align = style.get("vertical_align", "top")  # top, middle, bottom
         
         text = str(value)
         
-        # Select from registered fonts (use registered font name)
+        # Always use Noto Sans fonts (auto-detect language)
         font_name_to_use = None
         
         # Check for Unicode characters in text
@@ -207,42 +274,115 @@ class RenderService:
         has_korean = any('\uAC00' <= c <= '\uD7A3' for c in text)
         has_japanese = any('\u3040' <= c <= '\u309F' or '\u30A0' <= c <= '\u30FF' or '\u4E00' <= c <= '\u9FAF' for c in text)
         
-        # Find fonts from project font directory (CJK support required)
+        # Find fonts from project font directory
         project_font_dir = Path(__file__).parent.parent.parent / "fonts"
         
-        # Select from registered fonts (font required if Unicode exists)
+        # Always use Noto Sans fonts based on language
         if registered_fonts and project_font_dir.exists():
-            # Japanese priority (includes Kanji)
+            # Japanese: Noto Sans JP
             if has_japanese:
-                jp_font_path = project_font_dir / "NotoSansJP-VF.ttf"
-                if jp_font_path.exists() and str(jp_font_path) in registered_fonts:
-                    font_name_to_use = registered_fonts[str(jp_font_path)]
-                    print(f"✓ Using Japanese font: {font_name_to_use}")
-            # Korean
+                # Try bold variant first if bold is requested
+                if font_weight == "bold":
+                    for font_file_path, font_name in registered_fonts.items():
+                        if font_name == "NotoSansJP-Bold":
+                            font_name_to_use = font_name
+                            print(f"✓ Using Noto Sans JP Bold")
+                            break
+                # Use regular if bold not found or not requested
+                if not font_name_to_use:
+                    for font_file_path, font_name in registered_fonts.items():
+                        if font_name == "NotoSansJP":
+                            font_name_to_use = font_name
+                            if font_weight == "bold":
+                                print(f"✓ Using Noto Sans JP (bold simulation)")
+                            else:
+                                print(f"✓ Using Noto Sans JP")
+                            break
+            # Korean: Noto Sans KR
             elif has_korean:
-                kr_font_path = project_font_dir / "NotoSansKR-VF.ttf"
-                if kr_font_path.exists() and str(kr_font_path) in registered_fonts:
-                    font_name_to_use = registered_fonts[str(kr_font_path)]
-                    print(f"✓ Using Korean font: {font_name_to_use}")
-            # Use default font if Unicode exists
-            elif has_unicode:
-                for font_file_path, font_name in registered_fonts.items():
-                    font_name_to_use = font_name
-                    print(f"✓ Using Unicode font: {font_name_to_use}")
-                    break
+                # Try bold variant first if bold is requested
+                if font_weight == "bold":
+                    for font_file_path, font_name in registered_fonts.items():
+                        if font_name == "NotoSansKR-Bold":
+                            font_name_to_use = font_name
+                            print(f"✓ Using Noto Sans KR Bold")
+                            break
+                # Use regular if bold not found or not requested
+                if not font_name_to_use:
+                    for font_file_path, font_name in registered_fonts.items():
+                        if font_name == "NotoSansKR":
+                            font_name_to_use = font_name
+                            if font_weight == "bold":
+                                print(f"✓ Using Noto Sans KR (bold simulation)")
+                            else:
+                                print(f"✓ Using Noto Sans KR")
+                            break
+            # English/Other: Use Noto Sans JP as default (supports English)
+            else:
+                # Try bold variant first if bold is requested
+                if font_weight == "bold":
+                    for font_file_path, font_name in registered_fonts.items():
+                        if font_name == "NotoSansJP-Bold":
+                            font_name_to_use = font_name
+                            print(f"✓ Using Noto Sans JP Bold (English)")
+                            break
+                # Use regular if bold not found or not requested
+                if not font_name_to_use:
+                    for font_file_path, font_name in registered_fonts.items():
+                        if font_name == "NotoSansJP":
+                            font_name_to_use = font_name
+                            if font_weight == "bold":
+                                print(f"✓ Using Noto Sans JP (English, bold simulation)")
+                            else:
+                                print(f"✓ Using Noto Sans JP (English)")
+                            break
+                    # Fallback to Noto Sans KR if JP not available
+                    if not font_name_to_use:
+                        for font_file_path, font_name in registered_fonts.items():
+                            if font_name == "NotoSansKR":
+                                font_name_to_use = font_name
+                                print(f"✓ Using Noto Sans KR (fallback)")
+                                break
         
         # Warning if font not found
         if has_unicode and not font_name_to_use:
             print(f"⚠ Cannot find font for Unicode text: {text[:20]}...")
             print(f"   Font directory: {project_font_dir}")
         
+        # Convert hex color to RGB tuple
+        def hex_to_rgb(hex_color):
+            """Convert hex color (#RRGGBB) to RGB tuple (0-1 range)"""
+            hex_color = hex_color.lstrip('#')
+            if len(hex_color) == 6:
+                r = int(hex_color[0:2], 16) / 255.0
+                g = int(hex_color[2:4], 16) / 255.0
+                b = int(hex_color[4:6], 16) / 255.0
+                return (r, g, b)
+            return (0, 0, 0)  # Default to black
+        
+        text_color_rgb = hex_to_rgb(text_color)
+        
+        # Draw background color if specified
+        if background_color and background_color.lower() not in ['transparent', 'none', '']:
+            bg_color_rgb = hex_to_rgb(background_color)
+            rect = fitz.Rect(x, y_screen, x + w, y_screen + h)
+            page.draw_rect(rect, color=bg_color_rgb, fill=bg_color_rgb, width=0)
+        
         # PyMuPDF coordinate system: top-left is (0, 0)
         # insert_text's point is the text's baseline position
         # y_screen is screen coordinate system (top is 0)
         # Place baseline at top of field area with margin (approximately 80% of font size is above baseline)
-        # For top alignment: baseline should be at y_screen + font_size * 0.8 + margin
         top_margin = 5  # Margin from top (in points)
-        y_text = y_screen + font_size * 0.8 + top_margin  # Place baseline near top of field area with margin
+        
+        # Vertical alignment adjustment
+        if vertical_align == "middle":
+            # Center vertically: adjust y position to middle of field
+            y_text = y_screen + h / 2 + font_size * 0.3  # Approximate baseline position for middle
+        elif vertical_align == "bottom":
+            # Bottom alignment: place near bottom of field
+            y_text = y_screen + h - font_size * 0.2 - top_margin
+        else:  # top
+            y_text = y_screen + font_size * 0.8 + top_margin  # Place baseline near top of field area with margin
         
         # Left margin (only for left alignment)
         left_margin = 5  # Margin from left (in points)
@@ -276,15 +416,41 @@ class RenderService:
         # Insert text (recognized as PDF text, selectable/searchable)
         try:
             if font_name_to_use:
-                # Insert text using registered font name
-                page.insert_text(
-                    point=(x_text, y_text),
-                    text=text,
-                    fontsize=font_size,
-                    fontname=font_name_to_use,
-                    color=(0, 0, 0),
-                    render_mode=0  # Text mode (0=fill, 3=invisible)
-                )
+                # For CJK fonts without bold variant, simulate bold using stroke
+                # Check if this is a CJK font and bold is requested but not available
+                is_cjk_font = font_name_to_use in ["MSGothic", "MSMincho", "NotoSansJP", "MalgunGothic", "NanumGothic", "NotoSansKR"]
+                use_bold_simulation = is_cjk_font and font_weight == "bold" and "-Bold" not in font_name_to_use
+                
+                if use_bold_simulation:
+                    # Simulate bold by drawing text with stroke
+                    # First draw with stroke (outline) to make it bolder
+                    page.insert_text(
+                        point=(x_text, y_text),
+                        text=text,
+                        fontsize=font_size,
+                        fontname=font_name_to_use,
+                        color=text_color_rgb,
+                        render_mode=2  # Stroke mode (outline)
+                    )
+                    # Then draw filled text on top
+                    page.insert_text(
+                        point=(x_text, y_text),
+                        text=text,
+                        fontsize=font_size,
+                        fontname=font_name_to_use,
+                        color=text_color_rgb,
+                        render_mode=0  # Fill mode
+                    )
+                else:
+                    # Insert text using registered font name (normal or bold variant available)
+                    page.insert_text(
+                        point=(x_text, y_text),
+                        text=text,
+                        fontsize=font_size,
+                        fontname=font_name_to_use,
+                        color=text_color_rgb,
+                        render_mode=0  # Text mode (0=fill, 3=invisible)
+                    )
             elif has_unicode:
                 # Unicode without font may cause errors
                 print(f"⚠ Warning: Unicode text without font, using default font (may break): {text[:20]}...")
@@ -292,7 +458,7 @@ class RenderService:
                     point=(x_text, y_text),
                     text=text,
                     fontsize=font_size,
-                    color=(0, 0, 0)
+                    color=text_color_rgb
                 )
             else:
                 # Use default font (English, etc.)
@@ -300,8 +466,48 @@ class RenderService:
                     point=(x_text, y_text),
                     text=text,
                     fontsize=font_size,
-                    color=(0, 0, 0)
+                    color=text_color_rgb
                 )
+            
+            # Draw underline if specified
+            if underline:
+                try:
+                    if font_name_to_use:
+                        text_width = page.get_text_length(text, fontsize=font_size, fontname=font_name_to_use)
+                    else:
+                        text_width = page.get_text_length(text, fontsize=font_size)
+                    
+                    underline_y = y_text + 2  # Slightly below baseline
+                    underline_thickness = max(0.5, font_size * 0.05)  # Thickness proportional to font size
+                    page.draw_line(
+                        (x_text, underline_y),
+                        (x_text + text_width, underline_y),
+                        color=text_color_rgb,
+                        width=underline_thickness
+                    )
+                except:
+                    pass  # Skip underline if calculation fails
+            
+            # Draw strikethrough if specified
+            if strikethrough:
+                try:
+                    if font_name_to_use:
+                        text_width = page.get_text_length(text, fontsize=font_size, fontname=font_name_to_use)
+                    else:
+                        text_width = page.get_text_length(text, fontsize=font_size)
+                    
+                    # Strikethrough position: middle of text height
+                    strikethrough_y = y_text - font_size * 0.3  # Approximate middle of text
+                    strikethrough_thickness = max(0.5, font_size * 0.05)
+                    page.draw_line(
+                        (x_text, strikethrough_y),
+                        (x_text + text_width, strikethrough_y),
+                        color=text_color_rgb,
+                        width=strikethrough_thickness
+                    )
+                except:
+                    pass  # Skip strikethrough if calculation fails
+                    
         except Exception as e:
             print(f"⚠ PyMuPDF text insertion failed: {e}")
             print(f"   Text: {text[:50]}...")
@@ -451,19 +657,43 @@ class RenderService:
                     item_has_japanese = any('\u3040' <= c <= '\u309F' or '\u30A0' <= c <= '\u30FF' or '\u4E00' <= c <= '\u9FAF' for c in text)
                     item_has_unicode = any(ord(c) > 127 for c in text)
                     
-                    # Select from registered fonts
+                    # Select from registered fonts (same priority as text rendering)
                     item_font_name_to_use = None
                     if registered_fonts and project_font_dir.exists():
+                        # Japanese: MS Gothic > MS Mincho > Noto Sans JP
                         if item_has_japanese:
-                            item_font_path = project_font_dir / "NotoSansJP-VF.ttf"
-                            if item_font_path.exists() and str(item_font_path) in registered_fonts:
-                                item_font_name_to_use = registered_fonts[str(item_font_path)]
+                            for font_file_path, font_name in registered_fonts.items():
+                                if font_name == "MSGothic":
+                                    item_font_name_to_use = font_name
+                                    break
+                            if not item_font_name_to_use:
+                                for font_file_path, font_name in registered_fonts.items():
+                                    if font_name == "MSMincho":
+                                        item_font_name_to_use = font_name
+                                        break
+                            if not item_font_name_to_use:
+                                for font_file_path, font_name in registered_fonts.items():
+                                    if font_name == "NotoSansJP":
+                                        item_font_name_to_use = font_name
+                                        break
+                        # Korean: Malgun Gothic > Nanum Gothic > Noto Sans KR
                         elif item_has_korean:
-                            item_font_path = project_font_dir / "NotoSansKR-VF.ttf"
-                            if item_font_path.exists() and str(item_font_path) in registered_fonts:
-                                item_font_name_to_use = registered_fonts[str(item_font_path)]
+                            for font_file_path, font_name in registered_fonts.items():
+                                if font_name == "MalgunGothic":
+                                    item_font_name_to_use = font_name
+                                    break
+                            if not item_font_name_to_use:
+                                for font_file_path, font_name in registered_fonts.items():
+                                    if font_name == "NanumGothic":
+                                        item_font_name_to_use = font_name
+                                        break
+                            if not item_font_name_to_use:
+                                for font_file_path, font_name in registered_fonts.items():
+                                    if font_name == "NotoSansKR":
+                                        item_font_name_to_use = font_name
+                                        break
+                        # Other Unicode: use first available CJK font
                         elif item_has_unicode:
-                            # Use first registered font if Unicode
                             if registered_fonts:
                                 item_font_name_to_use = list(registered_fonts.values())[0]
                     

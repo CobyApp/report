@@ -14,6 +14,7 @@ A web application that automatically maps data to PDF templates to generate comp
 - [Quick Start](#quick-start)
 - [Usage](#usage)
 - [API Documentation](#api-documentation)
+- [Font Configuration](#font-configuration)
 - [Project Structure](#project-structure)
 
 ## ✨ Key Features
@@ -199,6 +200,38 @@ Access your application at: `http://<your-cname>.elasticbeanstalk.com`
 
 1. Click "💾 Save" button
 2. Template mapping information is saved to server
+
+## 🔤 Font Configuration
+
+This application supports automatic font selection based on text language:
+
+- **Japanese**: MS Gothic (government standard) → MS Mincho → Noto Sans JP
+- **Korean**: Malgun Gothic → Nanum Gothic → Noto Sans KR  
+- **English**: Times-Roman (formal documents)
+
+### Font Installation
+
+**Quick Setup (Recommended):**
+```bash
+# Run the automatic font installation script
+./install-fonts.sh
+```
+
+This script will download:
+- Nanum Gothic (Korean)
+- Noto Sans JP (Japanese, if not already present)
+- Noto Sans KR (Korean, if not already present)
+
+**Manual Installation:**
+1. Download required fonts (see [FONTS.md](./FONTS.md) for direct download links)
+2. Copy font files to `backend/fonts/` directory
+3. Restart the application
+
+**For Mac/Linux users:**
+- The `install-fonts.sh` script downloads open-source fonts automatically
+- For MS Gothic/Mincho and Malgun Gothic, copy from Windows: `C:\Windows\Fonts\`
+
+**Note**: The application includes Noto Sans JP and Noto Sans KR fonts by default. For Japanese government document compatibility, install MS Gothic or MS Mincho fonts. See [FONTS.md](./FONTS.md) for detailed instructions and download links.
 
 ## 📡 API Documentation
 
