@@ -517,11 +517,15 @@ class RenderService:
     
     def _render_checkbox_fitz(self, page: fitz.Page, elem: Dict[str, Any], data: Dict[str, Any], 
                              x: float, y_screen: float, w: float, h: float, page_h: float):
-        """Checkbox rendering - using PyMuPDF (display checkmark only, no box)"""
-        data_path = elem.get("data_path", "")
-        value = self._get_data_value(data, data_path)
+        """Checkbox rendering - using PyMuPDF (display checkmark only, no box)
         
-        checked = bool(value) if value is not None else False
+        Checkbox doesn't require data from request body - it's always checked if defined in template.
+        """
+        data_path = elem.get("data_path", "")
+        
+        # Checkbox doesn't need value from request body - always render if defined in template
+        # If data_path exists, the checkbox is meant to be checked
+        checked = bool(data_path) if data_path else False
         
         if not checked:
             return  # Don't draw anything if not checked

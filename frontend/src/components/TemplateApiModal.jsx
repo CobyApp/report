@@ -107,8 +107,9 @@ function TemplateApiModal({ template, onClose }) {
 
     elements.forEach(element => {
       const dataPath = element.data_path
-      if (!dataPath || element.type === 'image') {
-        // Skip elements without data_path or image elements
+      // Skip elements without data_path, image elements, and checkbox elements
+      // (checkbox and image don't need values in request body)
+      if (!dataPath || element.type === 'image' || element.type === 'checkbox') {
         return
       }
 

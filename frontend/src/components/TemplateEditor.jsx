@@ -793,83 +793,124 @@ function TemplateEditor({ templateId, onBack }) {
         const fontSize = style.size || 12
         const fontWeight = style.weight === 'bold' ? 'bold' : 'normal'
         const fontFamily = 'Noto Sans JP, Noto Sans KR, sans-serif'
+        const lineHeight = style.line_height || 1.2
+        const letterSpacing = style.letter_spacing || 0
         
         ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
-        
-        // For bold, simulate if browser doesn't support it
-        const useBoldSimulation = fontWeight === 'bold'
         ctx.textAlign = style.align || 'left'
-        ctx.textBaseline = 'top'
+        ctx.textBaseline = 'alphabetic' // Use alphabetic for better vertical positioning
         
-        // Calculate text position based on alignment
-        const topMargin = 8 // Margin from top
-        const leftMargin = 8 // Margin from left
-        let textX = x + leftMargin
-        let textY = y + topMargin
+        // Calculate text metrics
+        const textMetrics = ctx.measureText(element.data_path)
+        const textWidth = textMetrics.width
+        const textHeight = fontSize * lineHeight
         
-        // Vertical alignment
-        if (style.vertical_align === 'middle') {
-          textY = y + h / 2 - fontSize / 2
-        } else if (style.vertical_align === 'bottom') {
-          textY = y + h - fontSize - topMargin
-        }
+        // Calculate text position based on alignment (inside bbox boundaries)
+        let textX = x
+        let textY = y
         
-        // Horizontal alignment
+        // Horizontal alignment (within bbox)
         if (style.align === 'center') {
-          ctx.textAlign = 'center'
           textX = x + w / 2
+          ctx.textAlign = 'center'
         } else if (style.align === 'right') {
+          textX = x + w
           ctx.textAlign = 'right'
-          textX = x + w - leftMargin
+        } else {
+          // left
+          textX = x
+          ctx.textAlign = 'left'
         }
         
-        // Draw text
-        if (useBoldSimulation) {
-          // Simulate bold by drawing text multiple times with slight offset
-          ctx.fillText(element.data_path, textX, textY)
-          ctx.fillText(element.data_path, textX + 0.5, textY)
-          ctx.fillText(element.data_path, textX, textY + 0.5)
+        // Vertical alignment (within bbox, accounting for line height)
+        // Use alphabetic baseline, so need to adjust for actual text position
+        const baselineOffset = fontSize * 0.8 // Approximate baseline offset from top
+        if (style.vertical_align === 'middle') {
+          textY = y + h / 2 + baselineOffset - (textHeight / 2)
+        } else if (style.vertical_align === 'bottom') {
+          textY = y + h - (textHeight - baselineOffset)
         } else {
-          ctx.fillText(element.data_path, textX, textY)
+          // top - align to top of bbox, accounting for line height
+          textY = y + baselineOffset
+        }
+        
+        // Calculate actual text width (accounting for letter spacing)
+        let actualTextWidth = textWidth
+        if (letterSpacing !== 0 && element.data_path.length > 1) {
+          actualTextWidth = textWidth + (letterSpacing * (element.data_path.length - 1))
+        }
+        
+        // Draw text with letter spacing support
+        if (letterSpacing !== 0) {
+          // Manual letter spacing by drawing each character separately
+          const chars = element.data_path.split('')
+          ctx.textAlign = 'left'
+          
+          // Calculate starting X position based on alignment
+          let startX = textX
+          if (style.align === 'center') {
+            startX = textX - actualTextWidth / 2
+          } else if (style.align === 'right') {
+            startX = textX - actualTextWidth
+          }
+          
+          // Draw each character with letter spacing
+          let currentX = startX
+          chars.forEach((char) => {
+            const charWidth = ctx.measureText(char).width
+            if (fontWeight === 'bold') {
+              // Simulate bold
+              ctx.fillText(char, currentX, textY)
+              ctx.fillText(char, currentX + 0.5, textY)
+              ctx.fillText(char, currentX, textY + 0.5)
+            } else {
+              ctx.fillText(char, currentX, textY)
+            }
+            currentX += charWidth + letterSpacing
+          })
+        } else {
+          // Draw text normally (no letter spacing)
+          if (fontWeight === 'bold') {
+            // Simulate bold by drawing text multiple times with slight offset
+            ctx.fillText(element.data_path, textX, textY)
+            ctx.fillText(element.data_path, textX + 0.5, textY)
+            ctx.fillText(element.data_path, textX, textY + 0.5)
+          } else {
+            ctx.fillText(element.data_path, textX, textY)
+          }
+        }
+        
+        // Calculate underline/strikethrough X positions based on alignment
+        let underlineStartX = textX
+        let underlineEndX = textX + actualTextWidth
+        
+        if (style.align === 'center') {
+          underlineStartX = textX - actualTextWidth / 2
+          underlineEndX = textX + actualTextWidth / 2
+        } else if (style.align === 'right') {
+          underlineStartX = textX - actualTextWidth
+          underlineEndX = textX
         }
         
         // Draw underline if specified
         if (style.underline) {
-          const textWidth = ctx.measureText(element.data_path).width
-          const underlineY = textY + fontSize + 2
+          const underlineY = textY + (fontSize * 0.1) // Below baseline
           ctx.strokeStyle = style.color || '#2c3e50'
           ctx.lineWidth = Math.max(1, fontSize * 0.05)
           ctx.beginPath()
-          if (style.align === 'center') {
-            ctx.moveTo(textX - textWidth / 2, underlineY)
-            ctx.lineTo(textX + textWidth / 2, underlineY)
-          } else if (style.align === 'right') {
-            ctx.moveTo(textX - textWidth, underlineY)
-            ctx.lineTo(textX, underlineY)
-          } else {
-            ctx.moveTo(textX, underlineY)
-            ctx.lineTo(textX + textWidth, underlineY)
-          }
+          ctx.moveTo(underlineStartX, underlineY)
+          ctx.lineTo(underlineEndX, underlineY)
           ctx.stroke()
         }
         
         // Draw strikethrough if specified
         if (style.strikethrough) {
-          const textWidth = ctx.measureText(element.data_path).width
-          const strikethroughY = textY + fontSize / 2
+          const strikethroughY = textY - (fontSize * 0.3) // Above baseline (alphabetic baseline)
           ctx.strokeStyle = style.color || '#2c3e50'
           ctx.lineWidth = Math.max(1, fontSize * 0.05)
           ctx.beginPath()
-          if (style.align === 'center') {
-            ctx.moveTo(textX - textWidth / 2, strikethroughY)
-            ctx.lineTo(textX + textWidth / 2, strikethroughY)
-          } else if (style.align === 'right') {
-            ctx.moveTo(textX - textWidth, strikethroughY)
-            ctx.lineTo(textX, strikethroughY)
-          } else {
-            ctx.moveTo(textX, strikethroughY)
-            ctx.lineTo(textX + textWidth, strikethroughY)
-          }
+          ctx.moveTo(underlineStartX, strikethroughY)
+          ctx.lineTo(underlineEndX, strikethroughY)
           ctx.stroke()
         }
       }
