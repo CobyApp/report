@@ -789,14 +789,28 @@ function TemplateEditor({ templateId, onBack }) {
         // Use text color from style, default to dark gray
         ctx.fillStyle = style.color || '#2c3e50'
         
+        // Calculate scale factors to convert PDF points to screen pixels
+        // Use the same scaling method as pdfToScreen function
+        // pdfToScreen uses: x_screen = (x_pdf / pdfW) * displayW
+        // So scale = displayW / pdfW for width, displayH / pdfH for height
+        const scaleX = displaySize.width / pdfSize.width
+        const scaleY = displaySize.height / pdfSize.height
+        // For font size and margins, we need to match the actual rendering scale
+        // Since text is rendered in 2D space, use the geometric mean for more accurate scaling
+        // This accounts for both width and height scaling
+        const scale = Math.sqrt(scaleX * scaleY) // Geometric mean for 2D scaling
+        
         // Build font string from element style (always use Noto Sans)
-        const fontSize = style.size || 12
+        // Font size is in PDF points, must be converted to screen pixels
+        const fontSizePt = style.size || 12
+        const fontSize = fontSizePt * scale // Convert to screen pixels
         const fontWeight = style.weight === 'bold' ? 'bold' : 'normal'
         const fontFamily = 'Noto Sans JP, Noto Sans KR, sans-serif'
         const lineHeight = style.line_height || 1.2
         const letterSpacing = style.letter_spacing || 0
+        const letterSpacingPx = letterSpacing * scale // Convert to screen pixels
         
-        // Set font first for accurate measurement
+        // Set font first for accurate measurement (must use screen pixel size)
         ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
         ctx.textAlign = 'left'
         ctx.textBaseline = 'alphabetic' // PyMuPDF insert_text uses baseline
@@ -805,15 +819,10 @@ function TemplateEditor({ templateId, onBack }) {
         const textMetrics = ctx.measureText(element.data_path)
         const textWidth = textMetrics.width
         
-        // Get actual text metrics including ascent/descent for precise positioning
-        // Canvas measureText provides width, but for height we need to estimate based on font size
-        // PyMuPDF uses baseline for insert_text, and approximately 80% of font size is above baseline
-        const actualFontHeight = fontSize // Font height in points
-        const ascentRatio = 0.8 // Approximately 80% of font size is above baseline (typical for most fonts)
-        
-        // Margins matching backend exactly (5 points each)
-        const topMargin = 5
-        const leftMargin = 5
+        // Margins matching backend exactly (5 points each, converted to screen pixels)
+        // Use the same scale as font size for consistency
+        const topMargin = 5 * scale
+        const leftMargin = 5 * scale
         
         // Calculate text position based on alignment (matching backend render_service.py EXACTLY)
         let textX = x
@@ -830,10 +839,11 @@ function TemplateEditor({ templateId, onBack }) {
         }
         
         // Vertical alignment - match backend calculations EXACTLY
-        // Backend PyMuPDF insert_text uses baseline position:
+        // Backend PyMuPDF insert_text uses baseline position (all in PDF points):
         // - top: y_screen + font_size * 0.8 + top_margin (baseline from top)
         // - middle: y_screen + h / 2 + font_size * 0.3 (baseline adjustment for middle)
         // - bottom: y_screen + h - font_size * 0.2 - top_margin (baseline near bottom)
+        // Note: fontSize here is already in screen pixels, so calculations match
         if (style.vertical_align === 'middle') {
           // Middle: baseline at center + small adjustment
           textY = y + h / 2 + fontSize * 0.3
@@ -847,12 +857,12 @@ function TemplateEditor({ templateId, onBack }) {
         
         // Calculate actual text width (accounting for letter spacing)
         let actualTextWidth = textWidth
-        if (letterSpacing !== 0 && element.data_path.length > 1) {
-          actualTextWidth = textWidth + (letterSpacing * (element.data_path.length - 1))
+        if (letterSpacingPx !== 0 && element.data_path.length > 1) {
+          actualTextWidth = textWidth + (letterSpacingPx * (element.data_path.length - 1))
         }
         
         // Draw text with letter spacing support
-        if (letterSpacing !== 0) {
+        if (letterSpacingPx !== 0) {
           // Manual letter spacing by drawing each character separately
           const chars = element.data_path.split('')
           ctx.textAlign = 'left'
@@ -877,7 +887,7 @@ function TemplateEditor({ templateId, onBack }) {
             } else {
               ctx.fillText(char, currentX, textY)
             }
-            currentX += charWidth + letterSpacing
+            currentX += charWidth + letterSpacingPx
           })
         } else {
           // Draw text normally (no letter spacing)
