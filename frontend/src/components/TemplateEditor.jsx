@@ -797,41 +797,52 @@ function TemplateEditor({ templateId, onBack }) {
         const letterSpacing = style.letter_spacing || 0
         
         ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
-        ctx.textAlign = style.align || 'left'
-        ctx.textBaseline = 'alphabetic' // Use alphabetic for better vertical positioning
+        ctx.textAlign = 'left' // Always use left for measurement, we'll adjust position manually
+        ctx.textBaseline = 'alphabetic' // Use alphabetic to match backend (PyMuPDF uses baseline)
         
         // Calculate text metrics
         const textMetrics = ctx.measureText(element.data_path)
         const textWidth = textMetrics.width
         const textHeight = fontSize * lineHeight
         
-        // Calculate text position based on alignment (inside bbox boundaries)
+        // Margins matching backend (5 points each)
+        const topMargin = 5
+        const leftMargin = 5
+        
+        // Calculate text position based on alignment (matching backend exactly)
         let textX = x
         let textY = y
         
-        // Horizontal alignment (within bbox)
+        // Horizontal alignment (matching backend render_service.py)
+        // Backend uses left_margin for left, calculates center based on text_width, right uses text_width + left_margin
         if (style.align === 'center') {
-          textX = x + w / 2
-          ctx.textAlign = 'center'
+          // Center: x + (w - text_width) / 2
+          textX = x + (w - textWidth) / 2
+          ctx.textAlign = 'left' // Use left align and calculate position
         } else if (style.align === 'right') {
-          textX = x + w
-          ctx.textAlign = 'right'
+          // Right: x + w - text_width - left_margin
+          textX = x + w - textWidth - leftMargin
+          ctx.textAlign = 'left' // Use left align and calculate position
         } else {
-          // left
-          textX = x
+          // Left: x + left_margin
+          textX = x + leftMargin
           ctx.textAlign = 'left'
         }
         
-        // Vertical alignment (within bbox, accounting for line height)
-        // Use alphabetic baseline, so need to adjust for actual text position
-        const baselineOffset = fontSize * 0.8 // Approximate baseline offset from top
+        // Vertical alignment (matching backend render_service.py exactly)
+        // Backend uses: top: y_screen + font_size * 0.8 + top_margin
+        //               middle: y_screen + h / 2 + font_size * 0.3
+        //               bottom: y_screen + h - font_size * 0.2 - top_margin
+        const baselineOffset = fontSize * 0.8 // Approximate baseline offset from top (80% of font size)
         if (style.vertical_align === 'middle') {
-          textY = y + h / 2 + baselineOffset - (textHeight / 2)
+          // Middle: y + h / 2 + font_size * 0.3
+          textY = y + h / 2 + fontSize * 0.3
         } else if (style.vertical_align === 'bottom') {
-          textY = y + h - (textHeight - baselineOffset)
+          // Bottom: y + h - font_size * 0.2 - top_margin
+          textY = y + h - fontSize * 0.2 - topMargin
         } else {
-          // top - align to top of bbox, accounting for line height
-          textY = y + baselineOffset
+          // Top: y + font_size * 0.8 + top_margin
+          textY = y + baselineOffset + topMargin
         }
         
         // Calculate actual text width (accounting for letter spacing)
